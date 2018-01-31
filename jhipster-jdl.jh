@@ -1,0 +1,67 @@
+
+entity Supplier
+ {
+ reference Integer
+ 
+
+ }
+ entity Address
+ {
+ place String
+ district String
+ state String
+ pinCode Integer
+ }
+ 
+
+ 
+ entity Contact
+ {
+firstName String
+lastName String 
+ mailId String
+ phoneNumber1 Long
+ phoneNumber2 Long
+ companyName String
+ }
+ entity Quotation
+ {
+ reference String
+ issuedDate LocalDate
+ 
+ }
+ 
+ entity QuotationLine
+ {
+ productReference String
+ productPrice Integer
+ productTax Integer 
+ availableQuantity Integer
+ isSelect Boolean
+ }
+ entity QuotationStatus
+ {
+ statusId Integer
+ statusLevel String
+ }
+ 
+ 
+ 
+ relationship OneToOne
+ {
+ Supplier{permanentAddress} to Address
+ Supplier{contact} to Contact
+ Quotation{quotationStatus} to QuotationStatus
+ }
+ relationship OneToMany
+  {
+  Supplier{temporaryAddress} to Address
+  Supplier{quotation} to Quotation
+  Quotation{quotationLine} to QuotationLine
+  }
+  
+paginate * with pagination
+dto * with mapstruct
+service * with serviceImpl
+   
+ 

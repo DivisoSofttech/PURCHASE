@@ -1,0 +1,21 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "statusId",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "statusLevel",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20180131040657",
+    "entityTableName": "quotation_status",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "microserviceName": "purchase"
+}

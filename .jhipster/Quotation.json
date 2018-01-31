@@ -1,0 +1,42 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "supplier",
+            "otherEntityName": "supplier",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "quotationStatus",
+            "otherEntityName": "quotationStatus",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "quotation"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "quotationLine",
+            "otherEntityName": "quotationLine",
+            "otherEntityRelationshipName": "quotation"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "reference",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "issuedDate",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "changelogDate": "20180131040655",
+    "entityTableName": "quotation",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "microserviceName": "purchase"
+}

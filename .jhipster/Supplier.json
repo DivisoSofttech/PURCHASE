@@ -1,0 +1,46 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "permanentAddress",
+            "otherEntityName": "address",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "supplier"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "contact",
+            "otherEntityName": "contact",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "supplier"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "temporaryAddress",
+            "otherEntityName": "address",
+            "otherEntityRelationshipName": "supplier"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "quotation",
+            "otherEntityName": "quotation",
+            "otherEntityRelationshipName": "supplier"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "reference",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20180131040652",
+    "entityTableName": "supplier",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "microserviceName": "purchase"
+}
