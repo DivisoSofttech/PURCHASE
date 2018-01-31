@@ -1,10 +1,24 @@
 
- 
+
+entity DeliveryNote{
+reference String
+orderReference String
+supplierId Long
+purchaseDate LocalDate
+quotationId Long
+}
+entity Rating{
+reference String
+ratings Integer
+}
+entity Comment{
+reference String
+comments String
+}
+
 entity Supplier
  {
  reference Integer
- 
-
  }
  entity Address
  {
@@ -18,8 +32,8 @@ entity Supplier
  
  entity Contact
  {
-firstName String
-lastName String 
+ firstName String
+ lastName String 
  mailId String
  phoneNumber1 Long
  phoneNumber2 Long
@@ -53,6 +67,8 @@ lastName String
  Supplier{permanentAddress} to Address
  Supplier{contact} to Contact
  Quotation{quotationStatus} to QuotationStatus
+ DeliveryNote{PurchaseOrder} to PurchaseOrder
+ DeliveryNote{rating} to Rating
  }
  relationship OneToMany
   {
@@ -60,6 +76,7 @@ lastName String
   Supplier{quotation} to Quotation
   Quotation{quotationLine} to QuotationLine
   PurchaseOrder{quotation} to Quotation
+  DeliveryNote{comment} to Comment
   }
   
 paginate * with pagination

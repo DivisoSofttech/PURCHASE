@@ -1,0 +1,56 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "purchaseOrder",
+            "otherEntityName": "purchaseOrder",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "deliveryNote"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "rating",
+            "otherEntityName": "rating",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "deliveryNote"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "comment",
+            "otherEntityName": "comment",
+            "otherEntityRelationshipName": "deliveryNote"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "reference",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "orderReference",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "supplierId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "purchaseDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "quotationId",
+            "fieldType": "Long"
+        }
+    ],
+    "changelogDate": "20180131052434",
+    "entityTableName": "delivery_note",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "microserviceName": "purchase"
+}
