@@ -20,6 +20,12 @@
             "relationshipName": "quotationLine",
             "otherEntityName": "quotationLine",
             "otherEntityRelationshipName": "quotation"
+        },
+        {
+            "relationshipName": "purchaseOrder",
+            "otherEntityName": "purchaseOrder",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
         }
     ],
     "fields": [

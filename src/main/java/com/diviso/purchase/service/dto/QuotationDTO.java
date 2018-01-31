@@ -22,6 +22,8 @@ public class QuotationDTO implements Serializable {
 
     private Long quotationStatusId;
 
+    private Long purchaseOrderId;
+
     public Long getId() {
         return id;
     }
@@ -60,6 +62,14 @@ public class QuotationDTO implements Serializable {
 
     public void setQuotationStatusId(Long quotationStatusId) {
         this.quotationStatusId = quotationStatusId;
+    }
+
+    public Long getPurchaseOrderId() {
+        return purchaseOrderId;
+    }
+
+    public void setPurchaseOrderId(Long purchaseOrderId) {
+        this.purchaseOrderId = purchaseOrderId;
     }
 
     @Override

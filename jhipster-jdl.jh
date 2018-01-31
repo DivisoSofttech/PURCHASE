@@ -1,4 +1,5 @@
 
+ 
 entity Supplier
  {
  reference Integer
@@ -58,6 +59,7 @@ lastName String
   Supplier{temporaryAddress} to Address
   Supplier{quotation} to Quotation
   Quotation{quotationLine} to QuotationLine
+  PurchaseOrder{quotation} to Quotation
   }
   
 paginate * with pagination
@@ -65,3 +67,18 @@ dto * with mapstruct
 service * with serviceImpl
    
  
+ entity PurchaseOrder {
+	supplierId Long,
+    quotationId Long,
+	purchaseDate LocalDate
+ }
+ entity PurchaseLine {
+	productReference String,
+    productPrice Integer,
+    productTax Integer ,
+    availableQuantity Integer,
+    isSelect Boolean
+ }
+ relationship OneToMany {
+	PurchaseOrder{purchaseLine} to PurchaseLine
+ }

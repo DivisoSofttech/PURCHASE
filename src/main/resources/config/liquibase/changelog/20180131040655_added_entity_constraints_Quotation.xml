@@ -20,5 +20,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="quotation_status"/>
 
+        <addForeignKeyConstraint baseColumnNames="purchase_order_id"
+                                 baseTableName="quotation"
+                                 constraintName="fk_quotation_purchase_order_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="purchase_order"/>
+
     </changeSet>
 </databaseChangeLog>

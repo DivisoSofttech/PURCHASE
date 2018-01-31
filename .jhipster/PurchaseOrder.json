@@ -1,0 +1,38 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "quotation",
+            "otherEntityName": "quotation",
+            "otherEntityRelationshipName": "purchaseOrder"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "purchaseLine",
+            "otherEntityName": "purchaseLine",
+            "otherEntityRelationshipName": "purchaseOrder"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "supplierId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "quotationId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "purchaseDate",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "changelogDate": "20180131050044",
+    "entityTableName": "purchase_order",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "microserviceName": "purchase"
+}

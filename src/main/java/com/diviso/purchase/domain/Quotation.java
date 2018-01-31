@@ -40,6 +40,9 @@ public class Quotation implements Serializable {
     @JsonIgnore
     private Set<QuotationLine> quotationLines = new HashSet<>();
 
+    @ManyToOne
+    private PurchaseOrder purchaseOrder;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -124,6 +127,19 @@ public class Quotation implements Serializable {
 
     public void setQuotationLines(Set<QuotationLine> quotationLines) {
         this.quotationLines = quotationLines;
+    }
+
+    public PurchaseOrder getPurchaseOrder() {
+        return purchaseOrder;
+    }
+
+    public Quotation purchaseOrder(PurchaseOrder purchaseOrder) {
+        this.purchaseOrder = purchaseOrder;
+        return this;
+    }
+
+    public void setPurchaseOrder(PurchaseOrder purchaseOrder) {
+        this.purchaseOrder = purchaseOrder;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

@@ -1,0 +1,40 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "purchaseOrder",
+            "otherEntityName": "purchaseOrder",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "productReference",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "productPrice",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "productTax",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "availableQuantity",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "isSelect",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20180131050045",
+    "entityTableName": "purchase_line",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "microserviceName": "purchase"
+}
