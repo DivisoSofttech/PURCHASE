@@ -3,14 +3,14 @@
     "relationships": [
         {
             "relationshipType": "one-to-many",
-            "relationshipName": "quotation",
-            "otherEntityName": "quotation",
+            "relationshipName": "purchaseLine",
+            "otherEntityName": "purchaseLine",
             "otherEntityRelationshipName": "purchaseOrder"
         },
         {
             "relationshipType": "one-to-many",
-            "relationshipName": "purchaseLine",
-            "otherEntityName": "purchaseLine",
+            "relationshipName": "quotation",
+            "otherEntityName": "quotation",
             "otherEntityRelationshipName": "purchaseOrder"
         }
     ],

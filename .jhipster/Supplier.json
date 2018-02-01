@@ -34,6 +34,14 @@
         {
             "fieldName": "reference",
             "fieldType": "Integer"
+        },
+        {
+            "fieldName": "firstName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "lastName",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20180131040652",

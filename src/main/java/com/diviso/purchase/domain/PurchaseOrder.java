@@ -34,11 +34,11 @@ public class PurchaseOrder implements Serializable {
 
     @OneToMany(mappedBy = "purchaseOrder")
     @JsonIgnore
-    private Set<Quotation> quotations = new HashSet<>();
+    private Set<PurchaseLine> purchaseLines = new HashSet<>();
 
     @OneToMany(mappedBy = "purchaseOrder")
     @JsonIgnore
-    private Set<PurchaseLine> purchaseLines = new HashSet<>();
+    private Set<Quotation> quotations = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -88,31 +88,6 @@ public class PurchaseOrder implements Serializable {
         this.purchaseDate = purchaseDate;
     }
 
-    public Set<Quotation> getQuotations() {
-        return quotations;
-    }
-
-    public PurchaseOrder quotations(Set<Quotation> quotations) {
-        this.quotations = quotations;
-        return this;
-    }
-
-    public PurchaseOrder addQuotation(Quotation quotation) {
-        this.quotations.add(quotation);
-        quotation.setPurchaseOrder(this);
-        return this;
-    }
-
-    public PurchaseOrder removeQuotation(Quotation quotation) {
-        this.quotations.remove(quotation);
-        quotation.setPurchaseOrder(null);
-        return this;
-    }
-
-    public void setQuotations(Set<Quotation> quotations) {
-        this.quotations = quotations;
-    }
-
     public Set<PurchaseLine> getPurchaseLines() {
         return purchaseLines;
     }
@@ -136,6 +111,31 @@ public class PurchaseOrder implements Serializable {
 
     public void setPurchaseLines(Set<PurchaseLine> purchaseLines) {
         this.purchaseLines = purchaseLines;
+    }
+
+    public Set<Quotation> getQuotations() {
+        return quotations;
+    }
+
+    public PurchaseOrder quotations(Set<Quotation> quotations) {
+        this.quotations = quotations;
+        return this;
+    }
+
+    public PurchaseOrder addQuotation(Quotation quotation) {
+        this.quotations.add(quotation);
+        quotation.setPurchaseOrder(this);
+        return this;
+    }
+
+    public PurchaseOrder removeQuotation(Quotation quotation) {
+        this.quotations.remove(quotation);
+        quotation.setPurchaseOrder(null);
+        return this;
+    }
+
+    public void setQuotations(Set<Quotation> quotations) {
+        this.quotations = quotations;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

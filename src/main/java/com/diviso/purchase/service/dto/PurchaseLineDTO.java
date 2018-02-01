@@ -17,7 +17,7 @@ public class PurchaseLineDTO implements Serializable {
 
     private Integer productPrice;
 
-    private Integer productTax;
+    private Float productTax;
 
     private Integer availableQuantity;
 
@@ -49,11 +49,11 @@ public class PurchaseLineDTO implements Serializable {
         this.productPrice = productPrice;
     }
 
-    public Integer getProductTax() {
+    public Float getProductTax() {
         return productTax;
     }
 
-    public void setProductTax(Integer productTax) {
+    public void setProductTax(Float productTax) {
         this.productTax = productTax;
     }
 

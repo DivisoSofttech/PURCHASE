@@ -44,6 +44,12 @@ public class SupplierResourceIntTest {
     private static final Integer DEFAULT_REFERENCE = 1;
     private static final Integer UPDATED_REFERENCE = 2;
 
+    private static final String DEFAULT_FIRST_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_FIRST_NAME = "BBBBBBBBBB";
+
+    private static final String DEFAULT_LAST_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_LAST_NAME = "BBBBBBBBBB";
+
     @Autowired
     private SupplierRepository supplierRepository;
 
@@ -88,7 +94,9 @@ public class SupplierResourceIntTest {
      */
     public static Supplier createEntity(EntityManager em) {
         Supplier supplier = new Supplier()
-            .reference(DEFAULT_REFERENCE);
+            .reference(DEFAULT_REFERENCE)
+            .firstName(DEFAULT_FIRST_NAME)
+            .lastName(DEFAULT_LAST_NAME);
         return supplier;
     }
 
@@ -114,6 +122,8 @@ public class SupplierResourceIntTest {
         assertThat(supplierList).hasSize(databaseSizeBeforeCreate + 1);
         Supplier testSupplier = supplierList.get(supplierList.size() - 1);
         assertThat(testSupplier.getReference()).isEqualTo(DEFAULT_REFERENCE);
+        assertThat(testSupplier.getFirstName()).isEqualTo(DEFAULT_FIRST_NAME);
+        assertThat(testSupplier.getLastName()).isEqualTo(DEFAULT_LAST_NAME);
     }
 
     @Test
@@ -147,7 +157,9 @@ public class SupplierResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(supplier.getId().intValue())))
-            .andExpect(jsonPath("$.[*].reference").value(hasItem(DEFAULT_REFERENCE)));
+            .andExpect(jsonPath("$.[*].reference").value(hasItem(DEFAULT_REFERENCE)))
+            .andExpect(jsonPath("$.[*].firstName").value(hasItem(DEFAULT_FIRST_NAME.toString())))
+            .andExpect(jsonPath("$.[*].lastName").value(hasItem(DEFAULT_LAST_NAME.toString())));
     }
 
     @Test
@@ -161,7 +173,9 @@ public class SupplierResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(supplier.getId().intValue()))
-            .andExpect(jsonPath("$.reference").value(DEFAULT_REFERENCE));
+            .andExpect(jsonPath("$.reference").value(DEFAULT_REFERENCE))
+            .andExpect(jsonPath("$.firstName").value(DEFAULT_FIRST_NAME.toString()))
+            .andExpect(jsonPath("$.lastName").value(DEFAULT_LAST_NAME.toString()));
     }
 
     @Test
@@ -184,7 +198,9 @@ public class SupplierResourceIntTest {
         // Disconnect from session so that the updates on updatedSupplier are not directly saved in db
         em.detach(updatedSupplier);
         updatedSupplier
-            .reference(UPDATED_REFERENCE);
+            .reference(UPDATED_REFERENCE)
+            .firstName(UPDATED_FIRST_NAME)
+            .lastName(UPDATED_LAST_NAME);
         SupplierDTO supplierDTO = supplierMapper.toDto(updatedSupplier);
 
         restSupplierMockMvc.perform(put("/api/suppliers")
@@ -197,6 +213,8 @@ public class SupplierResourceIntTest {
         assertThat(supplierList).hasSize(databaseSizeBeforeUpdate);
         Supplier testSupplier = supplierList.get(supplierList.size() - 1);
         assertThat(testSupplier.getReference()).isEqualTo(UPDATED_REFERENCE);
+        assertThat(testSupplier.getFirstName()).isEqualTo(UPDATED_FIRST_NAME);
+        assertThat(testSupplier.getLastName()).isEqualTo(UPDATED_LAST_NAME);
     }
 
     @Test

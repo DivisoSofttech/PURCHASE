@@ -26,7 +26,7 @@ public class PurchaseLine implements Serializable {
     private Integer productPrice;
 
     @Column(name = "product_tax")
-    private Integer productTax;
+    private Float productTax;
 
     @Column(name = "available_quantity")
     private Integer availableQuantity;
@@ -72,16 +72,16 @@ public class PurchaseLine implements Serializable {
         this.productPrice = productPrice;
     }
 
-    public Integer getProductTax() {
+    public Float getProductTax() {
         return productTax;
     }
 
-    public PurchaseLine productTax(Integer productTax) {
+    public PurchaseLine productTax(Float productTax) {
         this.productTax = productTax;
         return this;
     }
 
-    public void setProductTax(Integer productTax) {
+    public void setProductTax(Float productTax) {
         this.productTax = productTax;
     }
 

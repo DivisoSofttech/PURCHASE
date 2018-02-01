@@ -19,7 +19,7 @@
         },
         {
             "fieldName": "productTax",
-            "fieldType": "Integer"
+            "fieldType": "Float"
         },
         {
             "fieldName": "availableQuantity",

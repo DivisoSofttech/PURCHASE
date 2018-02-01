@@ -3,14 +3,6 @@
     "relationships": [],
     "fields": [
         {
-            "fieldName": "firstName",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "lastName",
-            "fieldType": "String"
-        },
-        {
             "fieldName": "mailId",
             "fieldType": "String"
         },

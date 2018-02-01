@@ -47,8 +47,8 @@ public class PurchaseLineResourceIntTest {
     private static final Integer DEFAULT_PRODUCT_PRICE = 1;
     private static final Integer UPDATED_PRODUCT_PRICE = 2;
 
-    private static final Integer DEFAULT_PRODUCT_TAX = 1;
-    private static final Integer UPDATED_PRODUCT_TAX = 2;
+    private static final Float DEFAULT_PRODUCT_TAX = 1F;
+    private static final Float UPDATED_PRODUCT_TAX = 2F;
 
     private static final Integer DEFAULT_AVAILABLE_QUANTITY = 1;
     private static final Integer UPDATED_AVAILABLE_QUANTITY = 2;
@@ -169,7 +169,7 @@ public class PurchaseLineResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(purchaseLine.getId().intValue())))
             .andExpect(jsonPath("$.[*].productReference").value(hasItem(DEFAULT_PRODUCT_REFERENCE.toString())))
             .andExpect(jsonPath("$.[*].productPrice").value(hasItem(DEFAULT_PRODUCT_PRICE)))
-            .andExpect(jsonPath("$.[*].productTax").value(hasItem(DEFAULT_PRODUCT_TAX)))
+            .andExpect(jsonPath("$.[*].productTax").value(hasItem(DEFAULT_PRODUCT_TAX.doubleValue())))
             .andExpect(jsonPath("$.[*].availableQuantity").value(hasItem(DEFAULT_AVAILABLE_QUANTITY)))
             .andExpect(jsonPath("$.[*].isSelect").value(hasItem(DEFAULT_IS_SELECT.booleanValue())));
     }
@@ -187,7 +187,7 @@ public class PurchaseLineResourceIntTest {
             .andExpect(jsonPath("$.id").value(purchaseLine.getId().intValue()))
             .andExpect(jsonPath("$.productReference").value(DEFAULT_PRODUCT_REFERENCE.toString()))
             .andExpect(jsonPath("$.productPrice").value(DEFAULT_PRODUCT_PRICE))
-            .andExpect(jsonPath("$.productTax").value(DEFAULT_PRODUCT_TAX))
+            .andExpect(jsonPath("$.productTax").value(DEFAULT_PRODUCT_TAX.doubleValue()))
             .andExpect(jsonPath("$.availableQuantity").value(DEFAULT_AVAILABLE_QUANTITY))
             .andExpect(jsonPath("$.isSelect").value(DEFAULT_IS_SELECT.booleanValue()));
     }

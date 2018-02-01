@@ -32,6 +32,7 @@ public interface SupplierService {
      * @return the entity
      */
     SupplierDTO findOne(Long id);
+   
 
     /**
      * Delete the "id" supplier.
@@ -39,4 +40,6 @@ public interface SupplierService {
      * @param id the id of the entity
      */
     void delete(Long id);
+
+	SupplierDTO findByFirstName(String firstName);
 }

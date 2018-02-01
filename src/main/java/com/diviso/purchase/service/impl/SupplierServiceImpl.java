@@ -83,4 +83,19 @@ public class SupplierServiceImpl implements SupplierService {
         log.debug("Request to delete Supplier : {}", id);
         supplierRepository.delete(id);
     }
+
+    /**
+     * Get one supplier by firstName.
+     *
+     * @param id the id of the entity
+     * @return the entity
+     */ 
+	@Override
+	 @Transactional(readOnly = true)
+	public SupplierDTO findByFirstName(String firstName) {
+		// TODO Auto-generated method stub
+		 log.debug("Request to get Supplier : {}", firstName);
+	        Supplier supplier = supplierRepository.findByFirstName(firstName);
+	        return supplierMapper.toDto(supplier);
+	}
 }

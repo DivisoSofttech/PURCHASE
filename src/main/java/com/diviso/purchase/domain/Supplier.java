@@ -25,6 +25,12 @@ public class Supplier implements Serializable {
     @Column(name = "reference")
     private Integer reference;
 
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Column(name = "last_name")
+    private String lastName;
+
     @OneToOne
     @JoinColumn(unique = true)
     private Address permanentAddress;
@@ -61,6 +67,32 @@ public class Supplier implements Serializable {
 
     public void setReference(Integer reference) {
         this.reference = reference;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public Supplier firstName(String firstName) {
+        this.firstName = firstName;
+        return this;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public Supplier lastName(String lastName) {
+        this.lastName = lastName;
+        return this;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public Address getPermanentAddress() {
@@ -165,6 +197,8 @@ public class Supplier implements Serializable {
         return "Supplier{" +
             "id=" + getId() +
             ", reference=" + getReference() +
+            ", firstName='" + getFirstName() + "'" +
+            ", lastName='" + getLastName() + "'" +
             "}";
     }
 }

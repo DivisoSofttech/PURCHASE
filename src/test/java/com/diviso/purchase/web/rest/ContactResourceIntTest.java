@@ -41,12 +41,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = PurchaseApp.class)
 public class ContactResourceIntTest {
 
-    private static final String DEFAULT_FIRST_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_FIRST_NAME = "BBBBBBBBBB";
-
-    private static final String DEFAULT_LAST_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_LAST_NAME = "BBBBBBBBBB";
-
     private static final String DEFAULT_MAIL_ID = "AAAAAAAAAA";
     private static final String UPDATED_MAIL_ID = "BBBBBBBBBB";
 
@@ -103,8 +97,6 @@ public class ContactResourceIntTest {
      */
     public static Contact createEntity(EntityManager em) {
         Contact contact = new Contact()
-            .firstName(DEFAULT_FIRST_NAME)
-            .lastName(DEFAULT_LAST_NAME)
             .mailId(DEFAULT_MAIL_ID)
             .phoneNumber1(DEFAULT_PHONE_NUMBER_1)
             .phoneNumber2(DEFAULT_PHONE_NUMBER_2)
@@ -133,8 +125,6 @@ public class ContactResourceIntTest {
         List<Contact> contactList = contactRepository.findAll();
         assertThat(contactList).hasSize(databaseSizeBeforeCreate + 1);
         Contact testContact = contactList.get(contactList.size() - 1);
-        assertThat(testContact.getFirstName()).isEqualTo(DEFAULT_FIRST_NAME);
-        assertThat(testContact.getLastName()).isEqualTo(DEFAULT_LAST_NAME);
         assertThat(testContact.getMailId()).isEqualTo(DEFAULT_MAIL_ID);
         assertThat(testContact.getPhoneNumber1()).isEqualTo(DEFAULT_PHONE_NUMBER_1);
         assertThat(testContact.getPhoneNumber2()).isEqualTo(DEFAULT_PHONE_NUMBER_2);
@@ -172,8 +162,6 @@ public class ContactResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(contact.getId().intValue())))
-            .andExpect(jsonPath("$.[*].firstName").value(hasItem(DEFAULT_FIRST_NAME.toString())))
-            .andExpect(jsonPath("$.[*].lastName").value(hasItem(DEFAULT_LAST_NAME.toString())))
             .andExpect(jsonPath("$.[*].mailId").value(hasItem(DEFAULT_MAIL_ID.toString())))
             .andExpect(jsonPath("$.[*].phoneNumber1").value(hasItem(DEFAULT_PHONE_NUMBER_1.intValue())))
             .andExpect(jsonPath("$.[*].phoneNumber2").value(hasItem(DEFAULT_PHONE_NUMBER_2.intValue())))
@@ -191,8 +179,6 @@ public class ContactResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(contact.getId().intValue()))
-            .andExpect(jsonPath("$.firstName").value(DEFAULT_FIRST_NAME.toString()))
-            .andExpect(jsonPath("$.lastName").value(DEFAULT_LAST_NAME.toString()))
             .andExpect(jsonPath("$.mailId").value(DEFAULT_MAIL_ID.toString()))
             .andExpect(jsonPath("$.phoneNumber1").value(DEFAULT_PHONE_NUMBER_1.intValue()))
             .andExpect(jsonPath("$.phoneNumber2").value(DEFAULT_PHONE_NUMBER_2.intValue()))
@@ -219,8 +205,6 @@ public class ContactResourceIntTest {
         // Disconnect from session so that the updates on updatedContact are not directly saved in db
         em.detach(updatedContact);
         updatedContact
-            .firstName(UPDATED_FIRST_NAME)
-            .lastName(UPDATED_LAST_NAME)
             .mailId(UPDATED_MAIL_ID)
             .phoneNumber1(UPDATED_PHONE_NUMBER_1)
             .phoneNumber2(UPDATED_PHONE_NUMBER_2)
@@ -236,8 +220,6 @@ public class ContactResourceIntTest {
         List<Contact> contactList = contactRepository.findAll();
         assertThat(contactList).hasSize(databaseSizeBeforeUpdate);
         Contact testContact = contactList.get(contactList.size() - 1);
-        assertThat(testContact.getFirstName()).isEqualTo(UPDATED_FIRST_NAME);
-        assertThat(testContact.getLastName()).isEqualTo(UPDATED_LAST_NAME);
         assertThat(testContact.getMailId()).isEqualTo(UPDATED_MAIL_ID);
         assertThat(testContact.getPhoneNumber1()).isEqualTo(UPDATED_PHONE_NUMBER_1);
         assertThat(testContact.getPhoneNumber2()).isEqualTo(UPDATED_PHONE_NUMBER_2);

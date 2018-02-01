@@ -30,7 +30,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="product_tax" type="integer">
+            <column name="product_tax" type="${floatType}">
                 <constraints nullable="true" />
             </column>
 

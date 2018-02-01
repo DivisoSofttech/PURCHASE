@@ -1,24 +1,10 @@
 
-
-entity DeliveryNote{
-reference String
-orderReference String
-supplierId Long
-purchaseDate LocalDate
-quotationId Long
-}
-entity Rating{
-reference String
-ratings Integer
-}
-entity Comment{
-reference String
-comments String
-}
-
 entity Supplier
  {
  reference Integer
+ firstName String
+lastName String 
+
  }
  entity Address
  {
@@ -32,8 +18,7 @@ entity Supplier
  
  entity Contact
  {
- firstName String
- lastName String 
+
  mailId String
  phoneNumber1 Long
  phoneNumber2 Long
@@ -50,7 +35,7 @@ entity Supplier
  {
  productReference String
  productPrice Integer
- productTax Integer 
+ productTax Float 
  availableQuantity Integer
  isSelect Boolean
  }
@@ -60,14 +45,45 @@ entity Supplier
  statusLevel String
  }
  
- 
+ entity DeliveryNote{
+reference String
+orderReference String
+supplierId Long
+purchaseDate LocalDate
+quotationId Long
+}
+entity Rating{
+reference String
+ratings Integer
+}
+entity Comment{
+reference String
+comments String
+}
+
+entity PurchaseOrder {
+	supplierId Long,
+    quotationId Long,
+	purchaseDate LocalDate
+ }
+ entity PurchaseLine {
+	productReference String,
+    productPrice Integer,
+    productTax Float ,
+    availableQuantity Integer,
+    isSelect Boolean
+ }
+ relationship OneToMany {
+	PurchaseOrder{purchaseLine} to PurchaseLine
+ }
+
  
  relationship OneToOne
  {
  Supplier{permanentAddress} to Address
  Supplier{contact} to Contact
  Quotation{quotationStatus} to QuotationStatus
- DeliveryNote{PurchaseOrder} to PurchaseOrder
+  DeliveryNote{PurchaseOrder} to PurchaseOrder
  DeliveryNote{rating} to Rating
  }
  relationship OneToMany
@@ -75,7 +91,7 @@ entity Supplier
   Supplier{temporaryAddress} to Address
   Supplier{quotation} to Quotation
   Quotation{quotationLine} to QuotationLine
-  PurchaseOrder{quotation} to Quotation
+   PurchaseOrder{quotation} to Quotation
   DeliveryNote{comment} to Comment
   }
   
@@ -84,18 +100,3 @@ dto * with mapstruct
 service * with serviceImpl
    
  
- entity PurchaseOrder {
-	supplierId Long,
-    quotationId Long,
-	purchaseDate LocalDate
- }
- entity PurchaseLine {
-	productReference String,
-    productPrice Integer,
-    productTax Integer ,
-    availableQuantity Integer,
-    isSelect Boolean
- }
- relationship OneToMany {
-	PurchaseOrder{purchaseLine} to PurchaseLine
- }

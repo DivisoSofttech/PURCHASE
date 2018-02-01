@@ -25,6 +25,14 @@
             <column name="reference" type="integer">
                 <constraints nullable="true" />
             </column>
+
+            <column name="first_name" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="last_name" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="permanent_address_id" type="bigint">
                 <constraints unique="true" nullable="true" />
             </column>            <column name="contact_id" type="bigint">

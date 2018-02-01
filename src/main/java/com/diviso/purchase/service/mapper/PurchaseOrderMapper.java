@@ -12,8 +12,8 @@ import org.mapstruct.*;
 public interface PurchaseOrderMapper extends EntityMapper<PurchaseOrderDTO, PurchaseOrder> {
 
 
-    @Mapping(target = "quotations", ignore = true)
     @Mapping(target = "purchaseLines", ignore = true)
+    @Mapping(target = "quotations", ignore = true)
     PurchaseOrder toEntity(PurchaseOrderDTO purchaseOrderDTO);
 
     default PurchaseOrder fromId(Long id) {
