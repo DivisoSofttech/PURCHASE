@@ -83,7 +83,7 @@ entity PurchaseOrder {
  Supplier{permanentAddress} to Address
  Supplier{contact} to Contact
  Quotation{quotationStatus} to QuotationStatus
-  DeliveryNote{PurchaseOrder} to PurchaseOrder
+ PurchaseOrder{deliveryNote} to DeliveryNote
  DeliveryNote{rating} to Rating
  }
  relationship OneToMany
@@ -91,7 +91,7 @@ entity PurchaseOrder {
   Supplier{temporaryAddress} to Address
   Supplier{quotation} to Quotation
   Quotation{quotationLine} to QuotationLine
-   PurchaseOrder{quotation} to Quotation
+  PurchaseOrder{quotation} to Quotation
   DeliveryNote{comment} to Comment
   }
   

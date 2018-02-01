@@ -40,10 +40,6 @@ public class DeliveryNote implements Serializable {
 
     @OneToOne
     @JoinColumn(unique = true)
-    private PurchaseOrder purchaseOrder;
-
-    @OneToOne
-    @JoinColumn(unique = true)
     private Rating rating;
 
     @OneToMany(mappedBy = "deliveryNote")
@@ -122,19 +118,6 @@ public class DeliveryNote implements Serializable {
 
     public void setQuotationId(Long quotationId) {
         this.quotationId = quotationId;
-    }
-
-    public PurchaseOrder getPurchaseOrder() {
-        return purchaseOrder;
-    }
-
-    public DeliveryNote purchaseOrder(PurchaseOrder purchaseOrder) {
-        this.purchaseOrder = purchaseOrder;
-        return this;
-    }
-
-    public void setPurchaseOrder(PurchaseOrder purchaseOrder) {
-        this.purchaseOrder = purchaseOrder;
     }
 
     public Rating getRating() {

@@ -32,6 +32,10 @@ public class PurchaseOrder implements Serializable {
     @Column(name = "purchase_date")
     private LocalDate purchaseDate;
 
+    @OneToOne
+    @JoinColumn(unique = true)
+    private DeliveryNote deliveryNote;
+
     @OneToMany(mappedBy = "purchaseOrder")
     @JsonIgnore
     private Set<PurchaseLine> purchaseLines = new HashSet<>();
@@ -86,6 +90,19 @@ public class PurchaseOrder implements Serializable {
 
     public void setPurchaseDate(LocalDate purchaseDate) {
         this.purchaseDate = purchaseDate;
+    }
+
+    public DeliveryNote getDeliveryNote() {
+        return deliveryNote;
+    }
+
+    public PurchaseOrder deliveryNote(DeliveryNote deliveryNote) {
+        this.deliveryNote = deliveryNote;
+        return this;
+    }
+
+    public void setDeliveryNote(DeliveryNote deliveryNote) {
+        this.deliveryNote = deliveryNote;
     }
 
     public Set<PurchaseLine> getPurchaseLines() {

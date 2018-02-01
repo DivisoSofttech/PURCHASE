@@ -24,8 +24,6 @@ public class DeliveryNoteDTO implements Serializable {
 
     private Long quotationId;
 
-    private Long purchaseOrderId;
-
     private Long ratingId;
 
     public Long getId() {
@@ -74,14 +72,6 @@ public class DeliveryNoteDTO implements Serializable {
 
     public void setQuotationId(Long quotationId) {
         this.quotationId = quotationId;
-    }
-
-    public Long getPurchaseOrderId() {
-        return purchaseOrderId;
-    }
-
-    public void setPurchaseOrderId(Long purchaseOrderId) {
-        this.purchaseOrderId = purchaseOrderId;
     }
 
     public Long getRatingId() {

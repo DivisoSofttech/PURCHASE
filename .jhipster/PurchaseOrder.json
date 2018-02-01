@@ -2,6 +2,14 @@
     "fluentMethods": true,
     "relationships": [
         {
+            "relationshipType": "one-to-one",
+            "relationshipName": "deliveryNote",
+            "otherEntityName": "deliveryNote",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "purchaseOrder"
+        },
+        {
             "relationshipType": "one-to-many",
             "relationshipName": "purchaseLine",
             "otherEntityName": "purchaseLine",

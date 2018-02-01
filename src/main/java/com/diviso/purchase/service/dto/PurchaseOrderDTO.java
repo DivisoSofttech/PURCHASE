@@ -20,6 +20,8 @@ public class PurchaseOrderDTO implements Serializable {
 
     private LocalDate purchaseDate;
 
+    private Long deliveryNoteId;
+
     public Long getId() {
         return id;
     }
@@ -50,6 +52,14 @@ public class PurchaseOrderDTO implements Serializable {
 
     public void setPurchaseDate(LocalDate purchaseDate) {
         this.purchaseDate = purchaseDate;
+    }
+
+    public Long getDeliveryNoteId() {
+        return deliveryNoteId;
+    }
+
+    public void setDeliveryNoteId(Long deliveryNoteId) {
+        this.deliveryNoteId = deliveryNoteId;
     }
 
     @Override
