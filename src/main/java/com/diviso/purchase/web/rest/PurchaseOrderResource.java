@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -108,6 +108,21 @@ public class PurchaseOrderResource {
         log.debug("REST request to get PurchaseOrder : {}", id);
         PurchaseOrderDTO purchaseOrderDTO = purchaseOrderService.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(purchaseOrderDTO));
+    }
+    
+    /**
+     * GET  /purchase-orders/:purchase date : get the "purchase date" purchase orders.
+     * @param purchaseDate
+     * @param pageable
+     * @return
+     */
+    @GetMapping("/purchase-orders/findByDate/{purchaseDate}")
+    @Timed
+    public ResponseEntity<List<PurchaseOrderDTO>> getPurchaseOrder(@PathVariable LocalDate purchaseDate ,Pageable pageable) {
+    	log.debug("REST request to get a page of PurchaseOrder :{}", purchaseDate);
+        Page<PurchaseOrderDTO> page = purchaseOrderService.findByPurchaseOrder(purchaseDate , pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/purchase-orders");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
     /**

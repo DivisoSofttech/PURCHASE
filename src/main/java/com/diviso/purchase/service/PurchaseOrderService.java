@@ -1,6 +1,9 @@
 package com.diviso.purchase.service;
 
 import com.diviso.purchase.service.dto.PurchaseOrderDTO;
+
+import java.time.LocalDate;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -38,5 +41,13 @@ public interface PurchaseOrderService {
      *
      * @param id the id of the entity
      */
+    /**
+     * Get the "purchase order" date.
+     * @param purchaseDate
+     * @param pageable
+     * @return the entity
+     */
+
+	Page<PurchaseOrderDTO> findByPurchaseOrder(LocalDate purchaseDate, Pageable pageable);
     void delete(Long id);
 }
