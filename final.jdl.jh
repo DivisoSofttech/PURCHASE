@@ -27,10 +27,10 @@ lastName String
  
  entity QuotationLine
  {
- reference String
- price Integer
- tax Double
- availableQuantity Double
+ reference String,
+ price Integer,
+ tax Double,
+ availableQuantity Double,
  isSelect Boolean
  }
  entity Status
@@ -39,21 +39,21 @@ lastName String
  statusLevel String
  }
   entity DeliveryNote{
-reference String
-orderReference String
+reference String,
+orderReference String,
 purchaseDate LocalDate
 }
 entity Rating{
-reference String
+reference String,
 ratings Integer
 }
 entity Comment{
-reference String
+reference String,
 comments String
 }
 
 entity PurchaseOrder {
-   reference String 
+   reference String, 
 	purchaseDate LocalDate
  }
  entity PurchaseLine {
@@ -76,14 +76,14 @@ relationship OneToOne
  }
  relationship OneToMany
   {
-  DeliveryNote{deliveryLines} to DeliveryLine
-  Supplier{temporaryAddresses} to Address
-  Supplier{purchaseOrders} to PurchaseOrder
-  Supplier{quatations} to Quotation
-  Quotation{quotationLines} to QuotationLine
-  PurchaseOrder{purchaseLines} to PurchaseLine
-  Status{quotations} to Quotation
-  Status{purchaseOrders} to PurchaseOrder
+  DeliveryNote{deliveryLines} to DeliveryLine,
+  Supplier{temporaryAddresses} to Address,
+  Supplier{purchaseOrders} to PurchaseOrder,
+  Supplier{quatations} to Quotation,
+  Quotation{quotationLines} to QuotationLine,
+  PurchaseOrder{purchaseLines} to PurchaseLine,
+  Status{quotations} to Quotation,
+  Status{purchaseOrders} to PurchaseOrder,
   DeliveryNote{comments} to Comment
   }
   relationship ManyToMany
