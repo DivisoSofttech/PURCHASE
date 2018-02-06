@@ -26,7 +26,11 @@
             "fieldType": "Double"
         }
     ],
+<<<<<<< HEAD
     "changelogDate": "20180206064954",
+=======
+    "changelogDate": "20180202104743",
+>>>>>>> a39e31745e6f7a0e32d160f1bd8be514614b190c
     "entityTableName": "delivery_line",
     "dto": "mapstruct",
     "pagination": "pagination",

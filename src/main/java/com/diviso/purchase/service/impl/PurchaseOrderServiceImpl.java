@@ -7,8 +7,11 @@ import com.diviso.purchase.service.dto.PurchaseOrderDTO;
 import com.diviso.purchase.service.mapper.PurchaseOrderMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -72,6 +75,21 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         PurchaseOrder purchaseOrder = purchaseOrderRepository.findOne(id);
         return purchaseOrderMapper.toDto(purchaseOrder);
     }
+<<<<<<< HEAD
+=======
+    /**
+     * Get purchase order by date.
+     * @param purchaseDate the id of the entity
+     */
+
+	@Override
+	@Transactional(readOnly = true)
+	public Page<PurchaseOrderDTO> findByPurchaseOrder(LocalDate purchaseDate, Pageable pageable) {
+		log.debug("Request to get PurchaseOrder : {}", purchaseDate);
+		return purchaseOrderRepository.findByPurchaseDate(purchaseDate,pageable)
+	            .map(purchaseOrderMapper::toDto);
+	}
+>>>>>>> a39e31745e6f7a0e32d160f1bd8be514614b190c
 
     /**
      * Delete the purchaseOrder by id.
@@ -83,4 +101,5 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         log.debug("Request to delete PurchaseOrder : {}", id);
         purchaseOrderRepository.delete(id);
     }
+   
 }

@@ -24,7 +24,11 @@
             "fieldType": "String"
         }
     ],
+<<<<<<< HEAD
     "changelogDate": "20180206064948",
+=======
+    "changelogDate": "20180202104737",
+>>>>>>> a39e31745e6f7a0e32d160f1bd8be514614b190c
     "entityTableName": "status",
     "dto": "mapstruct",
     "pagination": "pagination",
