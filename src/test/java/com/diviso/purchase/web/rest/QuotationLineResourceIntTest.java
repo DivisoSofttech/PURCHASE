@@ -41,17 +41,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = PurchaseApp.class)
 public class QuotationLineResourceIntTest {
 
-    private static final String DEFAULT_PRODUCT_REFERENCE = "AAAAAAAAAA";
-    private static final String UPDATED_PRODUCT_REFERENCE = "BBBBBBBBBB";
+    private static final String DEFAULT_REFERENCE = "AAAAAAAAAA";
+    private static final String UPDATED_REFERENCE = "BBBBBBBBBB";
 
-    private static final Integer DEFAULT_PRODUCT_PRICE = 1;
-    private static final Integer UPDATED_PRODUCT_PRICE = 2;
+    private static final Integer DEFAULT_PRICE = 1;
+    private static final Integer UPDATED_PRICE = 2;
 
-    private static final Float DEFAULT_PRODUCT_TAX = 1F;
-    private static final Float UPDATED_PRODUCT_TAX = 2F;
+    private static final Double DEFAULT_TAX = 1D;
+    private static final Double UPDATED_TAX = 2D;
 
-    private static final Integer DEFAULT_AVAILABLE_QUANTITY = 1;
-    private static final Integer UPDATED_AVAILABLE_QUANTITY = 2;
+    private static final Double DEFAULT_AVAILABLE_QUANTITY = 1D;
+    private static final Double UPDATED_AVAILABLE_QUANTITY = 2D;
 
     private static final Boolean DEFAULT_IS_SELECT = false;
     private static final Boolean UPDATED_IS_SELECT = true;
@@ -100,9 +100,9 @@ public class QuotationLineResourceIntTest {
      */
     public static QuotationLine createEntity(EntityManager em) {
         QuotationLine quotationLine = new QuotationLine()
-            .productReference(DEFAULT_PRODUCT_REFERENCE)
-            .productPrice(DEFAULT_PRODUCT_PRICE)
-            .productTax(DEFAULT_PRODUCT_TAX)
+            .reference(DEFAULT_REFERENCE)
+            .price(DEFAULT_PRICE)
+            .tax(DEFAULT_TAX)
             .availableQuantity(DEFAULT_AVAILABLE_QUANTITY)
             .isSelect(DEFAULT_IS_SELECT);
         return quotationLine;
@@ -129,9 +129,9 @@ public class QuotationLineResourceIntTest {
         List<QuotationLine> quotationLineList = quotationLineRepository.findAll();
         assertThat(quotationLineList).hasSize(databaseSizeBeforeCreate + 1);
         QuotationLine testQuotationLine = quotationLineList.get(quotationLineList.size() - 1);
-        assertThat(testQuotationLine.getProductReference()).isEqualTo(DEFAULT_PRODUCT_REFERENCE);
-        assertThat(testQuotationLine.getProductPrice()).isEqualTo(DEFAULT_PRODUCT_PRICE);
-        assertThat(testQuotationLine.getProductTax()).isEqualTo(DEFAULT_PRODUCT_TAX);
+        assertThat(testQuotationLine.getReference()).isEqualTo(DEFAULT_REFERENCE);
+        assertThat(testQuotationLine.getPrice()).isEqualTo(DEFAULT_PRICE);
+        assertThat(testQuotationLine.getTax()).isEqualTo(DEFAULT_TAX);
         assertThat(testQuotationLine.getAvailableQuantity()).isEqualTo(DEFAULT_AVAILABLE_QUANTITY);
         assertThat(testQuotationLine.isIsSelect()).isEqualTo(DEFAULT_IS_SELECT);
     }
@@ -167,10 +167,10 @@ public class QuotationLineResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(quotationLine.getId().intValue())))
-            .andExpect(jsonPath("$.[*].productReference").value(hasItem(DEFAULT_PRODUCT_REFERENCE.toString())))
-            .andExpect(jsonPath("$.[*].productPrice").value(hasItem(DEFAULT_PRODUCT_PRICE)))
-            .andExpect(jsonPath("$.[*].productTax").value(hasItem(DEFAULT_PRODUCT_TAX.doubleValue())))
-            .andExpect(jsonPath("$.[*].availableQuantity").value(hasItem(DEFAULT_AVAILABLE_QUANTITY)))
+            .andExpect(jsonPath("$.[*].reference").value(hasItem(DEFAULT_REFERENCE.toString())))
+            .andExpect(jsonPath("$.[*].price").value(hasItem(DEFAULT_PRICE)))
+            .andExpect(jsonPath("$.[*].tax").value(hasItem(DEFAULT_TAX.doubleValue())))
+            .andExpect(jsonPath("$.[*].availableQuantity").value(hasItem(DEFAULT_AVAILABLE_QUANTITY.doubleValue())))
             .andExpect(jsonPath("$.[*].isSelect").value(hasItem(DEFAULT_IS_SELECT.booleanValue())));
     }
 
@@ -185,10 +185,10 @@ public class QuotationLineResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(quotationLine.getId().intValue()))
-            .andExpect(jsonPath("$.productReference").value(DEFAULT_PRODUCT_REFERENCE.toString()))
-            .andExpect(jsonPath("$.productPrice").value(DEFAULT_PRODUCT_PRICE))
-            .andExpect(jsonPath("$.productTax").value(DEFAULT_PRODUCT_TAX.doubleValue()))
-            .andExpect(jsonPath("$.availableQuantity").value(DEFAULT_AVAILABLE_QUANTITY))
+            .andExpect(jsonPath("$.reference").value(DEFAULT_REFERENCE.toString()))
+            .andExpect(jsonPath("$.price").value(DEFAULT_PRICE))
+            .andExpect(jsonPath("$.tax").value(DEFAULT_TAX.doubleValue()))
+            .andExpect(jsonPath("$.availableQuantity").value(DEFAULT_AVAILABLE_QUANTITY.doubleValue()))
             .andExpect(jsonPath("$.isSelect").value(DEFAULT_IS_SELECT.booleanValue()));
     }
 
@@ -212,9 +212,9 @@ public class QuotationLineResourceIntTest {
         // Disconnect from session so that the updates on updatedQuotationLine are not directly saved in db
         em.detach(updatedQuotationLine);
         updatedQuotationLine
-            .productReference(UPDATED_PRODUCT_REFERENCE)
-            .productPrice(UPDATED_PRODUCT_PRICE)
-            .productTax(UPDATED_PRODUCT_TAX)
+            .reference(UPDATED_REFERENCE)
+            .price(UPDATED_PRICE)
+            .tax(UPDATED_TAX)
             .availableQuantity(UPDATED_AVAILABLE_QUANTITY)
             .isSelect(UPDATED_IS_SELECT);
         QuotationLineDTO quotationLineDTO = quotationLineMapper.toDto(updatedQuotationLine);
@@ -228,9 +228,9 @@ public class QuotationLineResourceIntTest {
         List<QuotationLine> quotationLineList = quotationLineRepository.findAll();
         assertThat(quotationLineList).hasSize(databaseSizeBeforeUpdate);
         QuotationLine testQuotationLine = quotationLineList.get(quotationLineList.size() - 1);
-        assertThat(testQuotationLine.getProductReference()).isEqualTo(UPDATED_PRODUCT_REFERENCE);
-        assertThat(testQuotationLine.getProductPrice()).isEqualTo(UPDATED_PRODUCT_PRICE);
-        assertThat(testQuotationLine.getProductTax()).isEqualTo(UPDATED_PRODUCT_TAX);
+        assertThat(testQuotationLine.getReference()).isEqualTo(UPDATED_REFERENCE);
+        assertThat(testQuotationLine.getPrice()).isEqualTo(UPDATED_PRICE);
+        assertThat(testQuotationLine.getTax()).isEqualTo(UPDATED_TAX);
         assertThat(testQuotationLine.getAvailableQuantity()).isEqualTo(UPDATED_AVAILABLE_QUANTITY);
         assertThat(testQuotationLine.isIsSelect()).isEqualTo(UPDATED_IS_SELECT);
     }

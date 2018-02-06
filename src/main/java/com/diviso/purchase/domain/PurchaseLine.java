@@ -23,16 +23,13 @@ public class PurchaseLine implements Serializable {
     private String productReference;
 
     @Column(name = "product_price")
-    private Integer productPrice;
+    private Double productPrice;
 
     @Column(name = "product_tax")
-    private Float productTax;
+    private Double productTax;
 
-    @Column(name = "available_quantity")
-    private Integer availableQuantity;
-
-    @Column(name = "is_select")
-    private Boolean isSelect;
+    @Column(name = "quantity")
+    private Double quantity;
 
     @ManyToOne
     private PurchaseOrder purchaseOrder;
@@ -59,56 +56,43 @@ public class PurchaseLine implements Serializable {
         this.productReference = productReference;
     }
 
-    public Integer getProductPrice() {
+    public Double getProductPrice() {
         return productPrice;
     }
 
-    public PurchaseLine productPrice(Integer productPrice) {
+    public PurchaseLine productPrice(Double productPrice) {
         this.productPrice = productPrice;
         return this;
     }
 
-    public void setProductPrice(Integer productPrice) {
+    public void setProductPrice(Double productPrice) {
         this.productPrice = productPrice;
     }
 
-    public Float getProductTax() {
+    public Double getProductTax() {
         return productTax;
     }
 
-    public PurchaseLine productTax(Float productTax) {
+    public PurchaseLine productTax(Double productTax) {
         this.productTax = productTax;
         return this;
     }
 
-    public void setProductTax(Float productTax) {
+    public void setProductTax(Double productTax) {
         this.productTax = productTax;
     }
 
-    public Integer getAvailableQuantity() {
-        return availableQuantity;
+    public Double getQuantity() {
+        return quantity;
     }
 
-    public PurchaseLine availableQuantity(Integer availableQuantity) {
-        this.availableQuantity = availableQuantity;
+    public PurchaseLine quantity(Double quantity) {
+        this.quantity = quantity;
         return this;
     }
 
-    public void setAvailableQuantity(Integer availableQuantity) {
-        this.availableQuantity = availableQuantity;
-    }
-
-    public Boolean isIsSelect() {
-        return isSelect;
-    }
-
-    public PurchaseLine isSelect(Boolean isSelect) {
-        this.isSelect = isSelect;
-        return this;
-    }
-
-    public void setIsSelect(Boolean isSelect) {
-        this.isSelect = isSelect;
+    public void setQuantity(Double quantity) {
+        this.quantity = quantity;
     }
 
     public PurchaseOrder getPurchaseOrder() {
@@ -152,8 +136,7 @@ public class PurchaseLine implements Serializable {
             ", productReference='" + getProductReference() + "'" +
             ", productPrice=" + getProductPrice() +
             ", productTax=" + getProductTax() +
-            ", availableQuantity=" + getAvailableQuantity() +
-            ", isSelect='" + isIsSelect() + "'" +
+            ", quantity=" + getQuantity() +
             "}";
     }
 }

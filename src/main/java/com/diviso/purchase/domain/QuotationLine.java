@@ -19,17 +19,17 @@ public class QuotationLine implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "product_reference")
-    private String productReference;
+    @Column(name = "reference")
+    private String reference;
 
-    @Column(name = "product_price")
-    private Integer productPrice;
+    @Column(name = "price")
+    private Integer price;
 
-    @Column(name = "product_tax")
-    private Float productTax;
+    @Column(name = "tax")
+    private Double tax;
 
     @Column(name = "available_quantity")
-    private Integer availableQuantity;
+    private Double availableQuantity;
 
     @Column(name = "is_select")
     private Boolean isSelect;
@@ -46,55 +46,55 @@ public class QuotationLine implements Serializable {
         this.id = id;
     }
 
-    public String getProductReference() {
-        return productReference;
+    public String getReference() {
+        return reference;
     }
 
-    public QuotationLine productReference(String productReference) {
-        this.productReference = productReference;
+    public QuotationLine reference(String reference) {
+        this.reference = reference;
         return this;
     }
 
-    public void setProductReference(String productReference) {
-        this.productReference = productReference;
+    public void setReference(String reference) {
+        this.reference = reference;
     }
 
-    public Integer getProductPrice() {
-        return productPrice;
+    public Integer getPrice() {
+        return price;
     }
 
-    public QuotationLine productPrice(Integer productPrice) {
-        this.productPrice = productPrice;
+    public QuotationLine price(Integer price) {
+        this.price = price;
         return this;
     }
 
-    public void setProductPrice(Integer productPrice) {
-        this.productPrice = productPrice;
+    public void setPrice(Integer price) {
+        this.price = price;
     }
 
-    public Float getProductTax() {
-        return productTax;
+    public Double getTax() {
+        return tax;
     }
 
-    public QuotationLine productTax(Float productTax) {
-        this.productTax = productTax;
+    public QuotationLine tax(Double tax) {
+        this.tax = tax;
         return this;
     }
 
-    public void setProductTax(Float productTax) {
-        this.productTax = productTax;
+    public void setTax(Double tax) {
+        this.tax = tax;
     }
 
-    public Integer getAvailableQuantity() {
+    public Double getAvailableQuantity() {
         return availableQuantity;
     }
 
-    public QuotationLine availableQuantity(Integer availableQuantity) {
+    public QuotationLine availableQuantity(Double availableQuantity) {
         this.availableQuantity = availableQuantity;
         return this;
     }
 
-    public void setAvailableQuantity(Integer availableQuantity) {
+    public void setAvailableQuantity(Double availableQuantity) {
         this.availableQuantity = availableQuantity;
     }
 
@@ -149,9 +149,9 @@ public class QuotationLine implements Serializable {
     public String toString() {
         return "QuotationLine{" +
             "id=" + getId() +
-            ", productReference='" + getProductReference() + "'" +
-            ", productPrice=" + getProductPrice() +
-            ", productTax=" + getProductTax() +
+            ", reference='" + getReference() + "'" +
+            ", price=" + getPrice() +
+            ", tax=" + getTax() +
             ", availableQuantity=" + getAvailableQuantity() +
             ", isSelect='" + isIsSelect() + "'" +
             "}";

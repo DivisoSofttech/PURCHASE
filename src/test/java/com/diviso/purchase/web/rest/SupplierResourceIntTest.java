@@ -41,8 +41,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = PurchaseApp.class)
 public class SupplierResourceIntTest {
 
-    private static final Integer DEFAULT_REFERENCE = 1;
-    private static final Integer UPDATED_REFERENCE = 2;
+    private static final String DEFAULT_REFERENCE = "AAAAAAAAAA";
+    private static final String UPDATED_REFERENCE = "BBBBBBBBBB";
 
     private static final String DEFAULT_FIRST_NAME = "AAAAAAAAAA";
     private static final String UPDATED_FIRST_NAME = "BBBBBBBBBB";
@@ -157,7 +157,7 @@ public class SupplierResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(supplier.getId().intValue())))
-            .andExpect(jsonPath("$.[*].reference").value(hasItem(DEFAULT_REFERENCE)))
+            .andExpect(jsonPath("$.[*].reference").value(hasItem(DEFAULT_REFERENCE.toString())))
             .andExpect(jsonPath("$.[*].firstName").value(hasItem(DEFAULT_FIRST_NAME.toString())))
             .andExpect(jsonPath("$.[*].lastName").value(hasItem(DEFAULT_LAST_NAME.toString())));
     }
@@ -173,7 +173,7 @@ public class SupplierResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(supplier.getId().intValue()))
-            .andExpect(jsonPath("$.reference").value(DEFAULT_REFERENCE))
+            .andExpect(jsonPath("$.reference").value(DEFAULT_REFERENCE.toString()))
             .andExpect(jsonPath("$.firstName").value(DEFAULT_FIRST_NAME.toString()))
             .andExpect(jsonPath("$.lastName").value(DEFAULT_LAST_NAME.toString()));
     }

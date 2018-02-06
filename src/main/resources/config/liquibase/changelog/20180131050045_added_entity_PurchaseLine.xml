@@ -26,19 +26,15 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="product_price" type="integer">
+            <column name="product_price" type="double">
                 <constraints nullable="true" />
             </column>
 
-            <column name="product_tax" type="${floatType}">
+            <column name="product_tax" type="double">
                 <constraints nullable="true" />
             </column>
 
-            <column name="available_quantity" type="integer">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="is_select" type="bit">
+            <column name="quantity" type="double">
                 <constraints nullable="true" />
             </column>
 

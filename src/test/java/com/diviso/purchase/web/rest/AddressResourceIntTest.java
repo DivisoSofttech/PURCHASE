@@ -50,8 +50,8 @@ public class AddressResourceIntTest {
     private static final String DEFAULT_STATE = "AAAAAAAAAA";
     private static final String UPDATED_STATE = "BBBBBBBBBB";
 
-    private static final Integer DEFAULT_PIN_CODE = 1;
-    private static final Integer UPDATED_PIN_CODE = 2;
+    private static final Long DEFAULT_PIN_CODE = 1L;
+    private static final Long UPDATED_PIN_CODE = 2L;
 
     @Autowired
     private AddressRepository addressRepository;
@@ -165,7 +165,7 @@ public class AddressResourceIntTest {
             .andExpect(jsonPath("$.[*].place").value(hasItem(DEFAULT_PLACE.toString())))
             .andExpect(jsonPath("$.[*].district").value(hasItem(DEFAULT_DISTRICT.toString())))
             .andExpect(jsonPath("$.[*].state").value(hasItem(DEFAULT_STATE.toString())))
-            .andExpect(jsonPath("$.[*].pinCode").value(hasItem(DEFAULT_PIN_CODE)));
+            .andExpect(jsonPath("$.[*].pinCode").value(hasItem(DEFAULT_PIN_CODE.intValue())));
     }
 
     @Test
@@ -182,7 +182,7 @@ public class AddressResourceIntTest {
             .andExpect(jsonPath("$.place").value(DEFAULT_PLACE.toString()))
             .andExpect(jsonPath("$.district").value(DEFAULT_DISTRICT.toString()))
             .andExpect(jsonPath("$.state").value(DEFAULT_STATE.toString()))
-            .andExpect(jsonPath("$.pinCode").value(DEFAULT_PIN_CODE));
+            .andExpect(jsonPath("$.pinCode").value(DEFAULT_PIN_CODE.intValue()));
     }
 
     @Test

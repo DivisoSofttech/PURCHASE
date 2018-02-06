@@ -18,7 +18,8 @@ public interface SupplierMapper extends EntityMapper<SupplierDTO, Supplier> {
     @Mapping(source = "permanentAddressId", target = "permanentAddress")
     @Mapping(source = "contactId", target = "contact")
     @Mapping(target = "temporaryAddresses", ignore = true)
-    @Mapping(target = "quotations", ignore = true)
+    @Mapping(target = "purchaseOrders", ignore = true)
+    @Mapping(target = "quatations", ignore = true)
     Supplier toEntity(SupplierDTO supplierDTO);
 
     default Supplier fromId(Long id) {

@@ -8,22 +8,14 @@
             "otherEntityField": "id"
         },
         {
-            "relationshipType": "one-to-one",
-            "relationshipName": "quotationStatus",
-            "otherEntityName": "quotationStatus",
-            "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "quotation"
-        },
-        {
             "relationshipType": "one-to-many",
-            "relationshipName": "quotationLine",
+            "relationshipName": "quotationLines",
             "otherEntityName": "quotationLine",
             "otherEntityRelationshipName": "quotation"
         },
         {
-            "relationshipName": "purchaseOrder",
-            "otherEntityName": "purchaseOrder",
+            "relationshipName": "status",
+            "otherEntityName": "status",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
         }

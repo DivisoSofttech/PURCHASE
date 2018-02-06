@@ -123,13 +123,4 @@ public class SupplierResource {
         supplierService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
-    
-    @GetMapping("/suppliers/{firstName}")
-    @Timed
-    public ResponseEntity<SupplierDTO> getSupplier(@PathVariable String firstName) {
-        log.debug("REST request to get Supplier : {}", firstName);
-        SupplierDTO supplierDTO = supplierService.findByFirstName(firstName);
-        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(supplierDTO));
-    }
-   
 }

@@ -10,20 +10,20 @@
     ],
     "fields": [
         {
-            "fieldName": "productReference",
+            "fieldName": "reference",
             "fieldType": "String"
         },
         {
-            "fieldName": "productPrice",
+            "fieldName": "price",
             "fieldType": "Integer"
         },
         {
-            "fieldName": "productTax",
-            "fieldType": "Float"
+            "fieldName": "tax",
+            "fieldType": "Double"
         },
         {
             "fieldName": "availableQuantity",
-            "fieldType": "Integer"
+            "fieldType": "Double"
         },
         {
             "fieldName": "isSelect",

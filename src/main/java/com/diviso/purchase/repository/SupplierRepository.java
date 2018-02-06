@@ -13,8 +13,4 @@ import org.springframework.data.jpa.repository.*;
 @Repository
 public interface SupplierRepository extends JpaRepository<Supplier, Long> {
 
-	Supplier findByFirstName(String firstName);
-
-	
-
 }

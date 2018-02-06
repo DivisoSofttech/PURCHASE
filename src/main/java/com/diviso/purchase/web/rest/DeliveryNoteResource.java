@@ -18,7 +18,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -110,6 +111,25 @@ public class DeliveryNoteResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(deliveryNoteDTO));
     }
 
+    
+    /**
+     * GET  /delivery-notes : get all the deliveryNotes.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of deliveryNotes in body
+     */
+    @GetMapping("/delivery-notes/findByPurchaseDate/{purchaseDate}")
+    @Timed
+    public ResponseEntity<List<DeliveryNoteDTO>> getAllDeliveryNotes(@PathVariable LocalDate purchaseDate,Pageable pageable) {
+        log.debug("REST request to get a page of DeliveryNotes:{}",purchaseDate);
+        Page<DeliveryNoteDTO> page = deliveryNoteService.findByPurchaseDate(purchaseDate,pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/delivery-notes");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+
+    
+    
     /**
      * DELETE  /delivery-notes/:id : delete the "id" deliveryNote.
      *

@@ -23,7 +23,7 @@ public class Supplier implements Serializable {
     private Long id;
 
     @Column(name = "reference")
-    private Integer reference;
+    private String reference;
 
     @Column(name = "first_name")
     private String firstName;
@@ -45,7 +45,11 @@ public class Supplier implements Serializable {
 
     @OneToMany(mappedBy = "supplier")
     @JsonIgnore
-    private Set<Quotation> quotations = new HashSet<>();
+    private Set<PurchaseOrder> purchaseOrders = new HashSet<>();
+
+    @OneToMany(mappedBy = "supplier")
+    @JsonIgnore
+    private Set<Quotation> quatations = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -56,16 +60,16 @@ public class Supplier implements Serializable {
         this.id = id;
     }
 
-    public Integer getReference() {
+    public String getReference() {
         return reference;
     }
 
-    public Supplier reference(Integer reference) {
+    public Supplier reference(String reference) {
         this.reference = reference;
         return this;
     }
 
-    public void setReference(Integer reference) {
+    public void setReference(String reference) {
         this.reference = reference;
     }
 
@@ -130,13 +134,13 @@ public class Supplier implements Serializable {
         return this;
     }
 
-    public Supplier addTemporaryAddress(Address address) {
+    public Supplier addTemporaryAddresses(Address address) {
         this.temporaryAddresses.add(address);
         address.setSupplier(this);
         return this;
     }
 
-    public Supplier removeTemporaryAddress(Address address) {
+    public Supplier removeTemporaryAddresses(Address address) {
         this.temporaryAddresses.remove(address);
         address.setSupplier(null);
         return this;
@@ -146,29 +150,54 @@ public class Supplier implements Serializable {
         this.temporaryAddresses = addresses;
     }
 
-    public Set<Quotation> getQuotations() {
-        return quotations;
+    public Set<PurchaseOrder> getPurchaseOrders() {
+        return purchaseOrders;
     }
 
-    public Supplier quotations(Set<Quotation> quotations) {
-        this.quotations = quotations;
+    public Supplier purchaseOrders(Set<PurchaseOrder> purchaseOrders) {
+        this.purchaseOrders = purchaseOrders;
         return this;
     }
 
-    public Supplier addQuotation(Quotation quotation) {
-        this.quotations.add(quotation);
+    public Supplier addPurchaseOrders(PurchaseOrder purchaseOrder) {
+        this.purchaseOrders.add(purchaseOrder);
+        purchaseOrder.setSupplier(this);
+        return this;
+    }
+
+    public Supplier removePurchaseOrders(PurchaseOrder purchaseOrder) {
+        this.purchaseOrders.remove(purchaseOrder);
+        purchaseOrder.setSupplier(null);
+        return this;
+    }
+
+    public void setPurchaseOrders(Set<PurchaseOrder> purchaseOrders) {
+        this.purchaseOrders = purchaseOrders;
+    }
+
+    public Set<Quotation> getQuatations() {
+        return quatations;
+    }
+
+    public Supplier quatations(Set<Quotation> quotations) {
+        this.quatations = quotations;
+        return this;
+    }
+
+    public Supplier addQuatations(Quotation quotation) {
+        this.quatations.add(quotation);
         quotation.setSupplier(this);
         return this;
     }
 
-    public Supplier removeQuotation(Quotation quotation) {
-        this.quotations.remove(quotation);
+    public Supplier removeQuatations(Quotation quotation) {
+        this.quatations.remove(quotation);
         quotation.setSupplier(null);
         return this;
     }
 
-    public void setQuotations(Set<Quotation> quotations) {
-        this.quotations = quotations;
+    public void setQuatations(Set<Quotation> quotations) {
+        this.quatations = quotations;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -196,7 +225,7 @@ public class Supplier implements Serializable {
     public String toString() {
         return "Supplier{" +
             "id=" + getId() +
-            ", reference=" + getReference() +
+            ", reference='" + getReference() + "'" +
             ", firstName='" + getFirstName() + "'" +
             ", lastName='" + getLastName() + "'" +
             "}";

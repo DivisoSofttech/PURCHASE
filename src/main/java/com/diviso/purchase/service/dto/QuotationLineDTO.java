@@ -13,13 +13,13 @@ public class QuotationLineDTO implements Serializable {
 
     private Long id;
 
-    private String productReference;
+    private String reference;
 
-    private Integer productPrice;
+    private Integer price;
 
-    private Float productTax;
+    private Double tax;
 
-    private Integer availableQuantity;
+    private Double availableQuantity;
 
     private Boolean isSelect;
 
@@ -33,35 +33,35 @@ public class QuotationLineDTO implements Serializable {
         this.id = id;
     }
 
-    public String getProductReference() {
-        return productReference;
+    public String getReference() {
+        return reference;
     }
 
-    public void setProductReference(String productReference) {
-        this.productReference = productReference;
+    public void setReference(String reference) {
+        this.reference = reference;
     }
 
-    public Integer getProductPrice() {
-        return productPrice;
+    public Integer getPrice() {
+        return price;
     }
 
-    public void setProductPrice(Integer productPrice) {
-        this.productPrice = productPrice;
+    public void setPrice(Integer price) {
+        this.price = price;
     }
 
-    public Float getProductTax() {
-        return productTax;
+    public Double getTax() {
+        return tax;
     }
 
-    public void setProductTax(Float productTax) {
-        this.productTax = productTax;
+    public void setTax(Double tax) {
+        this.tax = tax;
     }
 
-    public Integer getAvailableQuantity() {
+    public Double getAvailableQuantity() {
         return availableQuantity;
     }
 
-    public void setAvailableQuantity(Integer availableQuantity) {
+    public void setAvailableQuantity(Double availableQuantity) {
         this.availableQuantity = availableQuantity;
     }
 
@@ -106,9 +106,9 @@ public class QuotationLineDTO implements Serializable {
     public String toString() {
         return "QuotationLineDTO{" +
             "id=" + getId() +
-            ", productReference='" + getProductReference() + "'" +
-            ", productPrice=" + getProductPrice() +
-            ", productTax=" + getProductTax() +
+            ", reference='" + getReference() + "'" +
+            ", price=" + getPrice() +
+            ", tax=" + getTax() +
             ", availableQuantity=" + getAvailableQuantity() +
             ", isSelect='" + isIsSelect() + "'" +
             "}";

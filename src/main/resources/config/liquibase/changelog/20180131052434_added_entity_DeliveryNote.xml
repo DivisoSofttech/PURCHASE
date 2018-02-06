@@ -30,22 +30,23 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="supplier_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-
             <column name="purchase_date" type="date">
                 <constraints nullable="true" />
             </column>
 
-            <column name="quotation_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-            <column name="rating_id" type="bigint">
-                <constraints unique="true" nullable="true" />
-            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
+        
+        <createTable tableName="delivery_note_ratings">
+            <column name="ratings_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="delivery_notes_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="delivery_notes_id, ratings_id" tableName="delivery_note_ratings"/>
         
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->

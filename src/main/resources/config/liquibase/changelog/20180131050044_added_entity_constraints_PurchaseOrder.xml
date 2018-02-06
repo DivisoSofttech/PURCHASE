@@ -8,11 +8,17 @@
     -->
     <changeSet id="20180131050044-2" author="jhipster">
         
-        <addForeignKeyConstraint baseColumnNames="delivery_note_id"
+        <addForeignKeyConstraint baseColumnNames="supplier_id"
                                  baseTableName="purchase_order"
-                                 constraintName="fk_purchase_order_delivery_note_id"
+                                 constraintName="fk_purchase_order_supplier_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="delivery_note"/>
+                                 referencedTableName="supplier"/>
+
+        <addForeignKeyConstraint baseColumnNames="status_id"
+                                 baseTableName="purchase_order"
+                                 constraintName="fk_purchase_order_status_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="status"/>
 
     </changeSet>
 </databaseChangeLog>

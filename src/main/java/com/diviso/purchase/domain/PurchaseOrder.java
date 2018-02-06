@@ -23,26 +23,21 @@ public class PurchaseOrder implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "supplier_id")
-    private Long supplierId;
-
-    @Column(name = "quotation_id")
-    private Long quotationId;
+    @Column(name = "reference")
+    private String reference;
 
     @Column(name = "purchase_date")
     private LocalDate purchaseDate;
 
-    @OneToOne
-    @JoinColumn(unique = true)
-    private DeliveryNote deliveryNote;
+    @ManyToOne
+    private Supplier supplier;
+
+    @ManyToOne
+    private Status status;
 
     @OneToMany(mappedBy = "purchaseOrder")
     @JsonIgnore
     private Set<PurchaseLine> purchaseLines = new HashSet<>();
-
-    @OneToMany(mappedBy = "purchaseOrder")
-    @JsonIgnore
-    private Set<Quotation> quotations = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -53,30 +48,17 @@ public class PurchaseOrder implements Serializable {
         this.id = id;
     }
 
-    public Long getSupplierId() {
-        return supplierId;
+    public String getReference() {
+        return reference;
     }
 
-    public PurchaseOrder supplierId(Long supplierId) {
-        this.supplierId = supplierId;
+    public PurchaseOrder reference(String reference) {
+        this.reference = reference;
         return this;
     }
 
-    public void setSupplierId(Long supplierId) {
-        this.supplierId = supplierId;
-    }
-
-    public Long getQuotationId() {
-        return quotationId;
-    }
-
-    public PurchaseOrder quotationId(Long quotationId) {
-        this.quotationId = quotationId;
-        return this;
-    }
-
-    public void setQuotationId(Long quotationId) {
-        this.quotationId = quotationId;
+    public void setReference(String reference) {
+        this.reference = reference;
     }
 
     public LocalDate getPurchaseDate() {
@@ -92,17 +74,30 @@ public class PurchaseOrder implements Serializable {
         this.purchaseDate = purchaseDate;
     }
 
-    public DeliveryNote getDeliveryNote() {
-        return deliveryNote;
+    public Supplier getSupplier() {
+        return supplier;
     }
 
-    public PurchaseOrder deliveryNote(DeliveryNote deliveryNote) {
-        this.deliveryNote = deliveryNote;
+    public PurchaseOrder supplier(Supplier supplier) {
+        this.supplier = supplier;
         return this;
     }
 
-    public void setDeliveryNote(DeliveryNote deliveryNote) {
-        this.deliveryNote = deliveryNote;
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public PurchaseOrder status(Status status) {
+        this.status = status;
+        return this;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public Set<PurchaseLine> getPurchaseLines() {
@@ -114,13 +109,13 @@ public class PurchaseOrder implements Serializable {
         return this;
     }
 
-    public PurchaseOrder addPurchaseLine(PurchaseLine purchaseLine) {
+    public PurchaseOrder addPurchaseLines(PurchaseLine purchaseLine) {
         this.purchaseLines.add(purchaseLine);
         purchaseLine.setPurchaseOrder(this);
         return this;
     }
 
-    public PurchaseOrder removePurchaseLine(PurchaseLine purchaseLine) {
+    public PurchaseOrder removePurchaseLines(PurchaseLine purchaseLine) {
         this.purchaseLines.remove(purchaseLine);
         purchaseLine.setPurchaseOrder(null);
         return this;
@@ -128,31 +123,6 @@ public class PurchaseOrder implements Serializable {
 
     public void setPurchaseLines(Set<PurchaseLine> purchaseLines) {
         this.purchaseLines = purchaseLines;
-    }
-
-    public Set<Quotation> getQuotations() {
-        return quotations;
-    }
-
-    public PurchaseOrder quotations(Set<Quotation> quotations) {
-        this.quotations = quotations;
-        return this;
-    }
-
-    public PurchaseOrder addQuotation(Quotation quotation) {
-        this.quotations.add(quotation);
-        quotation.setPurchaseOrder(this);
-        return this;
-    }
-
-    public PurchaseOrder removeQuotation(Quotation quotation) {
-        this.quotations.remove(quotation);
-        quotation.setPurchaseOrder(null);
-        return this;
-    }
-
-    public void setQuotations(Set<Quotation> quotations) {
-        this.quotations = quotations;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -180,8 +150,7 @@ public class PurchaseOrder implements Serializable {
     public String toString() {
         return "PurchaseOrder{" +
             "id=" + getId() +
-            ", supplierId=" + getSupplierId() +
-            ", quotationId=" + getQuotationId() +
+            ", reference='" + getReference() + "'" +
             ", purchaseDate='" + getPurchaseDate() + "'" +
             "}";
     }

@@ -5,6 +5,9 @@ import com.diviso.purchase.domain.DeliveryNote;
 import com.diviso.purchase.repository.DeliveryNoteRepository;
 import com.diviso.purchase.service.dto.DeliveryNoteDTO;
 import com.diviso.purchase.service.mapper.DeliveryNoteMapper;
+
+import java.time.LocalDate;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -69,7 +72,7 @@ public class DeliveryNoteServiceImpl implements DeliveryNoteService {
     @Transactional(readOnly = true)
     public DeliveryNoteDTO findOne(Long id) {
         log.debug("Request to get DeliveryNote : {}", id);
-        DeliveryNote deliveryNote = deliveryNoteRepository.findOne(id);
+        DeliveryNote deliveryNote = deliveryNoteRepository.findOneWithEagerRelationships(id);
         return deliveryNoteMapper.toDto(deliveryNote);
     }
 
@@ -83,4 +86,19 @@ public class DeliveryNoteServiceImpl implements DeliveryNoteService {
         log.debug("Request to delete DeliveryNote : {}", id);
         deliveryNoteRepository.delete(id);
     }
+
+    /**
+     * Get all the deliveryNotes.
+     *
+     * @param pageable the pagination information
+     * @return the list of entities
+     */
+
+	@Override
+	public Page<DeliveryNoteDTO> findByPurchaseDate(LocalDate purchaseDate, Pageable pageable) {
+		// TODO Auto-generated method stub
+		 log.debug("Request to get all DeliveryNotes: {}",purchaseDate);
+	        return deliveryNoteRepository.findByPurchaseDate(purchaseDate,pageable)
+	            .map(deliveryNoteMapper::toDto);
+	}
 }

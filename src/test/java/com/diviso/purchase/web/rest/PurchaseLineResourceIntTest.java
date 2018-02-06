@@ -44,17 +44,14 @@ public class PurchaseLineResourceIntTest {
     private static final String DEFAULT_PRODUCT_REFERENCE = "AAAAAAAAAA";
     private static final String UPDATED_PRODUCT_REFERENCE = "BBBBBBBBBB";
 
-    private static final Integer DEFAULT_PRODUCT_PRICE = 1;
-    private static final Integer UPDATED_PRODUCT_PRICE = 2;
+    private static final Double DEFAULT_PRODUCT_PRICE = 1D;
+    private static final Double UPDATED_PRODUCT_PRICE = 2D;
 
-    private static final Float DEFAULT_PRODUCT_TAX = 1F;
-    private static final Float UPDATED_PRODUCT_TAX = 2F;
+    private static final Double DEFAULT_PRODUCT_TAX = 1D;
+    private static final Double UPDATED_PRODUCT_TAX = 2D;
 
-    private static final Integer DEFAULT_AVAILABLE_QUANTITY = 1;
-    private static final Integer UPDATED_AVAILABLE_QUANTITY = 2;
-
-    private static final Boolean DEFAULT_IS_SELECT = false;
-    private static final Boolean UPDATED_IS_SELECT = true;
+    private static final Double DEFAULT_QUANTITY = 1D;
+    private static final Double UPDATED_QUANTITY = 2D;
 
     @Autowired
     private PurchaseLineRepository purchaseLineRepository;
@@ -103,8 +100,7 @@ public class PurchaseLineResourceIntTest {
             .productReference(DEFAULT_PRODUCT_REFERENCE)
             .productPrice(DEFAULT_PRODUCT_PRICE)
             .productTax(DEFAULT_PRODUCT_TAX)
-            .availableQuantity(DEFAULT_AVAILABLE_QUANTITY)
-            .isSelect(DEFAULT_IS_SELECT);
+            .quantity(DEFAULT_QUANTITY);
         return purchaseLine;
     }
 
@@ -132,8 +128,7 @@ public class PurchaseLineResourceIntTest {
         assertThat(testPurchaseLine.getProductReference()).isEqualTo(DEFAULT_PRODUCT_REFERENCE);
         assertThat(testPurchaseLine.getProductPrice()).isEqualTo(DEFAULT_PRODUCT_PRICE);
         assertThat(testPurchaseLine.getProductTax()).isEqualTo(DEFAULT_PRODUCT_TAX);
-        assertThat(testPurchaseLine.getAvailableQuantity()).isEqualTo(DEFAULT_AVAILABLE_QUANTITY);
-        assertThat(testPurchaseLine.isIsSelect()).isEqualTo(DEFAULT_IS_SELECT);
+        assertThat(testPurchaseLine.getQuantity()).isEqualTo(DEFAULT_QUANTITY);
     }
 
     @Test
@@ -168,10 +163,9 @@ public class PurchaseLineResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(purchaseLine.getId().intValue())))
             .andExpect(jsonPath("$.[*].productReference").value(hasItem(DEFAULT_PRODUCT_REFERENCE.toString())))
-            .andExpect(jsonPath("$.[*].productPrice").value(hasItem(DEFAULT_PRODUCT_PRICE)))
+            .andExpect(jsonPath("$.[*].productPrice").value(hasItem(DEFAULT_PRODUCT_PRICE.doubleValue())))
             .andExpect(jsonPath("$.[*].productTax").value(hasItem(DEFAULT_PRODUCT_TAX.doubleValue())))
-            .andExpect(jsonPath("$.[*].availableQuantity").value(hasItem(DEFAULT_AVAILABLE_QUANTITY)))
-            .andExpect(jsonPath("$.[*].isSelect").value(hasItem(DEFAULT_IS_SELECT.booleanValue())));
+            .andExpect(jsonPath("$.[*].quantity").value(hasItem(DEFAULT_QUANTITY.doubleValue())));
     }
 
     @Test
@@ -186,10 +180,9 @@ public class PurchaseLineResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(purchaseLine.getId().intValue()))
             .andExpect(jsonPath("$.productReference").value(DEFAULT_PRODUCT_REFERENCE.toString()))
-            .andExpect(jsonPath("$.productPrice").value(DEFAULT_PRODUCT_PRICE))
+            .andExpect(jsonPath("$.productPrice").value(DEFAULT_PRODUCT_PRICE.doubleValue()))
             .andExpect(jsonPath("$.productTax").value(DEFAULT_PRODUCT_TAX.doubleValue()))
-            .andExpect(jsonPath("$.availableQuantity").value(DEFAULT_AVAILABLE_QUANTITY))
-            .andExpect(jsonPath("$.isSelect").value(DEFAULT_IS_SELECT.booleanValue()));
+            .andExpect(jsonPath("$.quantity").value(DEFAULT_QUANTITY.doubleValue()));
     }
 
     @Test
@@ -215,8 +208,7 @@ public class PurchaseLineResourceIntTest {
             .productReference(UPDATED_PRODUCT_REFERENCE)
             .productPrice(UPDATED_PRODUCT_PRICE)
             .productTax(UPDATED_PRODUCT_TAX)
-            .availableQuantity(UPDATED_AVAILABLE_QUANTITY)
-            .isSelect(UPDATED_IS_SELECT);
+            .quantity(UPDATED_QUANTITY);
         PurchaseLineDTO purchaseLineDTO = purchaseLineMapper.toDto(updatedPurchaseLine);
 
         restPurchaseLineMockMvc.perform(put("/api/purchase-lines")
@@ -231,8 +223,7 @@ public class PurchaseLineResourceIntTest {
         assertThat(testPurchaseLine.getProductReference()).isEqualTo(UPDATED_PRODUCT_REFERENCE);
         assertThat(testPurchaseLine.getProductPrice()).isEqualTo(UPDATED_PRODUCT_PRICE);
         assertThat(testPurchaseLine.getProductTax()).isEqualTo(UPDATED_PRODUCT_TAX);
-        assertThat(testPurchaseLine.getAvailableQuantity()).isEqualTo(UPDATED_AVAILABLE_QUANTITY);
-        assertThat(testPurchaseLine.isIsSelect()).isEqualTo(UPDATED_IS_SELECT);
+        assertThat(testPurchaseLine.getQuantity()).isEqualTo(UPDATED_QUANTITY);
     }
 
     @Test

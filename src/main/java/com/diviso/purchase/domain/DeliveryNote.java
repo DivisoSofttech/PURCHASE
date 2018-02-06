@@ -29,22 +29,22 @@ public class DeliveryNote implements Serializable {
     @Column(name = "order_reference")
     private String orderReference;
 
-    @Column(name = "supplier_id")
-    private Long supplierId;
-
     @Column(name = "purchase_date")
     private LocalDate purchaseDate;
 
-    @Column(name = "quotation_id")
-    private Long quotationId;
-
-    @OneToOne
-    @JoinColumn(unique = true)
-    private Rating rating;
+    @OneToMany(mappedBy = "deliveryNote")
+    @JsonIgnore
+    private Set<DeliveryLine> deliveryLines = new HashSet<>();
 
     @OneToMany(mappedBy = "deliveryNote")
     @JsonIgnore
     private Set<Comment> comments = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(name = "delivery_note_ratings",
+               joinColumns = @JoinColumn(name="delivery_notes_id", referencedColumnName="id"),
+               inverseJoinColumns = @JoinColumn(name="ratings_id", referencedColumnName="id"))
+    private Set<Rating> ratings = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -81,19 +81,6 @@ public class DeliveryNote implements Serializable {
         this.orderReference = orderReference;
     }
 
-    public Long getSupplierId() {
-        return supplierId;
-    }
-
-    public DeliveryNote supplierId(Long supplierId) {
-        this.supplierId = supplierId;
-        return this;
-    }
-
-    public void setSupplierId(Long supplierId) {
-        this.supplierId = supplierId;
-    }
-
     public LocalDate getPurchaseDate() {
         return purchaseDate;
     }
@@ -107,30 +94,29 @@ public class DeliveryNote implements Serializable {
         this.purchaseDate = purchaseDate;
     }
 
-    public Long getQuotationId() {
-        return quotationId;
+    public Set<DeliveryLine> getDeliveryLines() {
+        return deliveryLines;
     }
 
-    public DeliveryNote quotationId(Long quotationId) {
-        this.quotationId = quotationId;
+    public DeliveryNote deliveryLines(Set<DeliveryLine> deliveryLines) {
+        this.deliveryLines = deliveryLines;
         return this;
     }
 
-    public void setQuotationId(Long quotationId) {
-        this.quotationId = quotationId;
-    }
-
-    public Rating getRating() {
-        return rating;
-    }
-
-    public DeliveryNote rating(Rating rating) {
-        this.rating = rating;
+    public DeliveryNote addDeliveryLines(DeliveryLine deliveryLine) {
+        this.deliveryLines.add(deliveryLine);
+        deliveryLine.setDeliveryNote(this);
         return this;
     }
 
-    public void setRating(Rating rating) {
-        this.rating = rating;
+    public DeliveryNote removeDeliveryLines(DeliveryLine deliveryLine) {
+        this.deliveryLines.remove(deliveryLine);
+        deliveryLine.setDeliveryNote(null);
+        return this;
+    }
+
+    public void setDeliveryLines(Set<DeliveryLine> deliveryLines) {
+        this.deliveryLines = deliveryLines;
     }
 
     public Set<Comment> getComments() {
@@ -142,13 +128,13 @@ public class DeliveryNote implements Serializable {
         return this;
     }
 
-    public DeliveryNote addComment(Comment comment) {
+    public DeliveryNote addComments(Comment comment) {
         this.comments.add(comment);
         comment.setDeliveryNote(this);
         return this;
     }
 
-    public DeliveryNote removeComment(Comment comment) {
+    public DeliveryNote removeComments(Comment comment) {
         this.comments.remove(comment);
         comment.setDeliveryNote(null);
         return this;
@@ -156,6 +142,29 @@ public class DeliveryNote implements Serializable {
 
     public void setComments(Set<Comment> comments) {
         this.comments = comments;
+    }
+
+    public Set<Rating> getRatings() {
+        return ratings;
+    }
+
+    public DeliveryNote ratings(Set<Rating> ratings) {
+        this.ratings = ratings;
+        return this;
+    }
+
+    public DeliveryNote addRatings(Rating rating) {
+        this.ratings.add(rating);
+        return this;
+    }
+
+    public DeliveryNote removeRatings(Rating rating) {
+        this.ratings.remove(rating);
+        return this;
+    }
+
+    public void setRatings(Set<Rating> ratings) {
+        this.ratings = ratings;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -185,9 +194,7 @@ public class DeliveryNote implements Serializable {
             "id=" + getId() +
             ", reference='" + getReference() + "'" +
             ", orderReference='" + getOrderReference() + "'" +
-            ", supplierId=" + getSupplierId() +
             ", purchaseDate='" + getPurchaseDate() + "'" +
-            ", quotationId=" + getQuotationId() +
             "}";
     }
 }

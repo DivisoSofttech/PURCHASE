@@ -14,13 +14,13 @@ public class PurchaseOrderDTO implements Serializable {
 
     private Long id;
 
-    private Long supplierId;
-
-    private Long quotationId;
+    private String reference;
 
     private LocalDate purchaseDate;
 
-    private Long deliveryNoteId;
+    private Long supplierId;
+
+    private Long statusId;
 
     public Long getId() {
         return id;
@@ -30,20 +30,12 @@ public class PurchaseOrderDTO implements Serializable {
         this.id = id;
     }
 
-    public Long getSupplierId() {
-        return supplierId;
+    public String getReference() {
+        return reference;
     }
 
-    public void setSupplierId(Long supplierId) {
-        this.supplierId = supplierId;
-    }
-
-    public Long getQuotationId() {
-        return quotationId;
-    }
-
-    public void setQuotationId(Long quotationId) {
-        this.quotationId = quotationId;
+    public void setReference(String reference) {
+        this.reference = reference;
     }
 
     public LocalDate getPurchaseDate() {
@@ -54,12 +46,20 @@ public class PurchaseOrderDTO implements Serializable {
         this.purchaseDate = purchaseDate;
     }
 
-    public Long getDeliveryNoteId() {
-        return deliveryNoteId;
+    public Long getSupplierId() {
+        return supplierId;
     }
 
-    public void setDeliveryNoteId(Long deliveryNoteId) {
-        this.deliveryNoteId = deliveryNoteId;
+    public void setSupplierId(Long supplierId) {
+        this.supplierId = supplierId;
+    }
+
+    public Long getStatusId() {
+        return statusId;
+    }
+
+    public void setStatusId(Long statusId) {
+        this.statusId = statusId;
     }
 
     @Override
@@ -87,8 +87,7 @@ public class PurchaseOrderDTO implements Serializable {
     public String toString() {
         return "PurchaseOrderDTO{" +
             "id=" + getId() +
-            ", supplierId=" + getSupplierId() +
-            ", quotationId=" + getQuotationId() +
+            ", reference='" + getReference() + "'" +
             ", purchaseDate='" + getPurchaseDate() + "'" +
             "}";
     }

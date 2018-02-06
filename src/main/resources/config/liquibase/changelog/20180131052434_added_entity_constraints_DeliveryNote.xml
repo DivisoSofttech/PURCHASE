@@ -8,11 +8,16 @@
     -->
     <changeSet id="20180131052434-2" author="jhipster">
         
-        <addForeignKeyConstraint baseColumnNames="rating_id"
-                                 baseTableName="delivery_note"
-                                 constraintName="fk_delivery_note_rating_id"
+        <addForeignKeyConstraint baseColumnNames="delivery_notes_id"
+                                 baseTableName="delivery_note_ratings"
+                                 constraintName="fk_delivery_note_ratings_delivery_notes_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="delivery_note"/>
+        <addForeignKeyConstraint baseColumnNames="ratings_id"
+                                 baseTableName="delivery_note_ratings"
+                                 constraintName="fk_delivery_note_ratings_ratings_id"
                                  referencedColumnNames="id"
                                  referencedTableName="rating"/>
-
+        
     </changeSet>
 </databaseChangeLog>

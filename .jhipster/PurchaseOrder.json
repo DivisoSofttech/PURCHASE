@@ -2,34 +2,28 @@
     "fluentMethods": true,
     "relationships": [
         {
-            "relationshipType": "one-to-one",
-            "relationshipName": "deliveryNote",
-            "otherEntityName": "deliveryNote",
-            "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "purchaseOrder"
+            "relationshipName": "supplier",
+            "otherEntityName": "supplier",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "status",
+            "otherEntityName": "status",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
         },
         {
             "relationshipType": "one-to-many",
-            "relationshipName": "purchaseLine",
+            "relationshipName": "purchaseLines",
             "otherEntityName": "purchaseLine",
-            "otherEntityRelationshipName": "purchaseOrder"
-        },
-        {
-            "relationshipType": "one-to-many",
-            "relationshipName": "quotation",
-            "otherEntityName": "quotation",
             "otherEntityRelationshipName": "purchaseOrder"
         }
     ],
     "fields": [
         {
-            "fieldName": "supplierId",
-            "fieldType": "Long"
-        },
-        {
-            "fieldName": "quotationId",
-            "fieldType": "Long"
+            "fieldName": "reference",
+            "fieldType": "String"
         },
         {
             "fieldName": "purchaseDate",

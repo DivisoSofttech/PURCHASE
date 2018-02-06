@@ -19,7 +19,7 @@ public class AddressDTO implements Serializable {
 
     private String state;
 
-    private Integer pinCode;
+    private Long pinCode;
 
     private Long supplierId;
 
@@ -55,11 +55,11 @@ public class AddressDTO implements Serializable {
         this.state = state;
     }
 
-    public Integer getPinCode() {
+    public Long getPinCode() {
         return pinCode;
     }
 
-    public void setPinCode(Integer pinCode) {
+    public void setPinCode(Long pinCode) {
         this.pinCode = pinCode;
     }
 

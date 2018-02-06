@@ -8,18 +8,16 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity Quotation and its DTO QuotationDTO.
  */
-@Mapper(componentModel = "spring", uses = {SupplierMapper.class, QuotationStatusMapper.class, PurchaseOrderMapper.class})
+@Mapper(componentModel = "spring", uses = {SupplierMapper.class, StatusMapper.class})
 public interface QuotationMapper extends EntityMapper<QuotationDTO, Quotation> {
 
     @Mapping(source = "supplier.id", target = "supplierId")
-    @Mapping(source = "quotationStatus.id", target = "quotationStatusId")
-    @Mapping(source = "purchaseOrder.id", target = "purchaseOrderId")
+    @Mapping(source = "status.id", target = "statusId")
     QuotationDTO toDto(Quotation quotation);
 
     @Mapping(source = "supplierId", target = "supplier")
-    @Mapping(source = "quotationStatusId", target = "quotationStatus")
     @Mapping(target = "quotationLines", ignore = true)
-    @Mapping(source = "purchaseOrderId", target = "purchaseOrder")
+    @Mapping(source = "statusId", target = "status")
     Quotation toEntity(QuotationDTO quotationDTO);
 
     default Quotation fromId(Long id) {
