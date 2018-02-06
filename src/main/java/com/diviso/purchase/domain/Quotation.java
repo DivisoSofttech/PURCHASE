@@ -32,16 +32,12 @@ public class Quotation implements Serializable {
     @ManyToOne
     private Supplier supplier;
 
-    @OneToOne
-    @JoinColumn(unique = true)
-    private QuotationStatus quotationStatus;
-
     @OneToMany(mappedBy = "quotation")
     @JsonIgnore
     private Set<QuotationLine> quotationLines = new HashSet<>();
 
     @ManyToOne
-    private PurchaseOrder purchaseOrder;
+    private Status status;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -91,19 +87,6 @@ public class Quotation implements Serializable {
         this.supplier = supplier;
     }
 
-    public QuotationStatus getQuotationStatus() {
-        return quotationStatus;
-    }
-
-    public Quotation quotationStatus(QuotationStatus quotationStatus) {
-        this.quotationStatus = quotationStatus;
-        return this;
-    }
-
-    public void setQuotationStatus(QuotationStatus quotationStatus) {
-        this.quotationStatus = quotationStatus;
-    }
-
     public Set<QuotationLine> getQuotationLines() {
         return quotationLines;
     }
@@ -113,13 +96,13 @@ public class Quotation implements Serializable {
         return this;
     }
 
-    public Quotation addQuotationLine(QuotationLine quotationLine) {
+    public Quotation addQuotationLines(QuotationLine quotationLine) {
         this.quotationLines.add(quotationLine);
         quotationLine.setQuotation(this);
         return this;
     }
 
-    public Quotation removeQuotationLine(QuotationLine quotationLine) {
+    public Quotation removeQuotationLines(QuotationLine quotationLine) {
         this.quotationLines.remove(quotationLine);
         quotationLine.setQuotation(null);
         return this;
@@ -129,17 +112,17 @@ public class Quotation implements Serializable {
         this.quotationLines = quotationLines;
     }
 
-    public PurchaseOrder getPurchaseOrder() {
-        return purchaseOrder;
+    public Status getStatus() {
+        return status;
     }
 
-    public Quotation purchaseOrder(PurchaseOrder purchaseOrder) {
-        this.purchaseOrder = purchaseOrder;
+    public Quotation status(Status status) {
+        this.status = status;
         return this;
     }
 
-    public void setPurchaseOrder(PurchaseOrder purchaseOrder) {
-        this.purchaseOrder = purchaseOrder;
+    public void setStatus(Status status) {
+        this.status = status;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

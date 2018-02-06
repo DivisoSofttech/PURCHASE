@@ -11,10 +11,8 @@ import org.mapstruct.*;
 @Mapper(componentModel = "spring", uses = {RatingMapper.class})
 public interface DeliveryNoteMapper extends EntityMapper<DeliveryNoteDTO, DeliveryNote> {
 
-    @Mapping(source = "rating.id", target = "ratingId")
-    DeliveryNoteDTO toDto(DeliveryNote deliveryNote);
 
-    @Mapping(source = "ratingId", target = "rating")
+    @Mapping(target = "deliveryLines", ignore = true)
     @Mapping(target = "comments", ignore = true)
     DeliveryNote toEntity(DeliveryNoteDTO deliveryNoteDTO);
 

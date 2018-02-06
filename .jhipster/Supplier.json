@@ -19,13 +19,19 @@
         },
         {
             "relationshipType": "one-to-many",
-            "relationshipName": "temporaryAddress",
+            "relationshipName": "temporaryAddresses",
             "otherEntityName": "address",
             "otherEntityRelationshipName": "supplier"
         },
         {
             "relationshipType": "one-to-many",
-            "relationshipName": "quotation",
+            "relationshipName": "purchaseOrders",
+            "otherEntityName": "purchaseOrder",
+            "otherEntityRelationshipName": "supplier"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "quatations",
             "otherEntityName": "quotation",
             "otherEntityRelationshipName": "supplier"
         }
@@ -33,7 +39,7 @@
     "fields": [
         {
             "fieldName": "reference",
-            "fieldType": "Integer"
+            "fieldType": "String"
         },
         {
             "fieldName": "firstName",

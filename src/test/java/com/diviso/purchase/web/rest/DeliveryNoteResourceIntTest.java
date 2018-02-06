@@ -49,14 +49,8 @@ public class DeliveryNoteResourceIntTest {
     private static final String DEFAULT_ORDER_REFERENCE = "AAAAAAAAAA";
     private static final String UPDATED_ORDER_REFERENCE = "BBBBBBBBBB";
 
-    private static final Long DEFAULT_SUPPLIER_ID = 1L;
-    private static final Long UPDATED_SUPPLIER_ID = 2L;
-
     private static final LocalDate DEFAULT_PURCHASE_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_PURCHASE_DATE = LocalDate.now(ZoneId.systemDefault());
-
-    private static final Long DEFAULT_QUOTATION_ID = 1L;
-    private static final Long UPDATED_QUOTATION_ID = 2L;
 
     @Autowired
     private DeliveryNoteRepository deliveryNoteRepository;
@@ -104,9 +98,7 @@ public class DeliveryNoteResourceIntTest {
         DeliveryNote deliveryNote = new DeliveryNote()
             .reference(DEFAULT_REFERENCE)
             .orderReference(DEFAULT_ORDER_REFERENCE)
-            .supplierId(DEFAULT_SUPPLIER_ID)
-            .purchaseDate(DEFAULT_PURCHASE_DATE)
-            .quotationId(DEFAULT_QUOTATION_ID);
+            .purchaseDate(DEFAULT_PURCHASE_DATE);
         return deliveryNote;
     }
 
@@ -133,9 +125,7 @@ public class DeliveryNoteResourceIntTest {
         DeliveryNote testDeliveryNote = deliveryNoteList.get(deliveryNoteList.size() - 1);
         assertThat(testDeliveryNote.getReference()).isEqualTo(DEFAULT_REFERENCE);
         assertThat(testDeliveryNote.getOrderReference()).isEqualTo(DEFAULT_ORDER_REFERENCE);
-        assertThat(testDeliveryNote.getSupplierId()).isEqualTo(DEFAULT_SUPPLIER_ID);
         assertThat(testDeliveryNote.getPurchaseDate()).isEqualTo(DEFAULT_PURCHASE_DATE);
-        assertThat(testDeliveryNote.getQuotationId()).isEqualTo(DEFAULT_QUOTATION_ID);
     }
 
     @Test
@@ -171,9 +161,7 @@ public class DeliveryNoteResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(deliveryNote.getId().intValue())))
             .andExpect(jsonPath("$.[*].reference").value(hasItem(DEFAULT_REFERENCE.toString())))
             .andExpect(jsonPath("$.[*].orderReference").value(hasItem(DEFAULT_ORDER_REFERENCE.toString())))
-            .andExpect(jsonPath("$.[*].supplierId").value(hasItem(DEFAULT_SUPPLIER_ID.intValue())))
-            .andExpect(jsonPath("$.[*].purchaseDate").value(hasItem(DEFAULT_PURCHASE_DATE.toString())))
-            .andExpect(jsonPath("$.[*].quotationId").value(hasItem(DEFAULT_QUOTATION_ID.intValue())));
+            .andExpect(jsonPath("$.[*].purchaseDate").value(hasItem(DEFAULT_PURCHASE_DATE.toString())));
     }
 
     @Test
@@ -189,9 +177,7 @@ public class DeliveryNoteResourceIntTest {
             .andExpect(jsonPath("$.id").value(deliveryNote.getId().intValue()))
             .andExpect(jsonPath("$.reference").value(DEFAULT_REFERENCE.toString()))
             .andExpect(jsonPath("$.orderReference").value(DEFAULT_ORDER_REFERENCE.toString()))
-            .andExpect(jsonPath("$.supplierId").value(DEFAULT_SUPPLIER_ID.intValue()))
-            .andExpect(jsonPath("$.purchaseDate").value(DEFAULT_PURCHASE_DATE.toString()))
-            .andExpect(jsonPath("$.quotationId").value(DEFAULT_QUOTATION_ID.intValue()));
+            .andExpect(jsonPath("$.purchaseDate").value(DEFAULT_PURCHASE_DATE.toString()));
     }
 
     @Test
@@ -216,9 +202,7 @@ public class DeliveryNoteResourceIntTest {
         updatedDeliveryNote
             .reference(UPDATED_REFERENCE)
             .orderReference(UPDATED_ORDER_REFERENCE)
-            .supplierId(UPDATED_SUPPLIER_ID)
-            .purchaseDate(UPDATED_PURCHASE_DATE)
-            .quotationId(UPDATED_QUOTATION_ID);
+            .purchaseDate(UPDATED_PURCHASE_DATE);
         DeliveryNoteDTO deliveryNoteDTO = deliveryNoteMapper.toDto(updatedDeliveryNote);
 
         restDeliveryNoteMockMvc.perform(put("/api/delivery-notes")
@@ -232,9 +216,7 @@ public class DeliveryNoteResourceIntTest {
         DeliveryNote testDeliveryNote = deliveryNoteList.get(deliveryNoteList.size() - 1);
         assertThat(testDeliveryNote.getReference()).isEqualTo(UPDATED_REFERENCE);
         assertThat(testDeliveryNote.getOrderReference()).isEqualTo(UPDATED_ORDER_REFERENCE);
-        assertThat(testDeliveryNote.getSupplierId()).isEqualTo(UPDATED_SUPPLIER_ID);
         assertThat(testDeliveryNote.getPurchaseDate()).isEqualTo(UPDATED_PURCHASE_DATE);
-        assertThat(testDeliveryNote.getQuotationId()).isEqualTo(UPDATED_QUOTATION_ID);
     }
 
     @Test

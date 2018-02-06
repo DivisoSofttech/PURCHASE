@@ -2,18 +2,24 @@
     "fluentMethods": true,
     "relationships": [
         {
-            "relationshipType": "one-to-one",
-            "relationshipName": "rating",
-            "otherEntityName": "rating",
-            "otherEntityField": "id",
-            "ownerSide": true,
+            "relationshipType": "one-to-many",
+            "relationshipName": "deliveryLines",
+            "otherEntityName": "deliveryLine",
             "otherEntityRelationshipName": "deliveryNote"
         },
         {
             "relationshipType": "one-to-many",
-            "relationshipName": "comment",
+            "relationshipName": "comments",
             "otherEntityName": "comment",
             "otherEntityRelationshipName": "deliveryNote"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "",
+            "relationshipName": "ratings",
+            "otherEntityName": "rating",
+            "otherEntityField": "id",
+            "ownerSide": true
         }
     ],
     "fields": [
@@ -26,16 +32,8 @@
             "fieldType": "String"
         },
         {
-            "fieldName": "supplierId",
-            "fieldType": "Long"
-        },
-        {
             "fieldName": "purchaseDate",
             "fieldType": "LocalDate"
-        },
-        {
-            "fieldName": "quotationId",
-            "fieldType": "Long"
         }
     ],
     "changelogDate": "20180131052434",

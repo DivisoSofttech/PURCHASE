@@ -29,7 +29,7 @@ public class Address implements Serializable {
     private String state;
 
     @Column(name = "pin_code")
-    private Integer pinCode;
+    private Long pinCode;
 
     @ManyToOne
     private Supplier supplier;
@@ -82,16 +82,16 @@ public class Address implements Serializable {
         this.state = state;
     }
 
-    public Integer getPinCode() {
+    public Long getPinCode() {
         return pinCode;
     }
 
-    public Address pinCode(Integer pinCode) {
+    public Address pinCode(Long pinCode) {
         this.pinCode = pinCode;
         return this;
     }
 
-    public void setPinCode(Integer pinCode) {
+    public void setPinCode(Long pinCode) {
         this.pinCode = pinCode;
     }
 

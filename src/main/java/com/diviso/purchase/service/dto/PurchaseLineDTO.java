@@ -15,13 +15,11 @@ public class PurchaseLineDTO implements Serializable {
 
     private String productReference;
 
-    private Integer productPrice;
+    private Double productPrice;
 
-    private Float productTax;
+    private Double productTax;
 
-    private Integer availableQuantity;
-
-    private Boolean isSelect;
+    private Double quantity;
 
     private Long purchaseOrderId;
 
@@ -41,36 +39,28 @@ public class PurchaseLineDTO implements Serializable {
         this.productReference = productReference;
     }
 
-    public Integer getProductPrice() {
+    public Double getProductPrice() {
         return productPrice;
     }
 
-    public void setProductPrice(Integer productPrice) {
+    public void setProductPrice(Double productPrice) {
         this.productPrice = productPrice;
     }
 
-    public Float getProductTax() {
+    public Double getProductTax() {
         return productTax;
     }
 
-    public void setProductTax(Float productTax) {
+    public void setProductTax(Double productTax) {
         this.productTax = productTax;
     }
 
-    public Integer getAvailableQuantity() {
-        return availableQuantity;
+    public Double getQuantity() {
+        return quantity;
     }
 
-    public void setAvailableQuantity(Integer availableQuantity) {
-        this.availableQuantity = availableQuantity;
-    }
-
-    public Boolean isIsSelect() {
-        return isSelect;
-    }
-
-    public void setIsSelect(Boolean isSelect) {
-        this.isSelect = isSelect;
+    public void setQuantity(Double quantity) {
+        this.quantity = quantity;
     }
 
     public Long getPurchaseOrderId() {
@@ -109,8 +99,7 @@ public class PurchaseLineDTO implements Serializable {
             ", productReference='" + getProductReference() + "'" +
             ", productPrice=" + getProductPrice() +
             ", productTax=" + getProductTax() +
-            ", availableQuantity=" + getAvailableQuantity() +
-            ", isSelect='" + isIsSelect() + "'" +
+            ", quantity=" + getQuantity() +
             "}";
     }
 }

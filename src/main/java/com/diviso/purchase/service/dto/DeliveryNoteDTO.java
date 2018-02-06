@@ -18,13 +18,9 @@ public class DeliveryNoteDTO implements Serializable {
 
     private String orderReference;
 
-    private Long supplierId;
-
     private LocalDate purchaseDate;
 
-    private Long quotationId;
-
-    private Long ratingId;
+    private Set<RatingDTO> ratings = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -50,14 +46,6 @@ public class DeliveryNoteDTO implements Serializable {
         this.orderReference = orderReference;
     }
 
-    public Long getSupplierId() {
-        return supplierId;
-    }
-
-    public void setSupplierId(Long supplierId) {
-        this.supplierId = supplierId;
-    }
-
     public LocalDate getPurchaseDate() {
         return purchaseDate;
     }
@@ -66,20 +54,12 @@ public class DeliveryNoteDTO implements Serializable {
         this.purchaseDate = purchaseDate;
     }
 
-    public Long getQuotationId() {
-        return quotationId;
+    public Set<RatingDTO> getRatings() {
+        return ratings;
     }
 
-    public void setQuotationId(Long quotationId) {
-        this.quotationId = quotationId;
-    }
-
-    public Long getRatingId() {
-        return ratingId;
-    }
-
-    public void setRatingId(Long ratingId) {
-        this.ratingId = ratingId;
+    public void setRatings(Set<RatingDTO> ratings) {
+        this.ratings = ratings;
     }
 
     @Override
@@ -109,9 +89,7 @@ public class DeliveryNoteDTO implements Serializable {
             "id=" + getId() +
             ", reference='" + getReference() + "'" +
             ", orderReference='" + getOrderReference() + "'" +
-            ", supplierId=" + getSupplierId() +
             ", purchaseDate='" + getPurchaseDate() + "'" +
-            ", quotationId=" + getQuotationId() +
             "}";
     }
 }

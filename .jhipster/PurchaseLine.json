@@ -15,19 +15,15 @@
         },
         {
             "fieldName": "productPrice",
-            "fieldType": "Integer"
+            "fieldType": "Double"
         },
         {
             "fieldName": "productTax",
-            "fieldType": "Float"
+            "fieldType": "Double"
         },
         {
-            "fieldName": "availableQuantity",
-            "fieldType": "Integer"
-        },
-        {
-            "fieldName": "isSelect",
-            "fieldType": "Boolean"
+            "fieldName": "quantity",
+            "fieldType": "Double"
         }
     ],
     "changelogDate": "20180131050045",

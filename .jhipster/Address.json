@@ -23,7 +23,7 @@
         },
         {
             "fieldName": "pinCode",
-            "fieldType": "Integer"
+            "fieldType": "Long"
         }
     ],
     "changelogDate": "20180131040653",

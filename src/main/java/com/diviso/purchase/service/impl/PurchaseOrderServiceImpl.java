@@ -10,8 +10,11 @@ import java.time.LocalDate;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -83,8 +86,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 	@Override
 	@Transactional(readOnly = true)
 	public Page<PurchaseOrderDTO> findByPurchaseOrder(LocalDate purchaseDate, Pageable pageable) {
-		// TODO Auto-generated method stub
-		log.debug("Request to delete PurchaseOrder : {}", purchaseDate);
+		log.debug("Request to get PurchaseOrder : {}", purchaseDate);
 		return purchaseOrderRepository.findByPurchaseDate(purchaseDate,pageable)
 	            .map(purchaseOrderMapper::toDto);
 	}
@@ -99,4 +101,5 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         log.debug("Request to delete PurchaseOrder : {}", id);
         purchaseOrderRepository.delete(id);
     }
+   
 }

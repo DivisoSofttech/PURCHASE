@@ -7,11 +7,11 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A QuotationLine.
+ * A DeliveryLine.
  */
 @Entity
-@Table(name = "quotation_line")
-public class QuotationLine implements Serializable {
+@Table(name = "delivery_line")
+public class DeliveryLine implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -23,19 +23,16 @@ public class QuotationLine implements Serializable {
     private String reference;
 
     @Column(name = "price")
-    private Integer price;
+    private Double price;
 
     @Column(name = "tax")
     private Double tax;
 
-    @Column(name = "available_quantity")
-    private Double availableQuantity;
-
-    @Column(name = "is_select")
-    private Boolean isSelect;
+    @Column(name = "quantity")
+    private Double quantity;
 
     @ManyToOne
-    private Quotation quotation;
+    private DeliveryNote deliveryNote;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -50,7 +47,7 @@ public class QuotationLine implements Serializable {
         return reference;
     }
 
-    public QuotationLine reference(String reference) {
+    public DeliveryLine reference(String reference) {
         this.reference = reference;
         return this;
     }
@@ -59,16 +56,16 @@ public class QuotationLine implements Serializable {
         this.reference = reference;
     }
 
-    public Integer getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public QuotationLine price(Integer price) {
+    public DeliveryLine price(Double price) {
         this.price = price;
         return this;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -76,7 +73,7 @@ public class QuotationLine implements Serializable {
         return tax;
     }
 
-    public QuotationLine tax(Double tax) {
+    public DeliveryLine tax(Double tax) {
         this.tax = tax;
         return this;
     }
@@ -85,43 +82,30 @@ public class QuotationLine implements Serializable {
         this.tax = tax;
     }
 
-    public Double getAvailableQuantity() {
-        return availableQuantity;
+    public Double getQuantity() {
+        return quantity;
     }
 
-    public QuotationLine availableQuantity(Double availableQuantity) {
-        this.availableQuantity = availableQuantity;
+    public DeliveryLine quantity(Double quantity) {
+        this.quantity = quantity;
         return this;
     }
 
-    public void setAvailableQuantity(Double availableQuantity) {
-        this.availableQuantity = availableQuantity;
+    public void setQuantity(Double quantity) {
+        this.quantity = quantity;
     }
 
-    public Boolean isIsSelect() {
-        return isSelect;
+    public DeliveryNote getDeliveryNote() {
+        return deliveryNote;
     }
 
-    public QuotationLine isSelect(Boolean isSelect) {
-        this.isSelect = isSelect;
+    public DeliveryLine deliveryNote(DeliveryNote deliveryNote) {
+        this.deliveryNote = deliveryNote;
         return this;
     }
 
-    public void setIsSelect(Boolean isSelect) {
-        this.isSelect = isSelect;
-    }
-
-    public Quotation getQuotation() {
-        return quotation;
-    }
-
-    public QuotationLine quotation(Quotation quotation) {
-        this.quotation = quotation;
-        return this;
-    }
-
-    public void setQuotation(Quotation quotation) {
-        this.quotation = quotation;
+    public void setDeliveryNote(DeliveryNote deliveryNote) {
+        this.deliveryNote = deliveryNote;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -133,11 +117,11 @@ public class QuotationLine implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        QuotationLine quotationLine = (QuotationLine) o;
-        if (quotationLine.getId() == null || getId() == null) {
+        DeliveryLine deliveryLine = (DeliveryLine) o;
+        if (deliveryLine.getId() == null || getId() == null) {
             return false;
         }
-        return Objects.equals(getId(), quotationLine.getId());
+        return Objects.equals(getId(), deliveryLine.getId());
     }
 
     @Override
@@ -147,13 +131,12 @@ public class QuotationLine implements Serializable {
 
     @Override
     public String toString() {
-        return "QuotationLine{" +
+        return "DeliveryLine{" +
             "id=" + getId() +
             ", reference='" + getReference() + "'" +
             ", price=" + getPrice() +
             ", tax=" + getTax() +
-            ", availableQuantity=" + getAvailableQuantity() +
-            ", isSelect='" + isIsSelect() + "'" +
+            ", quantity=" + getQuantity() +
             "}";
     }
 }

@@ -2,8 +2,8 @@
     "fluentMethods": true,
     "relationships": [
         {
-            "relationshipName": "quotation",
-            "otherEntityName": "quotation",
+            "relationshipName": "deliveryNote",
+            "otherEntityName": "deliveryNote",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
         }
@@ -15,23 +15,19 @@
         },
         {
             "fieldName": "price",
-            "fieldType": "Integer"
+            "fieldType": "Double"
         },
         {
             "fieldName": "tax",
             "fieldType": "Double"
         },
         {
-            "fieldName": "availableQuantity",
+            "fieldName": "quantity",
             "fieldType": "Double"
-        },
-        {
-            "fieldName": "isSelect",
-            "fieldType": "Boolean"
         }
     ],
-    "changelogDate": "20180131040656",
-    "entityTableName": "quotation_line",
+    "changelogDate": "20180202104743",
+    "entityTableName": "delivery_line",
     "dto": "mapstruct",
     "pagination": "pagination",
     "service": "serviceImpl",

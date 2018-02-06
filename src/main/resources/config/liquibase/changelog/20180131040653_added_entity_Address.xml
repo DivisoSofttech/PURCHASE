@@ -34,7 +34,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="pin_code" type="integer">
+            <column name="pin_code" type="bigint">
                 <constraints nullable="true" />
             </column>
 

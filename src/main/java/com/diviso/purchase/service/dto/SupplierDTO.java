@@ -9,12 +9,11 @@ import java.util.Objects;
 /**
  * A DTO for the Supplier entity.
  */
-@SuppressWarnings("serial")
 public class SupplierDTO implements Serializable {
 
     private Long id;
 
-    private Integer reference;
+    private String reference;
 
     private String firstName;
 
@@ -32,11 +31,11 @@ public class SupplierDTO implements Serializable {
         this.id = id;
     }
 
-    public Integer getReference() {
+    public String getReference() {
         return reference;
     }
 
-    public void setReference(Integer reference) {
+    public void setReference(String reference) {
         this.reference = reference;
     }
 
@@ -97,7 +96,7 @@ public class SupplierDTO implements Serializable {
     public String toString() {
         return "SupplierDTO{" +
             "id=" + getId() +
-            ", reference=" + getReference() +
+            ", reference='" + getReference() + "'" +
             ", firstName='" + getFirstName() + "'" +
             ", lastName='" + getLastName() + "'" +
             "}";

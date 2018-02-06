@@ -7,23 +7,21 @@ import java.util.Set;
 import java.util.Objects;
 
 /**
- * A DTO for the QuotationLine entity.
+ * A DTO for the DeliveryLine entity.
  */
-public class QuotationLineDTO implements Serializable {
+public class DeliveryLineDTO implements Serializable {
 
     private Long id;
 
     private String reference;
 
-    private Integer price;
+    private Double price;
 
     private Double tax;
 
-    private Double availableQuantity;
+    private Double quantity;
 
-    private Boolean isSelect;
-
-    private Long quotationId;
+    private Long deliveryNoteId;
 
     public Long getId() {
         return id;
@@ -41,11 +39,11 @@ public class QuotationLineDTO implements Serializable {
         this.reference = reference;
     }
 
-    public Integer getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -57,28 +55,20 @@ public class QuotationLineDTO implements Serializable {
         this.tax = tax;
     }
 
-    public Double getAvailableQuantity() {
-        return availableQuantity;
+    public Double getQuantity() {
+        return quantity;
     }
 
-    public void setAvailableQuantity(Double availableQuantity) {
-        this.availableQuantity = availableQuantity;
+    public void setQuantity(Double quantity) {
+        this.quantity = quantity;
     }
 
-    public Boolean isIsSelect() {
-        return isSelect;
+    public Long getDeliveryNoteId() {
+        return deliveryNoteId;
     }
 
-    public void setIsSelect(Boolean isSelect) {
-        this.isSelect = isSelect;
-    }
-
-    public Long getQuotationId() {
-        return quotationId;
-    }
-
-    public void setQuotationId(Long quotationId) {
-        this.quotationId = quotationId;
+    public void setDeliveryNoteId(Long deliveryNoteId) {
+        this.deliveryNoteId = deliveryNoteId;
     }
 
     @Override
@@ -90,11 +80,11 @@ public class QuotationLineDTO implements Serializable {
             return false;
         }
 
-        QuotationLineDTO quotationLineDTO = (QuotationLineDTO) o;
-        if(quotationLineDTO.getId() == null || getId() == null) {
+        DeliveryLineDTO deliveryLineDTO = (DeliveryLineDTO) o;
+        if(deliveryLineDTO.getId() == null || getId() == null) {
             return false;
         }
-        return Objects.equals(getId(), quotationLineDTO.getId());
+        return Objects.equals(getId(), deliveryLineDTO.getId());
     }
 
     @Override
@@ -104,13 +94,12 @@ public class QuotationLineDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "QuotationLineDTO{" +
+        return "DeliveryLineDTO{" +
             "id=" + getId() +
             ", reference='" + getReference() + "'" +
             ", price=" + getPrice() +
             ", tax=" + getTax() +
-            ", availableQuantity=" + getAvailableQuantity() +
-            ", isSelect='" + isIsSelect() + "'" +
+            ", quantity=" + getQuantity() +
             "}";
     }
 }
