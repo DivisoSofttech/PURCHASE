@@ -14,15 +14,13 @@ public class PurchaseOrderDTO implements Serializable {
 
     private Long id;
 
-    private Long supplierId;
-
     private String reference;
 
     private LocalDate purchaseDate;
 
     private Long supplierId;
 
-    private Long statusId;
+    private Long statussId;
 
     public Long getId() {
         return id;
@@ -30,14 +28,6 @@ public class PurchaseOrderDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getSupplierId() {
-        return supplierId;
-    }
-
-    public void setSupplierId(Long supplierId) {
-        this.supplierId = supplierId;
     }
 
     public String getReference() {
@@ -64,12 +54,12 @@ public class PurchaseOrderDTO implements Serializable {
         this.supplierId = supplierId;
     }
 
-    public Long getStatusId() {
-        return statusId;
+    public Long getStatussId() {
+        return statussId;
     }
 
-    public void setStatusId(Long statusId) {
-        this.statusId = statusId;
+    public void setStatussId(Long statussId) {
+        this.statussId = statussId;
     }
 
     @Override
@@ -97,7 +87,6 @@ public class PurchaseOrderDTO implements Serializable {
     public String toString() {
         return "PurchaseOrderDTO{" +
             "id=" + getId() +
-            ", supplierId=" + getSupplierId() +
             ", reference='" + getReference() + "'" +
             ", purchaseDate='" + getPurchaseDate() + "'" +
             "}";

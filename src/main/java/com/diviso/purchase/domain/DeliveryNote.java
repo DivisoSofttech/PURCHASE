@@ -34,7 +34,7 @@ public class DeliveryNote implements Serializable {
 
     @OneToMany(mappedBy = "deliveryNote")
     @JsonIgnore
-    private Set<DeliveryLine> deliveryLines = new HashSet<>();
+    private Set<DeliveriesLine> deliveryLines = new HashSet<>();
 
     @OneToMany(mappedBy = "deliveryNote")
     @JsonIgnore
@@ -94,29 +94,29 @@ public class DeliveryNote implements Serializable {
         this.purchaseDate = purchaseDate;
     }
 
-    public Set<DeliveryLine> getDeliveryLines() {
+    public Set<DeliveriesLine> getDeliveryLines() {
         return deliveryLines;
     }
 
-    public DeliveryNote deliveryLines(Set<DeliveryLine> deliveryLines) {
-        this.deliveryLines = deliveryLines;
+    public DeliveryNote deliveryLines(Set<DeliveriesLine> deliveriesLines) {
+        this.deliveryLines = deliveriesLines;
         return this;
     }
 
-    public DeliveryNote addDeliveryLines(DeliveryLine deliveryLine) {
-        this.deliveryLines.add(deliveryLine);
-        deliveryLine.setDeliveryNote(this);
+    public DeliveryNote addDeliveryLines(DeliveriesLine deliveriesLine) {
+        this.deliveryLines.add(deliveriesLine);
+        deliveriesLine.setDeliveryNote(this);
         return this;
     }
 
-    public DeliveryNote removeDeliveryLines(DeliveryLine deliveryLine) {
-        this.deliveryLines.remove(deliveryLine);
-        deliveryLine.setDeliveryNote(null);
+    public DeliveryNote removeDeliveryLines(DeliveriesLine deliveriesLine) {
+        this.deliveryLines.remove(deliveriesLine);
+        deliveriesLine.setDeliveryNote(null);
         return this;
     }
 
-    public void setDeliveryLines(Set<DeliveryLine> deliveryLines) {
-        this.deliveryLines = deliveryLines;
+    public void setDeliveryLines(Set<DeliveriesLine> deliveriesLines) {
+        this.deliveryLines = deliveriesLines;
     }
 
     public Set<Comment> getComments() {

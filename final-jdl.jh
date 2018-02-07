@@ -94,6 +94,6 @@ relationship OneToOne
   }
 paginate * with pagination
 dto * with mapstruct
-service * with serviceImpl
+service all with serviceImpl
    
  

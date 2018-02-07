@@ -37,7 +37,7 @@ public class Quotation implements Serializable {
     private Set<QuotationLine> quotationLines = new HashSet<>();
 
     @ManyToOne
-    private Status status;
+    private Statuss statuss;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -112,17 +112,17 @@ public class Quotation implements Serializable {
         this.quotationLines = quotationLines;
     }
 
-    public Status getStatus() {
-        return status;
+    public Statuss getStatuss() {
+        return statuss;
     }
 
-    public Quotation status(Status status) {
-        this.status = status;
+    public Quotation statuss(Statuss statuss) {
+        this.statuss = statuss;
         return this;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setStatuss(Statuss statuss) {
+        this.statuss = statuss;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

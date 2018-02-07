@@ -20,7 +20,7 @@ public class QuotationDTO implements Serializable {
 
     private Long supplierId;
 
-    private Long statusId;
+    private Long statussId;
 
     public Long getId() {
         return id;
@@ -54,12 +54,12 @@ public class QuotationDTO implements Serializable {
         this.supplierId = supplierId;
     }
 
-    public Long getStatusId() {
-        return statusId;
+    public Long getStatussId() {
+        return statussId;
     }
 
-    public void setStatusId(Long statusId) {
-        this.statusId = statusId;
+    public void setStatussId(Long statussId) {
+        this.statussId = statussId;
     }
 
     @Override

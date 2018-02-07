@@ -23,9 +23,6 @@ public class PurchaseOrder implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "supplier_id")
-    private Long supplierId;
-
     @Column(name = "reference")
     private String reference;
 
@@ -36,7 +33,7 @@ public class PurchaseOrder implements Serializable {
     private Supplier supplier;
 
     @ManyToOne
-    private Status status;
+    private Statuss statuss;
 
     @OneToMany(mappedBy = "purchaseOrder")
     @JsonIgnore
@@ -49,19 +46,6 @@ public class PurchaseOrder implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getSupplierId() {
-        return supplierId;
-    }
-
-    public PurchaseOrder supplierId(Long supplierId) {
-        this.supplierId = supplierId;
-        return this;
-    }
-
-    public void setSupplierId(Long supplierId) {
-        this.supplierId = supplierId;
     }
 
     public String getReference() {
@@ -103,17 +87,17 @@ public class PurchaseOrder implements Serializable {
         this.supplier = supplier;
     }
 
-    public Status getStatus() {
-        return status;
+    public Statuss getStatuss() {
+        return statuss;
     }
 
-    public PurchaseOrder status(Status status) {
-        this.status = status;
+    public PurchaseOrder statuss(Statuss statuss) {
+        this.statuss = statuss;
         return this;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setStatuss(Statuss statuss) {
+        this.statuss = statuss;
     }
 
     public Set<PurchaseLine> getPurchaseLines() {
@@ -166,7 +150,6 @@ public class PurchaseOrder implements Serializable {
     public String toString() {
         return "PurchaseOrder{" +
             "id=" + getId() +
-            ", supplierId=" + getSupplierId() +
             ", reference='" + getReference() + "'" +
             ", purchaseDate='" + getPurchaseDate() + "'" +
             "}";

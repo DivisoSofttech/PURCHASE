@@ -43,9 +43,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = PurchaseApp.class)
 public class PurchaseOrderResourceIntTest {
 
-    private static final Long DEFAULT_SUPPLIER_ID = 1L;
-    private static final Long UPDATED_SUPPLIER_ID = 2L;
-
     private static final String DEFAULT_REFERENCE = "AAAAAAAAAA";
     private static final String UPDATED_REFERENCE = "BBBBBBBBBB";
 
@@ -96,7 +93,6 @@ public class PurchaseOrderResourceIntTest {
      */
     public static PurchaseOrder createEntity(EntityManager em) {
         PurchaseOrder purchaseOrder = new PurchaseOrder()
-            .supplierId(DEFAULT_SUPPLIER_ID)
             .reference(DEFAULT_REFERENCE)
             .purchaseDate(DEFAULT_PURCHASE_DATE);
         return purchaseOrder;
@@ -123,7 +119,6 @@ public class PurchaseOrderResourceIntTest {
         List<PurchaseOrder> purchaseOrderList = purchaseOrderRepository.findAll();
         assertThat(purchaseOrderList).hasSize(databaseSizeBeforeCreate + 1);
         PurchaseOrder testPurchaseOrder = purchaseOrderList.get(purchaseOrderList.size() - 1);
-        assertThat(testPurchaseOrder.getSupplierId()).isEqualTo(DEFAULT_SUPPLIER_ID);
         assertThat(testPurchaseOrder.getReference()).isEqualTo(DEFAULT_REFERENCE);
         assertThat(testPurchaseOrder.getPurchaseDate()).isEqualTo(DEFAULT_PURCHASE_DATE);
     }
@@ -159,7 +154,6 @@ public class PurchaseOrderResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(purchaseOrder.getId().intValue())))
-            .andExpect(jsonPath("$.[*].supplierId").value(hasItem(DEFAULT_SUPPLIER_ID.intValue())))
             .andExpect(jsonPath("$.[*].reference").value(hasItem(DEFAULT_REFERENCE.toString())))
             .andExpect(jsonPath("$.[*].purchaseDate").value(hasItem(DEFAULT_PURCHASE_DATE.toString())));
     }
@@ -175,7 +169,6 @@ public class PurchaseOrderResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(purchaseOrder.getId().intValue()))
-            .andExpect(jsonPath("$.supplierId").value(DEFAULT_SUPPLIER_ID.intValue()))
             .andExpect(jsonPath("$.reference").value(DEFAULT_REFERENCE.toString()))
             .andExpect(jsonPath("$.purchaseDate").value(DEFAULT_PURCHASE_DATE.toString()));
     }
@@ -200,7 +193,6 @@ public class PurchaseOrderResourceIntTest {
         // Disconnect from session so that the updates on updatedPurchaseOrder are not directly saved in db
         em.detach(updatedPurchaseOrder);
         updatedPurchaseOrder
-            .supplierId(UPDATED_SUPPLIER_ID)
             .reference(UPDATED_REFERENCE)
             .purchaseDate(UPDATED_PURCHASE_DATE);
         PurchaseOrderDTO purchaseOrderDTO = purchaseOrderMapper.toDto(updatedPurchaseOrder);
@@ -214,7 +206,6 @@ public class PurchaseOrderResourceIntTest {
         List<PurchaseOrder> purchaseOrderList = purchaseOrderRepository.findAll();
         assertThat(purchaseOrderList).hasSize(databaseSizeBeforeUpdate);
         PurchaseOrder testPurchaseOrder = purchaseOrderList.get(purchaseOrderList.size() - 1);
-        assertThat(testPurchaseOrder.getSupplierId()).isEqualTo(UPDATED_SUPPLIER_ID);
         assertThat(testPurchaseOrder.getReference()).isEqualTo(UPDATED_REFERENCE);
         assertThat(testPurchaseOrder.getPurchaseDate()).isEqualTo(UPDATED_PURCHASE_DATE);
     }
