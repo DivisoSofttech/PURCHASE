@@ -13,7 +13,7 @@ public abstract class PurchaseLine_ {
 	public static volatile SingularAttribute<PurchaseLine, PurchaseOrder> purchaseOrder;
 	public static volatile SingularAttribute<PurchaseLine, String> productReference;
 	public static volatile SingularAttribute<PurchaseLine, Long> id;
-	public static volatile SingularAttribute<PurchaseLine, Double> productPrice;
+	public static volatile SingularAttribute<PurchaseLine, Integer> productPrice;
 
 }
 

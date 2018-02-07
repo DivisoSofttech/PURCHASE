@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2018-02-07T16:42:26+0530",
+    date = "2018-02-07T17:15:40+0530",
     comments = "version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_161 (Oracle Corporation)"
 )
 @Component
@@ -62,7 +62,9 @@ public class PurchaseLineMapperImpl implements PurchaseLineMapper {
         }
         purchaseLineDTO.setId( purchaseLine.getId() );
         purchaseLineDTO.setProductReference( purchaseLine.getProductReference() );
-        purchaseLineDTO.setProductPrice( purchaseLine.getProductPrice() );
+        if ( purchaseLine.getProductPrice() != null ) {
+            purchaseLineDTO.setProductPrice( purchaseLine.getProductPrice().doubleValue() );
+        }
         purchaseLineDTO.setProductTax( purchaseLine.getProductTax() );
         purchaseLineDTO.setQuantity( purchaseLine.getQuantity() );
 
@@ -80,7 +82,9 @@ public class PurchaseLineMapperImpl implements PurchaseLineMapper {
         purchaseLine.setPurchaseOrder( purchaseOrderMapper.fromId( purchaseLineDTO.getPurchaseOrderId() ) );
         purchaseLine.setId( purchaseLineDTO.getId() );
         purchaseLine.setProductReference( purchaseLineDTO.getProductReference() );
-        purchaseLine.setProductPrice( purchaseLineDTO.getProductPrice() );
+        if ( purchaseLineDTO.getProductPrice() != null ) {
+            purchaseLine.setProductPrice( purchaseLineDTO.getProductPrice().intValue() );
+        }
         purchaseLine.setProductTax( purchaseLineDTO.getProductTax() );
         purchaseLine.setQuantity( purchaseLineDTO.getQuantity() );
 

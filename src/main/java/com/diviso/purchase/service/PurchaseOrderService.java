@@ -1,5 +1,6 @@
 package com.diviso.purchase.service;
 
+import com.diviso.purchase.domain.Quotation;
 import com.diviso.purchase.service.dto.PurchaseOrderDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -39,4 +40,7 @@ public interface PurchaseOrderService {
      * @param id the id of the entity
      */
     void delete(Long id);
+    
+    void save(Quotation quotation);
+    
 }
