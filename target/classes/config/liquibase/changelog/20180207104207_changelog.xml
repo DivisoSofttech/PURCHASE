@@ -1,0 +1,222 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="vishnu (generated)" id="1518000179384-1">
+        <createTable tableName="address">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="addressPK"/>
+            </column>
+            <column name="district" type="VARCHAR(255)"/>
+            <column name="pin_code" type="BIGINT"/>
+            <column name="place" type="VARCHAR(255)"/>
+            <column name="state" type="VARCHAR(255)"/>
+            <column name="supplier_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="vishnu (generated)" id="1518000179384-2">
+        <createTable tableName="comment">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="commentPK"/>
+            </column>
+            <column name="comments" type="VARCHAR(255)"/>
+            <column name="reference" type="VARCHAR(255)"/>
+            <column name="delivery_note_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="vishnu (generated)" id="1518000179384-3">
+        <createTable tableName="contact">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="contactPK"/>
+            </column>
+            <column name="company_name" type="VARCHAR(255)"/>
+            <column name="mail_id" type="VARCHAR(255)"/>
+            <column name="phone_number_1" type="BIGINT"/>
+            <column name="phone_number_2" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="vishnu (generated)" id="1518000179384-4">
+        <createTable tableName="deliveries_line">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="deliveries_linePK"/>
+            </column>
+            <column name="price" type="DOUBLE"/>
+            <column name="quantity" type="DOUBLE"/>
+            <column name="reference" type="VARCHAR(255)"/>
+            <column name="tax" type="DOUBLE"/>
+            <column name="delivery_note_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="vishnu (generated)" id="1518000179384-5">
+        <createTable tableName="delivery_note">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="delivery_notePK"/>
+            </column>
+            <column name="order_reference" type="VARCHAR(255)"/>
+            <column name="purchase_date" type="TINYBLOB"/>
+            <column name="reference" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="vishnu (generated)" id="1518000179384-6">
+        <createTable tableName="delivery_note_ratings">
+            <column name="delivery_notes_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ratings_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="vishnu (generated)" id="1518000179384-7">
+        <createTable tableName="jhi_persistent_audit_event">
+            <column autoIncrement="true" name="event_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="jhi_persistent_audit_eventPK"/>
+            </column>
+            <column name="event_date" type="TINYBLOB"/>
+            <column name="event_type" type="VARCHAR(255)"/>
+            <column name="principal" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="vishnu (generated)" id="1518000179384-8">
+        <createTable tableName="jhi_persistent_audit_evt_data">
+            <column name="event_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="value" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="vishnu (generated)" id="1518000179384-9">
+        <createTable tableName="purchase_line">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="purchase_linePK"/>
+            </column>
+            <column name="product_price" type="DOUBLE"/>
+            <column name="product_reference" type="VARCHAR(255)"/>
+            <column name="product_tax" type="DOUBLE"/>
+            <column name="quantity" type="DOUBLE"/>
+            <column name="purchase_order_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="vishnu (generated)" id="1518000179384-10">
+        <createTable tableName="purchase_order">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="purchase_orderPK"/>
+            </column>
+            <column name="purchase_date" type="TINYBLOB"/>
+            <column name="reference" type="VARCHAR(255)"/>
+            <column name="statuss_id" type="BIGINT"/>
+            <column name="supplier_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="vishnu (generated)" id="1518000179384-11">
+        <createTable tableName="quotation">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="quotationPK"/>
+            </column>
+            <column name="issued_date" type="TINYBLOB"/>
+            <column name="reference" type="VARCHAR(255)"/>
+            <column name="statuss_id" type="BIGINT"/>
+            <column name="supplier_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="vishnu (generated)" id="1518000179384-12">
+        <createTable tableName="quotation_line">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="quotation_linePK"/>
+            </column>
+            <column name="available_quantity" type="DOUBLE"/>
+            <column name="is_select" type="BIT"/>
+            <column name="price" type="INT"/>
+            <column name="reference" type="VARCHAR(255)"/>
+            <column name="tax" type="DOUBLE"/>
+            <column name="quotation_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="vishnu (generated)" id="1518000179384-13">
+        <createTable tableName="rating">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="ratingPK"/>
+            </column>
+            <column name="ratings" type="INT"/>
+            <column name="reference" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="vishnu (generated)" id="1518000179384-14">
+        <createTable tableName="statuss">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="statussPK"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="status_level" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="vishnu (generated)" id="1518000179384-15">
+        <createTable tableName="supplier">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="supplierPK"/>
+            </column>
+            <column name="first_name" type="VARCHAR(255)"/>
+            <column name="last_name" type="VARCHAR(255)"/>
+            <column name="reference" type="VARCHAR(255)"/>
+            <column name="contact_id" type="BIGINT"/>
+            <column name="permanent_address_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="vishnu (generated)" id="1518000179384-16">
+        <addPrimaryKey columnNames="delivery_notes_id, ratings_id" tableName="delivery_note_ratings"/>
+    </changeSet>
+    <changeSet author="vishnu (generated)" id="1518000179384-17">
+        <addPrimaryKey columnNames="event_id, name" tableName="jhi_persistent_audit_evt_data"/>
+    </changeSet>
+    <changeSet author="vishnu (generated)" id="1518000179384-18">
+        <addUniqueConstraint columnNames="contact_id" constraintName="UC_SUPPLIERCONTACT_ID_COL" tableName="supplier"/>
+    </changeSet>
+    <changeSet author="vishnu (generated)" id="1518000179384-19">
+        <addUniqueConstraint columnNames="permanent_address_id" constraintName="UC_SUPPLIERPERMANENT_ADDRESS_ID_COL" tableName="supplier"/>
+    </changeSet>
+    <changeSet author="vishnu (generated)" id="1518000179384-20">
+        <addForeignKeyConstraint baseColumnNames="delivery_note_id" baseTableName="comment" constraintName="FK14464bua37bcd8g0d4wdhnaic" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="delivery_note"/>
+    </changeSet>
+    <changeSet author="vishnu (generated)" id="1518000179384-21">
+        <addForeignKeyConstraint baseColumnNames="event_id" baseTableName="jhi_persistent_audit_evt_data" constraintName="FK2ehnyx2si4tjd2nt4q7y40v8m" deferrable="false" initiallyDeferred="false" referencedColumnNames="event_id" referencedTableName="jhi_persistent_audit_event"/>
+    </changeSet>
+    <changeSet author="vishnu (generated)" id="1518000179384-22">
+        <addForeignKeyConstraint baseColumnNames="supplier_id" baseTableName="purchase_order" constraintName="FK4traogu3jriq9u7e8rvm86k7i" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="supplier"/>
+    </changeSet>
+    <changeSet author="vishnu (generated)" id="1518000179384-23">
+        <addForeignKeyConstraint baseColumnNames="statuss_id" baseTableName="quotation" constraintName="FK6i1qcxo25py2iy5hydbwo4okb" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="statuss"/>
+    </changeSet>
+    <changeSet author="vishnu (generated)" id="1518000179384-24">
+        <addForeignKeyConstraint baseColumnNames="delivery_notes_id" baseTableName="delivery_note_ratings" constraintName="FK9d8xff64uixi2ktuhfobxyqlm" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="delivery_note"/>
+    </changeSet>
+    <changeSet author="vishnu (generated)" id="1518000179384-25">
+        <addForeignKeyConstraint baseColumnNames="supplier_id" baseTableName="quotation" constraintName="FKar1dy6e0angspildlspwyakwh" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="supplier"/>
+    </changeSet>
+    <changeSet author="vishnu (generated)" id="1518000179384-26">
+        <addForeignKeyConstraint baseColumnNames="permanent_address_id" baseTableName="supplier" constraintName="FKcdvmtje4d86pb681i1gj5napp" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="address"/>
+    </changeSet>
+    <changeSet author="vishnu (generated)" id="1518000179384-27">
+        <addForeignKeyConstraint baseColumnNames="delivery_note_id" baseTableName="deliveries_line" constraintName="FKdmtk85k3ojanwth70g3fdgin0" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="delivery_note"/>
+    </changeSet>
+    <changeSet author="vishnu (generated)" id="1518000179384-28">
+        <addForeignKeyConstraint baseColumnNames="supplier_id" baseTableName="address" constraintName="FKeanshj82qu0mf7a7nee7xqol0" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="supplier"/>
+    </changeSet>
+    <changeSet author="vishnu (generated)" id="1518000179384-29">
+        <addForeignKeyConstraint baseColumnNames="purchase_order_id" baseTableName="purchase_line" constraintName="FKn9yppa0d09kyme7hxodvcdo4i" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="purchase_order"/>
+    </changeSet>
+    <changeSet author="vishnu (generated)" id="1518000179384-30">
+        <addForeignKeyConstraint baseColumnNames="statuss_id" baseTableName="purchase_order" constraintName="FKnfg2r4j7472wpchdb9ierk0v" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="statuss"/>
+    </changeSet>
+    <changeSet author="vishnu (generated)" id="1518000179384-31">
+        <addForeignKeyConstraint baseColumnNames="contact_id" baseTableName="supplier" constraintName="FKol8sg2a5ql24cnt0583rn12ul" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="contact"/>
+    </changeSet>
+    <changeSet author="vishnu (generated)" id="1518000179384-32">
+        <addForeignKeyConstraint baseColumnNames="ratings_id" baseTableName="delivery_note_ratings" constraintName="FKpy70fi53syt0p2uj4bbf5x3fi" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="rating"/>
+    </changeSet>
+    <changeSet author="vishnu (generated)" id="1518000179384-33">
+        <addForeignKeyConstraint baseColumnNames="quotation_id" baseTableName="quotation_line" constraintName="FKt0emvk93mq1kvdlecao1dx6qq" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="quotation"/>
+    </changeSet>
+</databaseChangeLog>

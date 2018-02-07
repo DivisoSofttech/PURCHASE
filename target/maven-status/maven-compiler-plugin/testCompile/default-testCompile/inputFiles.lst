@@ -16,6 +16,7 @@
 /home/vishnu/GIT-HUB/PURCHASE/src/test/java/com/diviso/purchase/web/rest/TestUtil.java
 /home/vishnu/GIT-HUB/PURCHASE/src/test/java/com/diviso/purchase/config/WebConfigurerTest.java
 /home/vishnu/GIT-HUB/PURCHASE/src/test/java/com/diviso/purchase/web/rest/PurchaseOrderResourceIntTest.java
+/home/vishnu/GIT-HUB/PURCHASE/src/test/java/com/diviso/purchase/web/rest/QuotationStatusResourceIntTest.java
 /home/vishnu/GIT-HUB/PURCHASE/src/test/java/com/diviso/purchase/web/rest/SupplierResourceIntTest.java
 /home/vishnu/GIT-HUB/PURCHASE/src/test/java/com/diviso/purchase/web/rest/CommentResourceIntTest.java
 /home/vishnu/GIT-HUB/PURCHASE/src/test/java/com/diviso/purchase/web/rest/util/PaginationUtilUnitTest.java
