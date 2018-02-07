@@ -52,7 +52,7 @@ entity PurchaseOrder {
 }
 entity PurchaseLine {
   productReference String,
-  productPrice Double,
+  productPrice Integer,
   productTax Double ,
   quantity Double   
 }

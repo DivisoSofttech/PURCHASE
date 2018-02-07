@@ -1,10 +1,16 @@
 package com.diviso.purchase.service.impl;
 
 import com.diviso.purchase.service.PurchaseOrderService;
+import com.diviso.purchase.domain.PurchaseLine;
 import com.diviso.purchase.domain.PurchaseOrder;
+import com.diviso.purchase.domain.Quotation;
+import com.diviso.purchase.domain.QuotationLine;
 import com.diviso.purchase.repository.PurchaseOrderRepository;
 import com.diviso.purchase.service.dto.PurchaseOrderDTO;
 import com.diviso.purchase.service.mapper.PurchaseOrderMapper;
+
+import java.time.LocalDate;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -83,4 +89,28 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         log.debug("Request to delete PurchaseOrder : {}", id);
         purchaseOrderRepository.delete(id);
     }
+
+	@Override
+	public void save(Quotation quotation) {
+		log.debug("Request to save PurchaseOrder using Quotation : {}", quotation);
+		
+		LocalDate localDate = LocalDate.now();
+		
+		PurchaseOrder purchaseOrder = new PurchaseOrder();
+		purchaseOrder.setPurchaseDate(localDate);
+		purchaseOrder.setSupplier(quotation.getSupplier());
+		purchaseOrder.setStatuss(quotation.getStatuss());
+		
+		for(QuotationLine ql: quotation.getQuotationLines()) {
+			
+			PurchaseLine purchaseLine = new PurchaseLine();
+			purchaseLine.setProductReference(ql.getReference());
+			purchaseLine.setProductPrice(ql.getPrice());
+			purchaseLine.setProductTax(ql.getTax());
+			purchaseLine.setQuantity(ql.getAvailableQuantity());
+			
+			purchaseOrder.getPurchaseLines().add(purchaseLine);
+		}
+		purchaseOrderRepository.save(purchaseOrder);
+	}
 }

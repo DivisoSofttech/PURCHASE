@@ -23,7 +23,7 @@ public class PurchaseLine implements Serializable {
     private String productReference;
 
     @Column(name = "product_price")
-    private Double productPrice;
+    private Integer productPrice;
 
     @Column(name = "product_tax")
     private Double productTax;
@@ -56,16 +56,16 @@ public class PurchaseLine implements Serializable {
         this.productReference = productReference;
     }
 
-    public Double getProductPrice() {
+    public Integer getProductPrice() {
         return productPrice;
     }
 
-    public PurchaseLine productPrice(Double productPrice) {
+    public PurchaseLine productPrice(Integer productPrice) {
         this.productPrice = productPrice;
         return this;
     }
 
-    public void setProductPrice(Double productPrice) {
+    public void setProductPrice(Integer productPrice) {
         this.productPrice = productPrice;
     }
 
