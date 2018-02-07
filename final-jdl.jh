@@ -1,4 +1,5 @@
 
+
 entity Supplier
  {
  reference String,
@@ -53,7 +54,8 @@ comments String
 }
 
 entity PurchaseOrder {
-   reference String, 
+	supplierId Long,
+    reference String, 
 	purchaseDate LocalDate
  }
  entity PurchaseLine {
