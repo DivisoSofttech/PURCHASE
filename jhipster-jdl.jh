@@ -64,7 +64,8 @@ entity DeliveriesLine {
 }
 relationship OneToOne {
    Supplier{permanentAddress} to Address,
-   Supplier{contact} to Contact
+   Supplier{contact} to Contact,
+   DeliverNote{supplier} to Supplier
 }
 relationship OneToMany {
   DeliveryNote{deliveryLines} to DeliveriesLine,

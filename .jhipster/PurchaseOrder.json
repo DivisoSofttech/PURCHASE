@@ -8,8 +8,8 @@
             "otherEntityField": "id"
         },
         {
-            "relationshipName": "status",
-            "otherEntityName": "status",
+            "relationshipName": "statuss",
+            "otherEntityName": "statuss",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
         },

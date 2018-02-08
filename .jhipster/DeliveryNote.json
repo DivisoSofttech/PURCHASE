@@ -4,7 +4,7 @@
         {
             "relationshipType": "one-to-many",
             "relationshipName": "deliveryLines",
-            "otherEntityName": "deliveryLine",
+            "otherEntityName": "deliveriesLine",
             "otherEntityRelationshipName": "deliveryNote"
         },
         {
