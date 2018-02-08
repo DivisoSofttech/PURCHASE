@@ -1,0 +1,29 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "mailId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "phoneNumber1",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "phoneNumber2",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "companyName",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20180208081956",
+    "entityTableName": "contact",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "microserviceName": "purchase"
+}
