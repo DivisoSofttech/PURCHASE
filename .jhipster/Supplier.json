@@ -1,0 +1,60 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "permanentAddress",
+            "otherEntityName": "address",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "supplier"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "contact",
+            "otherEntityName": "contact",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "supplier"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "temporaryAddresses",
+            "otherEntityName": "address",
+            "otherEntityRelationshipName": "supplier"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "purchaseOrders",
+            "otherEntityName": "purchaseOrder",
+            "otherEntityRelationshipName": "supplier"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "quatations",
+            "otherEntityName": "quotation",
+            "otherEntityRelationshipName": "supplier"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "reference",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "firstName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "lastName",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20180208081954",
+    "entityTableName": "supplier",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "microserviceName": "purchase"
+}

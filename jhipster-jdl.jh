@@ -1,0 +1,86 @@
+
+
+entity Supplier {
+  reference String,
+  firstName String,
+  lastName String 
+}
+entity Address {
+  place String,
+  district String,
+  state String,
+  pinCode Long
+}
+entity Contact {
+  mailId String,
+  phoneNumber1 Long,
+  phoneNumber2 Long,
+  companyName String
+}
+entity Quotation {
+  reference String,
+  issuedDate LocalDate
+}
+ 
+entity QuotationLine {
+  reference String,
+  price Double,
+  tax Double,
+  availableQuantity Double,
+  isSelect Boolean
+}
+entity Statuss {
+  name String,
+  statusLevel String
+}
+entity DeliveryNote {
+  reference String,
+  orderReference String,
+  purchaseDate LocalDate
+}
+entity Rating {
+  reference String,
+  ratings Integer
+}
+entity Comment {
+  reference String,
+  comments String
+}
+entity PurchaseOrder {
+  reference String, 
+  purchaseDate LocalDate
+}
+entity PurchaseLine {
+  productReference String,
+  productPrice Double,
+  productTax Double ,
+  quantity Double   
+}
+entity DeliveriesLine {
+  reference String,
+  price Double ,
+  tax Double ,
+  quantity Double
+}
+relationship OneToOne {
+   Supplier{permanentAddress} to Address,
+   Supplier{contact} to Contact,
+   DeliveryNote {supplier} to Supplier
+}
+relationship OneToMany {
+  DeliveryNote{deliveryLines} to DeliveriesLine,
+  Supplier{temporaryAddresses} to Address,
+  Supplier{purchaseOrders} to PurchaseOrder,
+  Supplier{quatations} to Quotation,
+  Quotation{quotationLines} to QuotationLine,
+  PurchaseOrder{purchaseLines} to PurchaseLine,
+  Statuss{quotations} to Quotation,
+  Statuss{purchaseOrders} to PurchaseOrder,
+  DeliveryNote{comments} to Comment
+}
+relationship ManyToMany {
+  DeliveryNote{ratings} to Rating
+}
+paginate * with pagination
+dto * with mapstruct
+service all with serviceImpl
