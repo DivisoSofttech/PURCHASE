@@ -39,4 +39,40 @@ public interface PurchaseLineService {
      * @param id the id of the entity
      */
     void delete(Long id);
+    
+    /*----------------------------------
+     *EXTRA METHOD 
+     -----------------------------------*/ 
+    /**
+     * Get the "purchase line" reference.
+     * @param reference
+     * @param pageable
+     * @return the entity
+     */
+
+	Page<PurchaseLineDTO> findByPurchaseLine(String productReference, Pageable pageable);
+	/**
+     * Get the "purchase line" price.
+     * @param price
+     * @param pageable
+     * @return the entity
+     */
+
+	Page<PurchaseLineDTO> findByPurchaseLinePrice(Double productPrice, Pageable pageable);
+	/**
+     * Get the "purchase line" productTax.
+     * @param tax
+     * @param pageable
+     * @return the entity
+     */
+
+	Page<PurchaseLineDTO> findByPurchaseLineTax(Double productTax, Pageable pageable);
+	/**
+     * Get the "purchase line" productQuantity.
+     * @param tax
+     * @param pageable
+     * @return the entity
+     */
+
+	Page<PurchaseLineDTO> findByPurchaseLineQuantity(Double quantity, Pageable pageable);
 }

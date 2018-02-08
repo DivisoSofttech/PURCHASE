@@ -83,4 +83,60 @@ public class PurchaseLineServiceImpl implements PurchaseLineService {
         log.debug("Request to delete PurchaseLine : {}", id);
         purchaseLineRepository.delete(id);
     }
+    
+    /*-----------------------------------------
+     * EXTRA METHOD
+     ------------------------------------------*/ 
+    /**
+     * Get purchase line by reference.
+     * @param purchaseReference the id of the entity
+     */
+
+	@Override
+	@Transactional(readOnly = true)
+	public Page<PurchaseLineDTO> findByPurchaseLine(String productReference, Pageable pageable) {
+		
+		log.debug("Request to delete PurchaseOrder : {}", productReference);
+		return purchaseLineRepository.findByProductReference(productReference,pageable)
+	            .map(purchaseLineMapper::toDto);
+	}
+	/**
+     * Get purchase line by productPrice.
+     * @param productPrice the id of the entity
+     */
+
+	@Override
+	@Transactional(readOnly = true)
+	public Page<PurchaseLineDTO> findByPurchaseLinePrice(Double productPrice, Pageable pageable) {
+		
+		log.debug("Request to delete PurchaseOrder : {}", productPrice);
+		return purchaseLineRepository.findByProductPrice(productPrice,pageable)
+	            .map(purchaseLineMapper::toDto);
+	}
+	/**
+     * Get purchase line by productTax.
+     * @param productPrice the id of the entity
+     */
+
+	@Override
+	@Transactional(readOnly = true)
+	public Page<PurchaseLineDTO> findByPurchaseLineTax(Double productTax, Pageable pageable) {
+		
+		log.debug("Request to delete PurchaseOrder : {}", productTax);
+		return purchaseLineRepository.findByProductTax(productTax,pageable)
+	            .map(purchaseLineMapper::toDto);
+	}
+	/**
+     * Get purchase line by productQuantity.
+     * @param productQuantity the id of the entity
+     */
+
+	@Override
+	@Transactional(readOnly = true)
+	public Page<PurchaseLineDTO> findByPurchaseLineQuantity(Double quantity, Pageable pageable) {
+		
+		log.debug("Request to delete PurchaseOrder : {}", quantity);
+		return purchaseLineRepository.findByQuantity(quantity,pageable)
+	            .map(purchaseLineMapper::toDto);
+	}
 }

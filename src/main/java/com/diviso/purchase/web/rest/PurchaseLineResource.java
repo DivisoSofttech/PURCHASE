@@ -123,4 +123,14 @@ public class PurchaseLineResource {
         purchaseLineService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+    
+    @GetMapping("/purchase-orders/findByproductReference/{productReference}")
+    @Timed
+    public ResponseEntity<List<PurchaseLineDTO>> findByProductReference(@PathVariable String productReference ,Pageable pageable) {
+    	log.debug("REST request to get a page of PurchaseOrder :{}", productReference);
+        Page<PurchaseLineDTO> page = purchaseLineService.findByPurchaseLine(productReference, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/purchase-orders");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    
 }
