@@ -124,7 +124,7 @@ public class PurchaseLineResource {
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
     
-    @GetMapping("/purchase-orders/findByproductReference/{productReference}")
+    @GetMapping("/purchase-lines/findByproductReference/{productReference}")
     @Timed
     public ResponseEntity<List<PurchaseLineDTO>> findByProductReference(@PathVariable String productReference ,Pageable pageable) {
     	log.debug("REST request to get a page of PurchaseOrder :{}", productReference);
@@ -133,4 +133,30 @@ public class PurchaseLineResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
     
+    @GetMapping("/purchase-lines/findByproductPrice/{productPrice}")
+    @Timed
+    public ResponseEntity<List<PurchaseLineDTO>> findByProductPrice(@PathVariable Double productPrice ,Pageable pageable) {
+    	log.debug("REST request to get a page of PurchaseOrder :{}", productPrice);
+        Page<PurchaseLineDTO> page = purchaseLineService.findByPurchaseLinePrice(productPrice, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/purchase-orders");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    
+    @GetMapping("/purchase-lines/findByproductTax/{productTax}")
+    @Timed
+    public ResponseEntity<List<PurchaseLineDTO>> findByProductTax(@PathVariable Double productTax ,Pageable pageable) {
+    	log.debug("REST request to get a page of PurchaseOrder :{}", productTax);
+        Page<PurchaseLineDTO> page = purchaseLineService.findByPurchaseLineTax(productTax, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/purchase-orders");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    
+    @GetMapping("/purchase-lines/findByproductQuantity/{quantity}")
+    @Timed
+    public ResponseEntity<List<PurchaseLineDTO>> findByProductQuantity(@PathVariable Double quantity ,Pageable pageable) {
+    	log.debug("REST request to get a page of PurchaseOrder :{}", quantity);
+        Page<PurchaseLineDTO> page = purchaseLineService.findByPurchaseLineQuantity(quantity, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/purchase-orders");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
 }
