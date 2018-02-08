@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -123,4 +123,37 @@ public class PurchaseOrderResource {
         purchaseOrderService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+    
+    /*-----------------------------------------------------------------------------------------------------------------------
+     *EXTRA METHODS 
+     * ----------------------------------------------------------------------------------------------------------------------
+     */
+    /**
+     * GET  /purchase-orders/:purchase date : get the "purchase order" purchaseDate.
+     * @param purchaseDate
+     * @param pageable
+     * @return
+     */
+   @GetMapping("/purchase-orders/findByDate/{purchaseDate}")
+    @Timed
+    public ResponseEntity<List<PurchaseOrderDTO>> getPurchaseOrder(@PathVariable LocalDate purchaseDate ,Pageable pageable) {
+    	log.debug("REST request to get a page of PurchaseOrder :{}", purchaseDate);
+        Page<PurchaseOrderDTO> page = purchaseOrderService.findByPurchaseOrder(purchaseDate , pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/purchase-orders");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+   /**
+    * GET  /purchase-orders/:purchase reference : get the "purchase order" reference.
+    * @param reference
+    * @param pageable
+    * @return
+    */
+  @GetMapping("/purchase-orders/findByReference/{reference}")
+   @Timed
+   public ResponseEntity<List<PurchaseOrderDTO>> getPurchaseOrder(@PathVariable String reference ,Pageable pageable) {
+   	log.debug("REST request to get a page of PurchaseOrder :{}", reference);
+       Page<PurchaseOrderDTO> page = purchaseOrderService.findByPurchaseOrder(reference , pageable);
+       HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/purchase-orders");
+       return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+   }
 }

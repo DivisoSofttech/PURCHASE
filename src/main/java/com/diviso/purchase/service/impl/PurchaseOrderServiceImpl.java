@@ -111,7 +111,37 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 			
 			purchaseOrder.getPurchaseLines().add(purchaseLine);
 		}
-		purchaseOrderRepository.save(purchaseOrder);
+		purchaseOrderRepository.save(purchaseOrder);	
+	}
+	
+	/*--------------------------------------------------------------
+     * EXTRA METHOD
+     * -------------------------------------------------------------*/
+     
+     /**
+      * Get purchase order by date.
+      * @param purchaseDate the id of the entity
+      */
+
+ 	@Override
+ 	@Transactional(readOnly = true)
+ 	public Page<PurchaseOrderDTO> findByPurchaseOrder(LocalDate purchaseDate, Pageable pageable) {
+ 		
+ 		log.debug("Request to delete PurchaseOrder : {}", purchaseDate);
+ 		return purchaseOrderRepository.findByPurchaseDate(purchaseDate,pageable)
+ 	            .map(purchaseOrderMapper::toDto);
+ 	}
+ 	/**
+     * Get purchase order by reference.
+     * @param purchaseDate the id of the entity
+     */
+
+	@Override
+	@Transactional(readOnly = true)
+	public Page<PurchaseOrderDTO> findByPurchaseOrder(String reference, Pageable pageable) {
 		
+		log.debug("Request to delete PurchaseOrder : {}", reference);
+		return purchaseOrderRepository.findByReference(reference,pageable)
+	            .map(purchaseOrderMapper::toDto);
 	}
 }
