@@ -134,7 +134,7 @@ public class PurchaseOrderResource {
      * @param pageable
      * @return
      */
-   @GetMapping("/purchase-orders/findByDate/{purchaseDate}")
+    @GetMapping("/purchase-orders/findByDate/{purchaseDate}")
     @Timed
     public ResponseEntity<List<PurchaseOrderDTO>> getPurchaseOrder(@PathVariable LocalDate purchaseDate ,Pageable pageable) {
     	log.debug("REST request to get a page of PurchaseOrder :{}", purchaseDate);
@@ -148,7 +148,7 @@ public class PurchaseOrderResource {
     * @param pageable
     * @return
     */
-  @GetMapping("/purchase-orders/findByReference/{reference}")
+   @GetMapping("/purchase-orders/findByReference/{reference}")
    @Timed
    public ResponseEntity<List<PurchaseOrderDTO>> getPurchaseOrder(@PathVariable String reference ,Pageable pageable) {
    	log.debug("REST request to get a page of PurchaseOrder :{}", reference);
