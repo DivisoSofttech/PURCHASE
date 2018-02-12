@@ -51,6 +51,10 @@ public class Supplier implements Serializable {
     @JsonIgnore
     private Set<Quotation> quatations = new HashSet<>();
 
+    @OneToMany(mappedBy = "supplier")
+    @JsonIgnore
+    private Set<DeliveryNote> deliveryNotes = new HashSet<>();
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -198,6 +202,31 @@ public class Supplier implements Serializable {
 
     public void setQuatations(Set<Quotation> quotations) {
         this.quatations = quotations;
+    }
+
+    public Set<DeliveryNote> getDeliveryNotes() {
+        return deliveryNotes;
+    }
+
+    public Supplier deliveryNotes(Set<DeliveryNote> deliveryNotes) {
+        this.deliveryNotes = deliveryNotes;
+        return this;
+    }
+
+    public Supplier addDeliveryNote(DeliveryNote deliveryNote) {
+        this.deliveryNotes.add(deliveryNote);
+        deliveryNote.setSupplier(this);
+        return this;
+    }
+
+    public Supplier removeDeliveryNote(DeliveryNote deliveryNote) {
+        this.deliveryNotes.remove(deliveryNote);
+        deliveryNote.setSupplier(null);
+        return this;
+    }
+
+    public void setDeliveryNotes(Set<DeliveryNote> deliveryNotes) {
+        this.deliveryNotes = deliveryNotes;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

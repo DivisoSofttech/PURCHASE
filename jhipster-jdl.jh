@@ -40,6 +40,10 @@ entity Rating {
   reference String,
   ratings Integer
 }
+entity RatingType{
+reference String,
+type String
+}
 entity Comment {
   reference String,
   comments String
@@ -62,7 +66,7 @@ entity DeliveriesLine {
 }
 relationship OneToOne {
    Supplier{permanentAddress} to Address,
-   Supplier{contact} to Contact,
+   Supplier{contact} to Contact
 }
 relationship OneToMany {
   DeliveryNote{deliveryLines} to DeliveriesLine,
