@@ -18,6 +18,14 @@
             "otherEntityRelationshipName": "supplier"
         },
         {
+            "relationshipType": "one-to-one",
+            "relationshipName": "rating",
+            "otherEntityName": "rating",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "supplier"
+        },
+        {
             "relationshipType": "one-to-many",
             "relationshipName": "temporaryAddresses",
             "otherEntityName": "address",

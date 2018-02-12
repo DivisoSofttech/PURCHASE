@@ -17,6 +17,10 @@ entity Contact {
   phoneNumber2 Long,
   companyName String
 }
+entity Rating {
+  reference String,
+  ratings Integer
+}
 entity Quotation {
   reference String,
   issuedDate LocalDate
@@ -66,6 +70,7 @@ relationship OneToOne {
    Supplier{permanentAddress} to Address,
    Supplier{contact} to Contact,
    DeliveryNote {supplier} to Supplier
+   Supplier {rating} to Rating
 }
 relationship OneToMany {
   DeliveryNote{deliveryLines} to DeliveriesLine,
