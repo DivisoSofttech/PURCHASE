@@ -141,4 +141,5 @@ Desktop.ini
 # ESLint
 ######################
 .eslintcache
-.classes
+.gitignore
+Displaying .gitignore.

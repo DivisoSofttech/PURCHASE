@@ -1,40 +1,40 @@
 package com.diviso.purchase.service;
 
-import com.diviso.purchase.service.dto.SupplierDTO;
+import com.diviso.purchase.service.dto.RatingTypeDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 /**
- * Service Interface for managing Supplier.
+ * Service Interface for managing RatingType.
  */
-public interface SupplierService {
+public interface RatingTypeService {
 
     /**
-     * Save a supplier.
+     * Save a ratingType.
      *
-     * @param supplierDTO the entity to save
+     * @param ratingTypeDTO the entity to save
      * @return the persisted entity
      */
-    SupplierDTO save(SupplierDTO supplierDTO);
+    RatingTypeDTO save(RatingTypeDTO ratingTypeDTO);
 
     /**
-     * Get all the suppliers.
+     * Get all the ratingTypes.
      *
      * @param pageable the pagination information
      * @return the list of entities
      */
-    Page<SupplierDTO> findAll(Pageable pageable);
+    Page<RatingTypeDTO> findAll(Pageable pageable);
 
     /**
-     * Get the "id" supplier.
+     * Get the "id" ratingType.
      *
      * @param id the id of the entity
      * @return the entity
      */
-    SupplierDTO findOne(Long id);
+    RatingTypeDTO findOne(Long id);
 
     /**
-     * Delete the "id" supplier.
+     * Delete the "id" ratingType.
      *
      * @param id the id of the entity
      */

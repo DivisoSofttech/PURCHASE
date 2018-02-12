@@ -83,31 +83,4 @@ public class SupplierServiceImpl implements SupplierService {
         log.debug("Request to delete Supplier : {}", id);
         supplierRepository.delete(id);
     }
-
-    /*--------------------------------------------------------------
-     * EXTRA METHOD
-     * -------------------------------------------------------------*/
-	
-    /**
-     * Get suppliers by reference
-     * @param suppliers the reference of the entity
-     */
-    
-    @Override
-    @Transactional(readOnly = true)
-	public SupplierDTO findByReference(String reference) {
-		// TODO Auto-generated method stub
-    	log.debug("Request to get Supplier : {}", reference);
-    	 Supplier supplier = supplierRepository.findByReference(reference);
-         return supplierMapper.toDto(supplier);
-	}
-
-	@Override
-	@Transactional(readOnly = true)
-	public Page<SupplierDTO> findByFirstName(String firstName, Pageable pageable) {
-		// TODO Auto-generated method stub
-		log.debug("Request to get suppliers : {}", firstName);
-		return supplierRepository.findByFirstName(firstName,pageable)
-	            .map(supplierMapper::toDto);
-	}
 }

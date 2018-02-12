@@ -17,10 +17,6 @@ entity Contact {
   phoneNumber2 Long,
   companyName String
 }
-entity Rating {
-  reference String,
-  ratings Integer
-}
 entity Quotation {
   reference String,
   issuedDate LocalDate

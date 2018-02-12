@@ -23,6 +23,8 @@ public class SupplierDTO implements Serializable {
 
     private Long contactId;
 
+    private Long ratingId;
+
     public Long getId() {
         return id;
     }
@@ -69,6 +71,14 @@ public class SupplierDTO implements Serializable {
 
     public void setContactId(Long contactId) {
         this.contactId = contactId;
+    }
+
+    public Long getRatingId() {
+        return ratingId;
+    }
+
+    public void setRatingId(Long ratingId) {
+        this.ratingId = ratingId;
     }
 
     @Override

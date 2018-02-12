@@ -20,5 +20,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="contact"/>
 
+        <addForeignKeyConstraint baseColumnNames="rating_id"
+                                 baseTableName="supplier"
+                                 constraintName="fk_supplier_rating_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="rating"/>
+
     </changeSet>
 </databaseChangeLog>
