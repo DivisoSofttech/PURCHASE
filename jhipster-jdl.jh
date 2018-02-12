@@ -1,5 +1,3 @@
-
-
 entity Supplier {
   reference String,
   firstName String,
@@ -36,7 +34,7 @@ entity Statuss {
 entity DeliveryNote {
   reference String,
   orderReference String,
-  purchaseDate LocalDate
+  deliveredDate LocalDate
 }
 entity Rating {
   reference String,
@@ -65,7 +63,6 @@ entity DeliveriesLine {
 relationship OneToOne {
    Supplier{permanentAddress} to Address,
    Supplier{contact} to Contact,
-   DeliveryNote {supplier} to Supplier
 }
 relationship OneToMany {
   DeliveryNote{deliveryLines} to DeliveriesLine,
@@ -77,6 +74,7 @@ relationship OneToMany {
   Statuss{quotations} to Quotation,
   Statuss{purchaseOrders} to PurchaseOrder,
   DeliveryNote{comments} to Comment
+  Supplier{deliveryNote} to DeliveryNote
 }
 relationship ManyToMany {
   DeliveryNote{ratings} to Rating

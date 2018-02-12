@@ -60,8 +60,12 @@ spring:
     mail:
         host: localhost
         port: 25
-        username:
-        password:
+        username: athira.p.m@lxisoft.com
+        password: athirapm1995
+        properties:
+            mail.smtp.auth:true
+            mail.smtp.starttls.enable:true
+            
     messages:
         cache-seconds: 1
     thymeleaf:
