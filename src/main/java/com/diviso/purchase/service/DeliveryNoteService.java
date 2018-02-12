@@ -1,6 +1,9 @@
 package com.diviso.purchase.service;
 
 import com.diviso.purchase.service.dto.DeliveryNoteDTO;
+
+import java.time.LocalDate;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -39,4 +42,15 @@ public interface DeliveryNoteService {
      * @param id the id of the entity
      */
     void delete(Long id);
+
+
+	Page<DeliveryNoteDTO> findAllByOrderReference(String orderReference, Pageable pageable);
+
+	Page<DeliveryNoteDTO> findAllBySupplier_Id(Long supplierId, Pageable pageable);
+
+	Page<DeliveryNoteDTO> findAllByPurchaseDateBetween(LocalDate startDate, LocalDate endDate, Pageable pageable);
+
+	Page<DeliveryNoteDTO> findAllByPurchaseDate(LocalDate purchaseDate, Pageable pageable);
+
+	Page<DeliveryNoteDTO> findAllByReference(String reference, Pageable pageable);
 }

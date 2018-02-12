@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -123,4 +123,79 @@ public class DeliveryNoteResource {
         deliveryNoteService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+    /**
+     * GET  /delivery-notes : get all the deliveryNotes by reference.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of deliveryNotes in body
+     */
+    @GetMapping("/delivery-notes/findbyreference/{reference}")
+    @Timed
+    public ResponseEntity<List<DeliveryNoteDTO>> getAllDeliveryNotes(@PathVariable String reference,Pageable pageable) {
+        log.debug("REST request to get a page of DeliveryNotes");
+        Page<DeliveryNoteDTO> page = deliveryNoteService.findAllByReference(reference,pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/delivery-notes");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    
+    /**
+     * GET  /delivery-notes : get all the deliveryNotes by orderReference.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of deliveryNotes in body
+     */
+    @GetMapping("/delivery-notes/findbyorderreference/{orderreference}")
+    @Timed
+    public ResponseEntity<List<DeliveryNoteDTO>> getAllDeliveryNotesByOrderReference(@PathVariable String orderReference,Pageable pageable) {
+        log.debug("REST request to get a page of DeliveryNotes");
+        Page<DeliveryNoteDTO> page = deliveryNoteService.findAllByOrderReference(orderReference,pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/delivery-notes");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    
+    /**
+     * GET  /delivery-notes : get all the deliveryNotes by purchase date.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of deliveryNotes in body
+     */
+    @GetMapping("/delivery-notes/findbypurchasedate/{purchaseDate}")
+    @Timed
+    public ResponseEntity<List<DeliveryNoteDTO>> getAllDeliveryNotesByPurchaseDate(@PathVariable LocalDate purchaseDate,Pageable pageable) {
+        log.debug("REST request to get a page of DeliveryNotes");
+        Page<DeliveryNoteDTO> page = deliveryNoteService.findAllByPurchaseDate(purchaseDate,pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/delivery-notes");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    /**
+     * GET  /delivery-notes : get all the deliveryNotes by purchase date between two dates.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of deliveryNotes in body
+     */
+    @GetMapping("/delivery-notes/findbypurchasedatebetween/{startDate}/{endDate}")
+    @Timed
+    public ResponseEntity<List<DeliveryNoteDTO>> getAllDeliveryNotesByPurchaseDateBetween(@PathVariable LocalDate startDate,@PathVariable LocalDate endDate,Pageable pageable) {
+        log.debug("REST request to get a page of DeliveryNotes");
+        Page<DeliveryNoteDTO> page = deliveryNoteService.findAllByPurchaseDateBetween(startDate,endDate,pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/delivery-notes");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    
+    /**
+     * GET  /delivery-notes : get all the deliveryNotes by suppliers.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of deliveryNotes in body
+     */
+    @GetMapping("/delivery-notes/findbysupplierid/{supplierId}")
+    @Timed
+    public ResponseEntity<List<DeliveryNoteDTO>> getAllDeliveryNotesBySupplier_Id(@PathVariable Long supplierId,Pageable pageable) {
+        log.debug("REST request to get a page of DeliveryNotes");
+        Page<DeliveryNoteDTO> page = deliveryNoteService.findAllBySupplier_Id(supplierId,pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/delivery-notes");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    
+    
 }

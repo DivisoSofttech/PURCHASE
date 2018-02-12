@@ -5,6 +5,9 @@ import com.diviso.purchase.domain.DeliveryNote;
 import com.diviso.purchase.repository.DeliveryNoteRepository;
 import com.diviso.purchase.service.dto.DeliveryNoteDTO;
 import com.diviso.purchase.service.mapper.DeliveryNoteMapper;
+
+import java.time.LocalDate;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -83,4 +86,52 @@ public class DeliveryNoteServiceImpl implements DeliveryNoteService {
         log.debug("Request to delete DeliveryNote : {}", id);
         deliveryNoteRepository.delete(id);
     }
+    
+    /**
+     * Get all the deliveryNotes by reference.
+     *
+     * @param pageable the pagination information
+     * @return the list of entities
+     */
+
+	@Override
+	public Page<DeliveryNoteDTO> findAllByReference(String reference, Pageable pageable) {
+		// TODO Auto-generated method stub
+		 log.debug("Request to get all DeliveryNotes");
+	        return deliveryNoteRepository.findAllByReference(reference,pageable)
+	            .map(deliveryNoteMapper::toDto);
+	}
+
+	@Override
+	public Page<DeliveryNoteDTO> findAllByPurchaseDate(LocalDate purchaseDate, Pageable pageable) {
+		// TODO Auto-generated method stub
+		log.debug("Request to get all DeliveryNotes");
+        return deliveryNoteRepository.findAllByPurchaseDate(purchaseDate,pageable)
+            .map(deliveryNoteMapper::toDto);
+	}
+
+	@Override
+	public Page<DeliveryNoteDTO> findAllByPurchaseDateBetween(LocalDate startDate, LocalDate endDate, Pageable pageable) {
+		// TODO Auto-generated method stub
+		log.debug("Request to get all DeliveryNotes");
+        return deliveryNoteRepository.findAllByPurchaseDateBetween(startDate,endDate,pageable)
+            .map(deliveryNoteMapper::toDto);
+	}
+
+	@Override
+	public Page<DeliveryNoteDTO> findAllBySupplier_Id(Long supplierId, Pageable pageable) {
+		// TODO Auto-generated method stub
+		log.debug("Request to get all DeliveryNotes");
+        return deliveryNoteRepository.findAllBySupplier_Id(supplierId,pageable)
+            .map(deliveryNoteMapper::toDto);
+	}
+
+	@Override
+	public Page<DeliveryNoteDTO> findAllByOrderReference(String orderReference, Pageable pageable) {
+		// TODO Auto-generated method stub
+		log.debug("Request to get all DeliveryNotes");
+        return deliveryNoteRepository.findAllByOrderReference(orderReference,pageable)
+            .map(deliveryNoteMapper::toDto);
+
+	}
 }

@@ -1,0 +1,209 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="ATHIRA (generated)" id="1518158734676-1">
+        <createTable tableName="address">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="addressPK"/>
+            </column>
+            <column name="district" type="VARCHAR(255)"/>
+            <column name="pin_code" type="BIGINT"/>
+            <column name="place" type="VARCHAR(255)"/>
+            <column name="state" type="VARCHAR(255)"/>
+            <column name="supplier_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="ATHIRA (generated)" id="1518158734676-2">
+        <createTable tableName="comment">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="commentPK"/>
+            </column>
+            <column name="comments" type="VARCHAR(255)"/>
+            <column name="reference" type="VARCHAR(255)"/>
+            <column name="delivery_note_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="ATHIRA (generated)" id="1518158734676-3">
+        <createTable tableName="contact">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="contactPK"/>
+            </column>
+            <column name="company_name" type="VARCHAR(255)"/>
+            <column name="mail_id" type="VARCHAR(255)"/>
+            <column name="phone_number_1" type="BIGINT"/>
+            <column name="phone_number_2" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="ATHIRA (generated)" id="1518158734676-4">
+        <createTable tableName="deliveries_line">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="deliveries_linePK"/>
+            </column>
+            <column name="price" type="DOUBLE"/>
+            <column name="quantity" type="DOUBLE"/>
+            <column name="reference" type="VARCHAR(255)"/>
+            <column name="tax" type="DOUBLE"/>
+            <column name="delivery_note_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="ATHIRA (generated)" id="1518158734676-5">
+        <createTable tableName="delivery_note">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="delivery_notePK"/>
+            </column>
+            <column name="order_reference" type="VARCHAR(255)"/>
+            <column name="purchase_date" type="TINYBLOB"/>
+            <column name="reference" type="VARCHAR(255)"/>
+            <column name="supplier_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="ATHIRA (generated)" id="1518158734676-6">
+        <createTable tableName="delivery_note_ratings">
+            <column name="delivery_notes_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ratings_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="ATHIRA (generated)" id="1518158734676-7">
+        <createTable tableName="purchase_line">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="purchase_linePK"/>
+            </column>
+            <column name="product_price" type="DOUBLE"/>
+            <column name="product_reference" type="VARCHAR(255)"/>
+            <column name="product_tax" type="DOUBLE"/>
+            <column name="quantity" type="DOUBLE"/>
+            <column name="purchase_order_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="ATHIRA (generated)" id="1518158734676-8">
+        <createTable tableName="purchase_order">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="purchase_orderPK"/>
+            </column>
+            <column name="purchase_date" type="TINYBLOB"/>
+            <column name="reference" type="VARCHAR(255)"/>
+            <column name="statuss_id" type="BIGINT"/>
+            <column name="supplier_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="ATHIRA (generated)" id="1518158734676-9">
+        <createTable tableName="quotation">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="quotationPK"/>
+            </column>
+            <column name="issued_date" type="TINYBLOB"/>
+            <column name="reference" type="VARCHAR(255)"/>
+            <column name="statuss_id" type="BIGINT"/>
+            <column name="supplier_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="ATHIRA (generated)" id="1518158734676-10">
+        <createTable tableName="quotation_line">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="quotation_linePK"/>
+            </column>
+            <column name="available_quantity" type="DOUBLE"/>
+            <column name="is_select" type="BIT"/>
+            <column name="price" type="DOUBLE"/>
+            <column name="reference" type="VARCHAR(255)"/>
+            <column name="tax" type="DOUBLE"/>
+            <column name="quotation_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="ATHIRA (generated)" id="1518158734676-11">
+        <createTable tableName="rating">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="ratingPK"/>
+            </column>
+            <column name="ratings" type="INT"/>
+            <column name="reference" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="ATHIRA (generated)" id="1518158734676-12">
+        <createTable tableName="statuss">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="statussPK"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="status_level" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="ATHIRA (generated)" id="1518158734676-13">
+        <createTable tableName="supplier">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="supplierPK"/>
+            </column>
+            <column name="first_name" type="VARCHAR(255)"/>
+            <column name="last_name" type="VARCHAR(255)"/>
+            <column name="reference" type="VARCHAR(255)"/>
+            <column name="contact_id" type="BIGINT"/>
+            <column name="permanent_address_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="ATHIRA (generated)" id="1518158734676-14">
+        <addPrimaryKey columnNames="delivery_notes_id, ratings_id" tableName="delivery_note_ratings"/>
+    </changeSet>
+    <changeSet author="ATHIRA (generated)" id="1518158734676-15">
+        <addUniqueConstraint columnNames="supplier_id" constraintName="UC_DELIVERY_NOTESUPPLIER_ID_COL" tableName="delivery_note"/>
+    </changeSet>
+    <changeSet author="ATHIRA (generated)" id="1518158734676-16">
+        <addUniqueConstraint columnNames="contact_id" constraintName="UC_SUPPLIERCONTACT_ID_COL" tableName="supplier"/>
+    </changeSet>
+    <changeSet author="ATHIRA (generated)" id="1518158734676-17">
+        <addUniqueConstraint columnNames="permanent_address_id" constraintName="UC_SUPPLIERPERMANENT_ADDRESS_ID_COL" tableName="supplier"/>
+    </changeSet>
+    <changeSet author="ATHIRA (generated)" id="1518158734676-18">
+        <addForeignKeyConstraint baseColumnNames="delivery_note_id" baseTableName="comment" constraintName="FK14464bua37bcd8g0d4wdhnaic" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="delivery_note"/>
+    </changeSet>
+    <changeSet author="ATHIRA (generated)" id="1518158734676-19">
+        <addForeignKeyConstraint baseColumnNames="supplier_id" baseTableName="purchase_order" constraintName="FK4traogu3jriq9u7e8rvm86k7i" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="supplier"/>
+    </changeSet>
+    <changeSet author="ATHIRA (generated)" id="1518158734676-20">
+        <addForeignKeyConstraint baseColumnNames="supplier_id" baseTableName="delivery_note" constraintName="FK5vxge47hk8ahvm5lo8sgnahe5" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="supplier"/>
+    </changeSet>
+    <changeSet author="ATHIRA (generated)" id="1518158734676-21">
+        <addForeignKeyConstraint baseColumnNames="statuss_id" baseTableName="quotation" constraintName="FK6i1qcxo25py2iy5hydbwo4okb" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="statuss"/>
+    </changeSet>
+    <changeSet author="ATHIRA (generated)" id="1518158734676-22">
+        <addForeignKeyConstraint baseColumnNames="delivery_notes_id" baseTableName="delivery_note_ratings" constraintName="FK9d8xff64uixi2ktuhfobxyqlm" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="delivery_note"/>
+    </changeSet>
+    <changeSet author="ATHIRA (generated)" id="1518158734676-23">
+        <addForeignKeyConstraint baseColumnNames="supplier_id" baseTableName="quotation" constraintName="FKar1dy6e0angspildlspwyakwh" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="supplier"/>
+    </changeSet>
+    <changeSet author="ATHIRA (generated)" id="1518158734676-24">
+        <addForeignKeyConstraint baseColumnNames="permanent_address_id" baseTableName="supplier" constraintName="FKcdvmtje4d86pb681i1gj5napp" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="address"/>
+    </changeSet>
+    <changeSet author="ATHIRA (generated)" id="1518158734676-25">
+        <addForeignKeyConstraint baseColumnNames="delivery_note_id" baseTableName="deliveries_line" constraintName="FKdmtk85k3ojanwth70g3fdgin0" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="delivery_note"/>
+    </changeSet>
+    <changeSet author="ATHIRA (generated)" id="1518158734676-26">
+        <addForeignKeyConstraint baseColumnNames="supplier_id" baseTableName="address" constraintName="FKeanshj82qu0mf7a7nee7xqol0" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="supplier"/>
+    </changeSet>
+    <changeSet author="ATHIRA (generated)" id="1518158734676-27">
+        <addForeignKeyConstraint baseColumnNames="purchase_order_id" baseTableName="purchase_line" constraintName="FKn9yppa0d09kyme7hxodvcdo4i" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="purchase_order"/>
+    </changeSet>
+    <changeSet author="ATHIRA (generated)" id="1518158734676-28">
+        <addForeignKeyConstraint baseColumnNames="statuss_id" baseTableName="purchase_order" constraintName="FKnfg2r4j7472wpchdb9ierk0v" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="statuss"/>
+    </changeSet>
+    <changeSet author="ATHIRA (generated)" id="1518158734676-29">
+        <addForeignKeyConstraint baseColumnNames="contact_id" baseTableName="supplier" constraintName="FKol8sg2a5ql24cnt0583rn12ul" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="contact"/>
+    </changeSet>
+    <changeSet author="ATHIRA (generated)" id="1518158734676-30">
+        <addForeignKeyConstraint baseColumnNames="ratings_id" baseTableName="delivery_note_ratings" constraintName="FKpy70fi53syt0p2uj4bbf5x3fi" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="rating"/>
+    </changeSet>
+    <changeSet author="ATHIRA (generated)" id="1518158734676-31">
+        <addForeignKeyConstraint baseColumnNames="quotation_id" baseTableName="quotation_line" constraintName="FKt0emvk93mq1kvdlecao1dx6qq" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="quotation"/>
+    </changeSet>
+    <changeSet author="ATHIRA (generated)" id="1518158734676-32">
+        <dropForeignKeyConstraint baseTableName="jhi_user_authority" constraintName="fk_authority_name"/>
+    </changeSet>
+    <changeSet author="ATHIRA (generated)" id="1518158734676-33">
+        <dropTable tableName="jhi_authority"/>
+    </changeSet>
+    <changeSet author="ATHIRA (generated)" id="1518158734676-34">
+        <dropTable tableName="jhi_user_authority"/>
+    </changeSet>
+</databaseChangeLog>
