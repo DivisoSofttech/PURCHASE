@@ -3,7 +3,11 @@ package com.diviso.purchase.service;
 import com.diviso.purchase.domain.Quotation;
 import com.diviso.purchase.service.dto.PurchaseOrderDTO;
 
+import net.sf.jasperreports.engine.JRException;
+
 import java.time.LocalDate;
+
+import javax.mail.MessagingException;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -67,4 +71,8 @@ public interface PurchaseOrderService {
      */
 
 	Page<PurchaseOrderDTO> findByPurchaseOrder(String reference, Pageable pageable);
+	
+	String issuePurchaseOrder(Long purchaseOrderId) throws JRException;
+	
+	String sendMailWithAttachment(Long purchaseOrderId) throws MessagingException;
 }

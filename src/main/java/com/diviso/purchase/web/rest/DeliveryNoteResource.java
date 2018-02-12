@@ -190,7 +190,7 @@ public class DeliveryNoteResource {
      */
     @GetMapping("/delivery-notes/findbysupplierid/{supplierId}")
     @Timed
-    public ResponseEntity<List<DeliveryNoteDTO>> getAllDeliveryNotesBySupplier_Id(@PathVariable Long supplierId,Pageable pageable) {
+    public ResponseEntity<List<DeliveryNoteDTO>> getAllDeliveryNotesBySupplierId(@PathVariable Long supplierId,Pageable pageable) {
         log.debug("REST request to get a page of DeliveryNotes");
         Page<DeliveryNoteDTO> page = deliveryNoteService.findAllBySupplier_Id(supplierId,pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/delivery-notes");

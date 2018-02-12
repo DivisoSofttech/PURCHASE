@@ -1,20 +1,45 @@
 package com.diviso.purchase.service.impl;
 
 import com.diviso.purchase.service.PurchaseOrderService;
+
+
 import com.diviso.purchase.domain.PurchaseLine;
 import com.diviso.purchase.domain.PurchaseOrder;
 import com.diviso.purchase.domain.Quotation;
 import com.diviso.purchase.domain.QuotationLine;
+import com.diviso.purchase.domain.Supplier;
 import com.diviso.purchase.repository.PurchaseOrderRepository;
 import com.diviso.purchase.service.dto.PurchaseOrderDTO;
 import com.diviso.purchase.service.mapper.PurchaseOrderMapper;
 
+import io.swagger.annotations.ApiParam;
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+
+import java.io.File;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,6 +56,9 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
     private final PurchaseOrderRepository purchaseOrderRepository;
 
     private final PurchaseOrderMapper purchaseOrderMapper;
+    
+    @Autowired
+	public JavaMailSender emailSender;
 
     public PurchaseOrderServiceImpl(PurchaseOrderRepository purchaseOrderRepository, PurchaseOrderMapper purchaseOrderMapper) {
         this.purchaseOrderRepository = purchaseOrderRepository;
@@ -89,6 +117,11 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         log.debug("Request to delete PurchaseOrder : {}", id);
         purchaseOrderRepository.delete(id);
     }
+    
+    /**
+     * create purchaseorder by quotation.
+     * @param quotation
+     */
 
 	@Override
 	public void save(Quotation quotation) {
@@ -131,6 +164,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
  		return purchaseOrderRepository.findByPurchaseDate(purchaseDate,pageable)
  	            .map(purchaseOrderMapper::toDto);
  	}
+ 	
  	/**
      * Get purchase order by reference.
      * @param purchaseDate the id of the entity
@@ -143,5 +177,77 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 		log.debug("Request to delete PurchaseOrder : {}", reference);
 		return purchaseOrderRepository.findByReference(reference,pageable)
 	            .map(purchaseOrderMapper::toDto);
+	}
+	
+	/**
+	 * JRXML - PDF
+     * create pdf by purchaseorder id
+     * @param id the id of the entity
+     */
+	@Override
+	public String issuePurchaseOrder(Long purchaseOrderId) throws JRException {
+		List<PurchaseOrder> entityList = new ArrayList<PurchaseOrder>();
+		entityList.add(purchaseOrderRepository.findOne(purchaseOrderId));
+		
+		JRDataSource beanColDataSource = new JRBeanCollectionDataSource(entityList);
+		
+		JasperReport jasperReport = JasperCompileManager.compileReport("/home/vishnu/purchase_order.jrxml\n");
+		
+		Map<String, Object> parameters = new HashMap<String, Object>();
+
+		JasperPrint jasperPrint = null;
+		try {
+			jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, beanColDataSource);
+
+		} catch (JRException e1) {
+
+			e1.printStackTrace();
+		}
+		
+		File outDir = new File("/home/vishnu/LXI");
+		outDir.mkdirs();
+		try {
+			JasperExportManager.exportReportToPdfFile(jasperPrint, "/home/vishnu/LXI/purchase_order.pdf");
+
+		} catch (JRException e) {
+
+			e.printStackTrace();
+		}
+		
+		///call sendMailWithAttachment method
+		try {
+			
+			sendMailWithAttachment(purchaseOrderId);
+		}
+		catch (MessagingException e) {
+			
+			e.printStackTrace();
+		}
+		return "success to convert jrxml to pdf";
+	}
+	
+	/**
+	 * This is a method which is used to send individual mail to the customer with attachment
+	 * 
+	 * 
+	 */
+	@Override
+	public String sendMailWithAttachment(Long purchaseOrderId) throws MessagingException {
+		
+		PurchaseOrder purchaseOrder = purchaseOrderRepository.findOne(purchaseOrderId);
+		
+		MimeMessage message = emailSender.createMimeMessage();
+		
+		MimeMessageHelper helper = new MimeMessageHelper(message, true);
+		helper.setTo(""+purchaseOrder.getSupplier().getContact().getMailId());
+		helper.setSubject("subject");
+		helper.setText("text");
+
+		FileSystemResource file = new FileSystemResource(new File("/home/vishnu/LXI/purchase_order.pdf"));
+		helper.addAttachment("Invoice", file);
+		
+		emailSender.send(message);
+
+		return "Mail Successfully sent..";
 	}
 }
