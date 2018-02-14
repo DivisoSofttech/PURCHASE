@@ -1,0 +1,118 @@
+[{
+  "first_name": "Erica",
+  "last_name": "Stanhope",
+  "id": 1,
+  "reference": "Erica_001",
+  "contact": [
+    {
+      "mail_id": "mbatterbee0@biblegateway.com",
+      "phone_number1": "4631852146",
+      "phone_number2": "2732124998",
+      "company_name": "Tazz"
+    }
+  ],
+  "permanent_address": [
+    {
+      "id": 1,
+      "place": "45 Graedel Parkway",
+      "district": "Washington",
+      "state": "District of Columbia",
+      "pin_code": "20530"
+    }
+  ],
+  "temporary_addresses": [
+    {
+      "id": 1,
+      "place": "0 Gateway Court",
+      "district": "Stockton",
+      "state": "California",
+      "pin_code": "95298"
+    },
+    {
+      "id": 2,
+      "place": "17 Messerschmidt Avenue",
+      "district": "New York City",
+      "state": "New York",
+      "pin_code": "10175"
+    }
+  ],
+  "quotations": [
+    {
+      "id": 1,
+      "reference": "Erica_001_quo_001",
+      "issued_date": "03/17/2016",
+      "quotation_lines": [
+        {
+          "id": 1,
+          "reference": "quoline_001",
+          "price": 1573,
+          "tax": 11.87,
+          "available_quantity": 529,
+          "is_select": true
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "reference": "Erica_001_quo_002",
+      "issued_date": "03/28/2015",
+      "quotation_lines": [
+        {
+          "id": 1,
+          "reference": "quoline_001",
+          "price": 9712,
+          "tax": 10.71,
+          "available_quantity": 800,
+          "is_select": false
+        },
+        {
+          "id": 2,
+          "reference": "quoline_002",
+          "price": 8025,
+          "tax": 5.44,
+          "available_quantity": 433,
+          "is_select": false
+        },
+        {
+          "id": 3,
+          "reference": "quoline_003",
+          "price": 6091,
+          "tax": 5.14,
+          "available_quantity": 345,
+          "is_select": false
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "reference": "Erica_001_quo_003",
+      "issued_date": "07/29/2015",
+      "quotation_lines": [
+        {
+          "id": 1,
+          "reference": "quoline_001",
+          "price": 4674,
+          "tax": 9.1,
+          "available_quantity": 892,
+          "is_select": true
+        },
+        {
+          "id": 2,
+          "reference": "quoline_002",
+          "price": 343,
+          "tax": 3.54,
+          "available_quantity": 365,
+          "is_select": true
+        }
+      ]
+    }
+  ],
+  "budget": {
+    "name": "Sophie",
+    "price": "4.50",
+    "alert": {
+      "percentage": -9.7540414,
+      "price": "2.28"
+    }
+  }
+}]
