@@ -2,10 +2,12 @@
     "fluentMethods": true,
     "relationships": [
         {
+            "relationshipType": "one-to-one",
             "relationshipName": "supplier",
             "otherEntityName": "supplier",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "deliveryNote"
         },
         {
             "relationshipType": "one-to-many",
@@ -46,7 +48,7 @@
             "fieldType": "String"
         },
         {
-            "fieldName": "deliveredDate",
+            "fieldName": "purchaseDate",
             "fieldType": "LocalDate"
         }
     ],

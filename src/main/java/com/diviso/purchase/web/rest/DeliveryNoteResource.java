@@ -243,8 +243,8 @@ public class DeliveryNoteResource {
  	}
      
 	/**
- 	 * This is a method which is used to send individual mail to the customer with attachment
- 	 * @param to,subject,text
+ 	 * This is a method which is used to update inventory after creating delivery note.
+ 	 * 
  	 * 
  	 */
  	@PutMapping("/delivery-notes/update-inventory/{id}")
