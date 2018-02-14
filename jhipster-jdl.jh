@@ -67,6 +67,7 @@ entity DeliveriesLine {
 relationship OneToOne {
    Supplier{permanentAddress} to Address,
    Supplier{contact} to Contact
+   
 }
 relationship OneToMany {
   DeliveryNote{deliveryLines} to DeliveriesLine,
@@ -79,9 +80,11 @@ relationship OneToMany {
   Statuss{purchaseOrders} to PurchaseOrder,
   DeliveryNote{comments} to Comment
   Supplier{deliveryNote} to DeliveryNote
+  Rating{ratingType} to RatingType
 }
 relationship ManyToMany {
   DeliveryNote{ratings} to Rating
+  DeliveryNote{ratingType} to RatingType
 }
 paginate * with pagination
 dto * with mapstruct

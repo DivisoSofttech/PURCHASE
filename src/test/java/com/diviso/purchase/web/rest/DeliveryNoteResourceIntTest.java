@@ -49,8 +49,8 @@ public class DeliveryNoteResourceIntTest {
     private static final String DEFAULT_ORDER_REFERENCE = "AAAAAAAAAA";
     private static final String UPDATED_ORDER_REFERENCE = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_PURCHASE_DATE = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_PURCHASE_DATE = LocalDate.now(ZoneId.systemDefault());
+    private static final LocalDate DEFAULT_DELIVERED_DATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_DELIVERED_DATE = LocalDate.now(ZoneId.systemDefault());
 
     @Autowired
     private DeliveryNoteRepository deliveryNoteRepository;
@@ -98,7 +98,7 @@ public class DeliveryNoteResourceIntTest {
         DeliveryNote deliveryNote = new DeliveryNote()
             .reference(DEFAULT_REFERENCE)
             .orderReference(DEFAULT_ORDER_REFERENCE)
-            .purchaseDate(DEFAULT_PURCHASE_DATE);
+            .deliveredDate(DEFAULT_DELIVERED_DATE);
         return deliveryNote;
     }
 
@@ -125,7 +125,7 @@ public class DeliveryNoteResourceIntTest {
         DeliveryNote testDeliveryNote = deliveryNoteList.get(deliveryNoteList.size() - 1);
         assertThat(testDeliveryNote.getReference()).isEqualTo(DEFAULT_REFERENCE);
         assertThat(testDeliveryNote.getOrderReference()).isEqualTo(DEFAULT_ORDER_REFERENCE);
-        assertThat(testDeliveryNote.getPurchaseDate()).isEqualTo(DEFAULT_PURCHASE_DATE);
+        assertThat(testDeliveryNote.getDeliveredDate()).isEqualTo(DEFAULT_DELIVERED_DATE);
     }
 
     @Test
@@ -161,7 +161,7 @@ public class DeliveryNoteResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(deliveryNote.getId().intValue())))
             .andExpect(jsonPath("$.[*].reference").value(hasItem(DEFAULT_REFERENCE.toString())))
             .andExpect(jsonPath("$.[*].orderReference").value(hasItem(DEFAULT_ORDER_REFERENCE.toString())))
-            .andExpect(jsonPath("$.[*].purchaseDate").value(hasItem(DEFAULT_PURCHASE_DATE.toString())));
+            .andExpect(jsonPath("$.[*].deliveredDate").value(hasItem(DEFAULT_DELIVERED_DATE.toString())));
     }
 
     @Test
@@ -177,7 +177,7 @@ public class DeliveryNoteResourceIntTest {
             .andExpect(jsonPath("$.id").value(deliveryNote.getId().intValue()))
             .andExpect(jsonPath("$.reference").value(DEFAULT_REFERENCE.toString()))
             .andExpect(jsonPath("$.orderReference").value(DEFAULT_ORDER_REFERENCE.toString()))
-            .andExpect(jsonPath("$.purchaseDate").value(DEFAULT_PURCHASE_DATE.toString()));
+            .andExpect(jsonPath("$.deliveredDate").value(DEFAULT_DELIVERED_DATE.toString()));
     }
 
     @Test
@@ -202,7 +202,7 @@ public class DeliveryNoteResourceIntTest {
         updatedDeliveryNote
             .reference(UPDATED_REFERENCE)
             .orderReference(UPDATED_ORDER_REFERENCE)
-            .purchaseDate(UPDATED_PURCHASE_DATE);
+            .deliveredDate(UPDATED_DELIVERED_DATE);
         DeliveryNoteDTO deliveryNoteDTO = deliveryNoteMapper.toDto(updatedDeliveryNote);
 
         restDeliveryNoteMockMvc.perform(put("/api/delivery-notes")
@@ -216,7 +216,7 @@ public class DeliveryNoteResourceIntTest {
         DeliveryNote testDeliveryNote = deliveryNoteList.get(deliveryNoteList.size() - 1);
         assertThat(testDeliveryNote.getReference()).isEqualTo(UPDATED_REFERENCE);
         assertThat(testDeliveryNote.getOrderReference()).isEqualTo(UPDATED_ORDER_REFERENCE);
-        assertThat(testDeliveryNote.getPurchaseDate()).isEqualTo(UPDATED_PURCHASE_DATE);
+        assertThat(testDeliveryNote.getDeliveredDate()).isEqualTo(UPDATED_DELIVERED_DATE);
     }
 
     @Test

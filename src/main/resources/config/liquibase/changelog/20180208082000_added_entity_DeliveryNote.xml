@@ -30,12 +30,14 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="purchase_date" type="date">
+            <column name="delivered_date" type="date">
                 <constraints nullable="true" />
             </column>
+
             <column name="supplier_id" type="bigint">
-                <constraints unique="true" nullable="true" />
+                <constraints nullable="true" />
             </column>
+
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
         
@@ -49,6 +51,17 @@
         </createTable>
 
         <addPrimaryKey columnNames="delivery_notes_id, ratings_id" tableName="delivery_note_ratings"/>
+        
+        <createTable tableName="delivery_note_rating_type">
+            <column name="rating_types_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="delivery_notes_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="delivery_notes_id, rating_types_id" tableName="delivery_note_rating_type"/>
         
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->

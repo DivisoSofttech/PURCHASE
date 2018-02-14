@@ -4,8 +4,11 @@ import com.diviso.purchase.service.dto.DeliveryNoteDTO;
 
 import java.time.LocalDate;
 
+import javax.mail.MessagingException;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  * Service Interface for managing DeliveryNote.
@@ -48,9 +51,15 @@ public interface DeliveryNoteService {
 
 	Page<DeliveryNoteDTO> findAllBySupplier_Id(Long supplierId, Pageable pageable);
 
-	Page<DeliveryNoteDTO> findAllByPurchaseDateBetween(LocalDate startDate, LocalDate endDate, Pageable pageable);
+	Page<DeliveryNoteDTO> findAllByDeliveredDateBetween(LocalDate startDate, LocalDate endDate, Pageable pageable);
 
-	Page<DeliveryNoteDTO> findAllByPurchaseDate(LocalDate purchaseDate, Pageable pageable);
+	Page<DeliveryNoteDTO> findAllByDeliveredDate(LocalDate deliveredDate, Pageable pageable);
 
 	Page<DeliveryNoteDTO> findAllByReference(String reference, Pageable pageable);
+	
+	public String sendMail(String to,String subject,String text);
+ 	public String sendMailWithAttachments(String to,String subject,String text) throws MessagingException;
+
+	String updateInventory();
+
 }

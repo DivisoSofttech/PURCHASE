@@ -25,5 +25,16 @@
                                  referencedColumnNames="id"
                                  referencedTableName="rating"/>
         
+        <addForeignKeyConstraint baseColumnNames="delivery_notes_id"
+                                 baseTableName="delivery_note_rating_type"
+                                 constraintName="fk_delivery_note_rating_type_delivery_notes_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="delivery_note"/>
+        <addForeignKeyConstraint baseColumnNames="rating_types_id"
+                                 baseTableName="delivery_note_rating_type"
+                                 constraintName="fk_delivery_note_rating_type_rating_types_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="rating_type"/>
+        
     </changeSet>
 </databaseChangeLog>

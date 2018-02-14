@@ -26,9 +26,9 @@ public interface DeliveryNoteRepository extends JpaRepository<DeliveryNote, Long
 
 	Page<DeliveryNote> findAllByReference(String reference, Pageable pageable);
 
-	Page<DeliveryNote> findAllByPurchaseDate(LocalDate purchaseDate, Pageable pageable);
+	Page<DeliveryNote> findAllByDeliveredDate(LocalDate purchaseDate, Pageable pageable);
 
-	Page<DeliveryNote> findAllByPurchaseDateBetween(LocalDate startDate, LocalDate endDate, Pageable pageable);
+	Page<DeliveryNote> findAllByDeliveredDateBetween(LocalDate startDate, LocalDate endDate, Pageable pageable);
 
 	Page<DeliveryNote> findAllBySupplier_Id(Long supplierId, Pageable pageable);
 

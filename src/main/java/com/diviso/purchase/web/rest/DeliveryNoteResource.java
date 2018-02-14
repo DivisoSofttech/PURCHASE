@@ -9,18 +9,27 @@ import com.diviso.purchase.service.dto.DeliveryNoteDTO;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 
 /**
  * REST controller for managing DeliveryNote.
@@ -34,6 +43,9 @@ public class DeliveryNoteResource {
     private static final String ENTITY_NAME = "deliveryNote";
 
     private final DeliveryNoteService deliveryNoteService;
+    
+    @Autowired
+	public JavaMailSender emailSender;
 
     public DeliveryNoteResource(DeliveryNoteService deliveryNoteService) {
         this.deliveryNoteService = deliveryNoteService;
@@ -159,11 +171,11 @@ public class DeliveryNoteResource {
      * @param pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of deliveryNotes in body
      */
-    @GetMapping("/delivery-notes/findbypurchasedate/{purchaseDate}")
+    @GetMapping("/delivery-notes/findbydelivereddate/{deliveredDate}")
     @Timed
-    public ResponseEntity<List<DeliveryNoteDTO>> getAllDeliveryNotesByPurchaseDate(@PathVariable LocalDate purchaseDate,Pageable pageable) {
+    public ResponseEntity<List<DeliveryNoteDTO>> getAllDeliveryNotesByDeliveredDate(@PathVariable LocalDate deliveredDate,Pageable pageable) {
         log.debug("REST request to get a page of DeliveryNotes");
-        Page<DeliveryNoteDTO> page = deliveryNoteService.findAllByPurchaseDate(purchaseDate,pageable);
+        Page<DeliveryNoteDTO> page = deliveryNoteService.findAllByDeliveredDate(deliveredDate,pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/delivery-notes");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -173,11 +185,11 @@ public class DeliveryNoteResource {
      * @param pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of deliveryNotes in body
      */
-    @GetMapping("/delivery-notes/findbypurchasedatebetween/{startDate}/{endDate}")
+    @GetMapping("/delivery-notes/findbydelivereddatebetween/{startDate}/{endDate}")
     @Timed
-    public ResponseEntity<List<DeliveryNoteDTO>> getAllDeliveryNotesByPurchaseDateBetween(@PathVariable LocalDate startDate,@PathVariable LocalDate endDate,Pageable pageable) {
+    public ResponseEntity<List<DeliveryNoteDTO>> getAllDeliveryNotesByDeliveredDateBetween(@PathVariable LocalDate startDate,@PathVariable LocalDate endDate,Pageable pageable) {
         log.debug("REST request to get a page of DeliveryNotes");
-        Page<DeliveryNoteDTO> page = deliveryNoteService.findAllByPurchaseDateBetween(startDate,endDate,pageable);
+        Page<DeliveryNoteDTO> page = deliveryNoteService.findAllByDeliveredDateBetween(startDate,endDate,pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/delivery-notes");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -197,5 +209,52 @@ public class DeliveryNoteResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
     
+ // --------------------------------------------------------------------------------------
+	
+ 	//    Email
+
+ 	// -------------------------------------------------------------------------------------
+ 	/**
+ 	 * This is a method which is used to send individual mail to the customer
+ 	 * @param to,subject,text
+ 	 * 
+ 	 */
+ 	@PostMapping("/delivery-notes/sendmail/{to}/{subject}/{text}")
+ 	@Timed
+ 	public String sendMail(@PathVariable String to,@PathVariable String subject,@PathVariable String text) {
+ 		
+ 		return deliveryNoteService.sendMail(to, subject, text);
+ 	}
+ 	
+ 	
+ 	
+ 	/**
+ 	 * This is a method which is used to send individual mail to the customer with attachment
+ 	 * @param to,subject,text
+ 	 * 
+ 	 */
+ 	@PostMapping("/delivery-notes/sendmailwithattachments")
+ 	@Timed
+ 	public String sendMailWithAttachments(@PathVariable String to,@PathVariable String subject,@PathVariable String text
+ 											 ) throws MessagingException {
+
+
+ 		return deliveryNoteService.sendMailWithAttachments(to, subject, text);
+ 	}
+     
+	/**
+ 	 * This is a method which is used to send individual mail to the customer with attachment
+ 	 * @param to,subject,text
+ 	 * 
+ 	 */
+ 	@PutMapping("/delivery-notes/update-inventory/{id}")
+ 	@Timed
+ 	public String updateInventory(@PathVariable long id){
+ 		deliveryNoteService.findOne(id);
+
+
+ 		return null;
+ 	}
+     
     
 }

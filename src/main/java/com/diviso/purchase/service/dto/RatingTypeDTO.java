@@ -2,6 +2,8 @@ package com.diviso.purchase.service.dto;
 
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -14,6 +16,8 @@ public class RatingTypeDTO implements Serializable {
     private String reference;
 
     private String type;
+
+    private Long ratingId;
 
     public Long getId() {
         return id;
@@ -37,6 +41,14 @@ public class RatingTypeDTO implements Serializable {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public Long getRatingId() {
+        return ratingId;
+    }
+
+    public void setRatingId(Long ratingId) {
+        this.ratingId = ratingId;
     }
 
     @Override

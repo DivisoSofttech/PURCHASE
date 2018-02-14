@@ -29,11 +29,10 @@ public class DeliveryNote implements Serializable {
     @Column(name = "order_reference")
     private String orderReference;
 
-    @Column(name = "purchase_date")
-    private LocalDate purchaseDate;
+    @Column(name = "delivered_date")
+    private LocalDate deliveredDate;
 
-    @OneToOne
-    @JoinColumn(unique = true)
+    @ManyToOne
     private Supplier supplier;
 
     @OneToMany(mappedBy = "deliveryNote")
@@ -49,6 +48,12 @@ public class DeliveryNote implements Serializable {
                joinColumns = @JoinColumn(name="delivery_notes_id", referencedColumnName="id"),
                inverseJoinColumns = @JoinColumn(name="ratings_id", referencedColumnName="id"))
     private Set<Rating> ratings = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(name = "delivery_note_rating_type",
+               joinColumns = @JoinColumn(name="delivery_notes_id", referencedColumnName="id"),
+               inverseJoinColumns = @JoinColumn(name="rating_types_id", referencedColumnName="id"))
+    private Set<RatingType> ratingTypes = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -85,17 +90,17 @@ public class DeliveryNote implements Serializable {
         this.orderReference = orderReference;
     }
 
-    public LocalDate getPurchaseDate() {
-        return purchaseDate;
+    public LocalDate getDeliveredDate() {
+        return deliveredDate;
     }
 
-    public DeliveryNote purchaseDate(LocalDate purchaseDate) {
-        this.purchaseDate = purchaseDate;
+    public DeliveryNote deliveredDate(LocalDate deliveredDate) {
+        this.deliveredDate = deliveredDate;
         return this;
     }
 
-    public void setPurchaseDate(LocalDate purchaseDate) {
-        this.purchaseDate = purchaseDate;
+    public void setDeliveredDate(LocalDate deliveredDate) {
+        this.deliveredDate = deliveredDate;
     }
 
     public Supplier getSupplier() {
@@ -183,6 +188,29 @@ public class DeliveryNote implements Serializable {
     public void setRatings(Set<Rating> ratings) {
         this.ratings = ratings;
     }
+
+    public Set<RatingType> getRatingTypes() {
+        return ratingTypes;
+    }
+
+    public DeliveryNote ratingTypes(Set<RatingType> ratingTypes) {
+        this.ratingTypes = ratingTypes;
+        return this;
+    }
+
+    public DeliveryNote addRatingType(RatingType ratingType) {
+        this.ratingTypes.add(ratingType);
+        return this;
+    }
+
+    public DeliveryNote removeRatingType(RatingType ratingType) {
+        this.ratingTypes.remove(ratingType);
+        return this;
+    }
+
+    public void setRatingTypes(Set<RatingType> ratingTypes) {
+        this.ratingTypes = ratingTypes;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -211,7 +239,7 @@ public class DeliveryNote implements Serializable {
             "id=" + getId() +
             ", reference='" + getReference() + "'" +
             ", orderReference='" + getOrderReference() + "'" +
-            ", purchaseDate='" + getPurchaseDate() + "'" +
+            ", deliveredDate='" + getDeliveredDate() + "'" +
             "}";
     }
 }
