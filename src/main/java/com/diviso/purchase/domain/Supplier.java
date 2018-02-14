@@ -43,6 +43,10 @@ public class Supplier implements Serializable {
     @JoinColumn(unique = true)
     private Rating rating;
 
+    @OneToOne
+    @JoinColumn(unique = true)
+    private Budget budget;
+
     @OneToMany(mappedBy = "supplier")
     @JsonIgnore
     private Set<Address> temporaryAddresses = new HashSet<>();
@@ -140,6 +144,19 @@ public class Supplier implements Serializable {
 
     public void setRating(Rating rating) {
         this.rating = rating;
+    }
+
+    public Budget getBudget() {
+        return budget;
+    }
+
+    public Supplier budget(Budget budget) {
+        this.budget = budget;
+        return this;
+    }
+
+    public void setBudget(Budget budget) {
+        this.budget = budget;
     }
 
     public Set<Address> getTemporaryAddresses() {

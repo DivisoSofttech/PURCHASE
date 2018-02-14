@@ -26,5 +26,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="rating"/>
 
+        <addForeignKeyConstraint baseColumnNames="budget_id"
+                                 baseTableName="supplier"
+                                 constraintName="fk_supplier_budget_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="budget"/>
+
     </changeSet>
 </databaseChangeLog>

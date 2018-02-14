@@ -17,6 +17,20 @@ entity Contact {
   phoneNumber2 Long,
   companyName String
 }
+
+entity Budget
+ {
+ name String
+ price Double
+
+ }
+ 
+ entity Alert
+ {
+ percentage String
+ price Double
+ }
+
 entity Quotation {
   reference String,
   issuedDate LocalDate
@@ -65,8 +79,10 @@ entity DeliveriesLine {
 relationship OneToOne {
    Supplier{permanentAddress} to Address,
    Supplier{contact} to Contact,
-   DeliveryNote {supplier} to Supplier
-   Supplier {rating} to Rating
+   DeliveryNote{supplier} to Supplier
+   Supplier{rating} to Rating
+   Supplier{budget} to Budget
+   
 }
 relationship OneToMany {
   DeliveryNote{deliveryLines} to DeliveriesLine,
@@ -78,6 +94,7 @@ relationship OneToMany {
   Statuss{quotations} to Quotation,
   Statuss{purchaseOrders} to PurchaseOrder,
   DeliveryNote{comments} to Comment
+  Budget{alert} to Alert
 }
 relationship ManyToMany {
   DeliveryNote{ratings} to Rating

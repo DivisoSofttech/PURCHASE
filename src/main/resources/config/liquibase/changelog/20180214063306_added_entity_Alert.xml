@@ -15,33 +15,25 @@
     <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
 
     <!--
-        Added the entity Supplier.
+        Added the entity Alert.
     -->
-    <changeSet id="20180208081954-1" author="jhipster">
-        <createTable tableName="supplier">
+    <changeSet id="20180214063306-1" author="jhipster">
+        <createTable tableName="alert">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="reference" type="varchar(255)">
+            <column name="percentage" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 
-            <column name="first_name" type="varchar(255)">
+            <column name="price" type="double">
                 <constraints nullable="true" />
             </column>
 
-            <column name="last_name" type="varchar(255)">
+            <column name="budget_id" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="permanent_address_id" type="bigint">
-                <constraints unique="true" nullable="true" />
-            </column>            <column name="contact_id" type="bigint">
-                <constraints unique="true" nullable="true" />
-            </column>            <column name="rating_id" type="bigint">
-                <constraints unique="true" nullable="true" />
-            </column>            <column name="budget_id" type="bigint">
-                <constraints unique="true" nullable="true" />
-            </column>
+
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
         
