@@ -1,40 +1,40 @@
 package com.diviso.purchase.service;
 
-import com.diviso.purchase.service.dto.SupplierDTO;
+import com.diviso.purchase.service.dto.AlertDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 /**
- * Service Interface for managing Supplier.
+ * Service Interface for managing Alert.
  */
-public interface SupplierService {
+public interface AlertService {
 
     /**
-     * Save a supplier.
+     * Save a alert.
      *
-     * @param supplierDTO the entity to save
+     * @param alertDTO the entity to save
      * @return the persisted entity
      */
-    SupplierDTO save(SupplierDTO supplierDTO);
+    AlertDTO save(AlertDTO alertDTO);
 
     /**
-     * Get all the suppliers.
+     * Get all the alerts.
      *
      * @param pageable the pagination information
      * @return the list of entities
      */
-    Page<SupplierDTO> findAll(Pageable pageable);
+    Page<AlertDTO> findAll(Pageable pageable);
 
     /**
-     * Get the "id" supplier.
+     * Get the "id" alert.
      *
      * @param id the id of the entity
      * @return the entity
      */
-    SupplierDTO findOne(Long id);
+    AlertDTO findOne(Long id);
 
     /**
-     * Delete the "id" supplier.
+     * Delete the "id" alert.
      *
      * @param id the id of the entity
      */

@@ -39,6 +39,14 @@ public class Supplier implements Serializable {
     @JoinColumn(unique = true)
     private Contact contact;
 
+    @OneToOne
+    @JoinColumn(unique = true)
+    private Rating rating;
+
+    @OneToOne
+    @JoinColumn(unique = true)
+    private Budget budget;
+
     @OneToMany(mappedBy = "supplier")
     @JsonIgnore
     private Set<Address> temporaryAddresses = new HashSet<>();
@@ -50,10 +58,6 @@ public class Supplier implements Serializable {
     @OneToMany(mappedBy = "supplier")
     @JsonIgnore
     private Set<Quotation> quatations = new HashSet<>();
-
-    @OneToMany(mappedBy = "supplier")
-    @JsonIgnore
-    private Set<DeliveryNote> deliveryNotes = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -129,6 +133,32 @@ public class Supplier implements Serializable {
         this.contact = contact;
     }
 
+    public Rating getRating() {
+        return rating;
+    }
+
+    public Supplier rating(Rating rating) {
+        this.rating = rating;
+        return this;
+    }
+
+    public void setRating(Rating rating) {
+        this.rating = rating;
+    }
+
+    public Budget getBudget() {
+        return budget;
+    }
+
+    public Supplier budget(Budget budget) {
+        this.budget = budget;
+        return this;
+    }
+
+    public void setBudget(Budget budget) {
+        this.budget = budget;
+    }
+
     public Set<Address> getTemporaryAddresses() {
         return temporaryAddresses;
     }
@@ -202,31 +232,6 @@ public class Supplier implements Serializable {
 
     public void setQuatations(Set<Quotation> quotations) {
         this.quatations = quotations;
-    }
-
-    public Set<DeliveryNote> getDeliveryNotes() {
-        return deliveryNotes;
-    }
-
-    public Supplier deliveryNotes(Set<DeliveryNote> deliveryNotes) {
-        this.deliveryNotes = deliveryNotes;
-        return this;
-    }
-
-    public Supplier addDeliveryNote(DeliveryNote deliveryNote) {
-        this.deliveryNotes.add(deliveryNote);
-        deliveryNote.setSupplier(this);
-        return this;
-    }
-
-    public Supplier removeDeliveryNote(DeliveryNote deliveryNote) {
-        this.deliveryNotes.remove(deliveryNote);
-        deliveryNote.setSupplier(null);
-        return this;
-    }
-
-    public void setDeliveryNotes(Set<DeliveryNote> deliveryNotes) {
-        this.deliveryNotes = deliveryNotes;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

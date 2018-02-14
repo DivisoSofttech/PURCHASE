@@ -1,40 +1,40 @@
 package com.diviso.purchase.service;
 
-import com.diviso.purchase.service.dto.SupplierDTO;
+import com.diviso.purchase.service.dto.BudgetDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 /**
- * Service Interface for managing Supplier.
+ * Service Interface for managing Budget.
  */
-public interface SupplierService {
+public interface BudgetService {
 
     /**
-     * Save a supplier.
+     * Save a budget.
      *
-     * @param supplierDTO the entity to save
+     * @param budgetDTO the entity to save
      * @return the persisted entity
      */
-    SupplierDTO save(SupplierDTO supplierDTO);
+    BudgetDTO save(BudgetDTO budgetDTO);
 
     /**
-     * Get all the suppliers.
+     * Get all the budgets.
      *
      * @param pageable the pagination information
      * @return the list of entities
      */
-    Page<SupplierDTO> findAll(Pageable pageable);
+    Page<BudgetDTO> findAll(Pageable pageable);
 
     /**
-     * Get the "id" supplier.
+     * Get the "id" budget.
      *
      * @param id the id of the entity
      * @return the entity
      */
-    SupplierDTO findOne(Long id);
+    BudgetDTO findOne(Long id);
 
     /**
-     * Delete the "id" supplier.
+     * Delete the "id" budget.
      *
      * @param id the id of the entity
      */
