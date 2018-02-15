@@ -48,6 +48,10 @@ public interface PurchaseOrderService {
      */
     void delete(Long id);
     
+    /**
+     * create purchaseorder by quotation.
+     * @param quotation
+     */
     void save(Quotation quotation);
     
     /*---------------------------------------------------------------
@@ -72,7 +76,15 @@ public interface PurchaseOrderService {
 
 	Page<PurchaseOrderDTO> findByPurchaseOrder(String reference, Pageable pageable);
 	
+	/**
+     * This is a method for issue purchase order by communicating with report service
+     * @param id the id of the entity
+     */
 	String issuePurchaseOrder(Long purchaseOrderId) throws JRException;
 	
+	/**
+	 * This is a method which is used to send individual mail to the customer with attachment
+	 * @param id the id of the entity
+	 */
 	String sendMailWithAttachment(Long purchaseOrderId) throws MessagingException;
 }

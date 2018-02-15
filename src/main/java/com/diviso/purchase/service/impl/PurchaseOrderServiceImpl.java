@@ -118,6 +118,10 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         purchaseOrderRepository.delete(id);
     }
     
+    /*--------------------------------------------------------------
+     * EXTRA METHOD
+     * -------------------------------------------------------------*/
+    
     /**
      * create purchaseorder by quotation.
      * @param quotation
@@ -146,10 +150,6 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 		}
 		purchaseOrderRepository.save(purchaseOrder);	
 	}
-	
-	/*--------------------------------------------------------------
-     * EXTRA METHOD
-     * -------------------------------------------------------------*/
      
      /**
       * Get purchase order by date.
@@ -180,39 +180,12 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 	}
 	
 	/**
-	 * JRXML - PDF
-     * create pdf by purchaseorder id
+     * This is a method for issue purchase order by communicating with report service
      * @param id the id of the entity
      */
 	@Override
 	public String issuePurchaseOrder(Long purchaseOrderId) throws JRException {
-		List<PurchaseOrder> entityList = new ArrayList<PurchaseOrder>();
-		entityList.add(purchaseOrderRepository.findOne(purchaseOrderId));
 		
-		JRDataSource beanColDataSource = new JRBeanCollectionDataSource(entityList);
-		
-		JasperReport jasperReport = JasperCompileManager.compileReport("/home/vishnu/purchase_order.jrxml\n");
-		
-		Map<String, Object> parameters = new HashMap<String, Object>();
-
-		JasperPrint jasperPrint = null;
-		try {
-			jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, beanColDataSource);
-
-		} catch (JRException e1) {
-
-			e1.printStackTrace();
-		}
-		
-		File outDir = new File("/home/vishnu/LXI");
-		outDir.mkdirs();
-		try {
-			JasperExportManager.exportReportToPdfFile(jasperPrint, "/home/vishnu/LXI/purchase_order.pdf");
-
-		} catch (JRException e) {
-
-			e.printStackTrace();
-		}
 		
 		///call sendMailWithAttachment method
 		try {
@@ -223,13 +196,12 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 			
 			e.printStackTrace();
 		}
-		return "success to convert jrxml to pdf";
+		return "success";
 	}
 	
 	/**
 	 * This is a method which is used to send individual mail to the customer with attachment
-	 * 
-	 * 
+	 * @param id the id of the entity
 	 */
 	@Override
 	public String sendMailWithAttachment(Long purchaseOrderId) throws MessagingException {
