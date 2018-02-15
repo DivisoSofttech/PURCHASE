@@ -41,6 +41,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = PurchaseApp.class)
 public class BudgetResourceIntTest {
 
+    private static final String DEFAULT_REFERENCE = "AAAAAAAAAA";
+    private static final String UPDATED_REFERENCE = "BBBBBBBBBB";
+
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
@@ -91,6 +94,7 @@ public class BudgetResourceIntTest {
      */
     public static Budget createEntity(EntityManager em) {
         Budget budget = new Budget()
+            .reference(DEFAULT_REFERENCE)
             .name(DEFAULT_NAME)
             .price(DEFAULT_PRICE);
         return budget;
@@ -117,6 +121,7 @@ public class BudgetResourceIntTest {
         List<Budget> budgetList = budgetRepository.findAll();
         assertThat(budgetList).hasSize(databaseSizeBeforeCreate + 1);
         Budget testBudget = budgetList.get(budgetList.size() - 1);
+        assertThat(testBudget.getReference()).isEqualTo(DEFAULT_REFERENCE);
         assertThat(testBudget.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testBudget.getPrice()).isEqualTo(DEFAULT_PRICE);
     }
@@ -152,6 +157,7 @@ public class BudgetResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(budget.getId().intValue())))
+            .andExpect(jsonPath("$.[*].reference").value(hasItem(DEFAULT_REFERENCE.toString())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].price").value(hasItem(DEFAULT_PRICE.doubleValue())));
     }
@@ -167,6 +173,7 @@ public class BudgetResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(budget.getId().intValue()))
+            .andExpect(jsonPath("$.reference").value(DEFAULT_REFERENCE.toString()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
             .andExpect(jsonPath("$.price").value(DEFAULT_PRICE.doubleValue()));
     }
@@ -191,6 +198,7 @@ public class BudgetResourceIntTest {
         // Disconnect from session so that the updates on updatedBudget are not directly saved in db
         em.detach(updatedBudget);
         updatedBudget
+            .reference(UPDATED_REFERENCE)
             .name(UPDATED_NAME)
             .price(UPDATED_PRICE);
         BudgetDTO budgetDTO = budgetMapper.toDto(updatedBudget);
@@ -204,6 +212,7 @@ public class BudgetResourceIntTest {
         List<Budget> budgetList = budgetRepository.findAll();
         assertThat(budgetList).hasSize(databaseSizeBeforeUpdate);
         Budget testBudget = budgetList.get(budgetList.size() - 1);
+        assertThat(testBudget.getReference()).isEqualTo(UPDATED_REFERENCE);
         assertThat(testBudget.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testBudget.getPrice()).isEqualTo(UPDATED_PRICE);
     }

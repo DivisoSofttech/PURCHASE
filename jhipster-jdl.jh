@@ -20,6 +20,7 @@ entity Contact {
 
 entity Budget
  {
+ reference String
  name String
  price Double
 

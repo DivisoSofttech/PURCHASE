@@ -22,6 +22,9 @@ public class Budget implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "reference")
+    private String reference;
+
     @Column(name = "name")
     private String name;
 
@@ -39,6 +42,19 @@ public class Budget implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getReference() {
+        return reference;
+    }
+
+    public Budget reference(String reference) {
+        this.reference = reference;
+        return this;
+    }
+
+    public void setReference(String reference) {
+        this.reference = reference;
     }
 
     public String getName() {
@@ -117,6 +133,7 @@ public class Budget implements Serializable {
     public String toString() {
         return "Budget{" +
             "id=" + getId() +
+            ", reference='" + getReference() + "'" +
             ", name='" + getName() + "'" +
             ", price=" + getPrice() +
             "}";
