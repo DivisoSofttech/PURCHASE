@@ -123,4 +123,32 @@ public class ContactResource {
         contactService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+    
+    /**
+     * GET  /contacts/:mailId : get the "mailId" contact.
+     *
+     * @param mailId the mailId of the contactDTO to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the contactDTO, or with status 404 (Not Found)
+     */
+    @GetMapping("/contacts/{mailId}")
+    @Timed
+    public ResponseEntity<ContactDTO> findByMailId(@PathVariable String mailId) {
+        log.debug("REST request to get Contact : {}", mailId);
+        ContactDTO contactDTO = contactService.findByMailId(mailId);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(contactDTO));
+    }
+    
+    /**
+     * GET  /contacts/:phoneNumber1 : get the "phoneNumber" contact.
+     *
+     * @param phoneNumber1 the phoneNumber1 of the contactDTO to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the contactDTO, or with status 404 (Not Found)
+     */
+    @GetMapping("/contacts/{phoneNumber1}")
+    @Timed
+    public ResponseEntity<ContactDTO> findByPhoneNumber(@PathVariable Long phoneNumber1) {
+        log.debug("REST request to get Contact : {}", phoneNumber1);
+        ContactDTO contactDTO = contactService.findByPhoneNumber(phoneNumber1);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(contactDTO));
+    }
 }
