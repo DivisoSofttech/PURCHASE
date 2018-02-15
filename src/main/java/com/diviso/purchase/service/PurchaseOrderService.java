@@ -52,11 +52,17 @@ public interface PurchaseOrderService {
      * create purchaseorder by quotation.
      * @param quotation
      */
-    void save(Quotation quotation);
+    
     
     /*---------------------------------------------------------------
      * EXTRA METHOD
     ----------------------------------------------------------------- */
+    
+    /**
+     * create purchaseorder by quotation.
+     * @param quotation
+     */
+    void save(Quotation quotation);
     
      /**
       * Get the "purchase order" date.

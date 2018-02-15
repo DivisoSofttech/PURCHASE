@@ -118,10 +118,6 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         purchaseOrderRepository.delete(id);
     }
     
-    /*--------------------------------------------------------------
-     * EXTRA METHOD
-     * -------------------------------------------------------------*/
-    
     /**
      * create purchaseorder by quotation.
      * @param quotation
