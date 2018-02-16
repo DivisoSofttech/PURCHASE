@@ -2,6 +2,7 @@ package com.diviso.purchase.service;
 
 import com.diviso.purchase.domain.Quotation;
 import com.diviso.purchase.service.dto.PurchaseOrderDTO;
+import com.diviso.purchase.service.model.PurchaseOrderModel;
 
 import net.sf.jasperreports.engine.JRException;
 
@@ -93,4 +94,12 @@ public interface PurchaseOrderService {
 	 * @param id the id of the entity
 	 */
 	String sendMailWithAttachment(Long purchaseOrderId) throws MessagingException;
+	
+	 /**
+     * Get one purchaseOrder by id.
+     *
+     * @param id the id of the entity
+     * @return the entity
+     */
+	PurchaseOrderModel marshelledFindOne(Long id);
 }

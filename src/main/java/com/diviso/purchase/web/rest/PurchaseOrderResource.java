@@ -109,6 +109,8 @@ public class PurchaseOrderResource {
         PurchaseOrderDTO purchaseOrderDTO = purchaseOrderService.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(purchaseOrderDTO));
     }
+    
+    
 
     /**
      * DELETE  /purchase-orders/:id : delete the "id" purchaseOrder.
