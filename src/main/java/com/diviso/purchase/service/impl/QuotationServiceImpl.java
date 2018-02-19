@@ -5,6 +5,9 @@ import com.diviso.purchase.domain.Quotation;
 import com.diviso.purchase.repository.QuotationRepository;
 import com.diviso.purchase.service.dto.QuotationDTO;
 import com.diviso.purchase.service.mapper.QuotationMapper;
+
+import java.time.LocalDate;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -83,4 +86,10 @@ public class QuotationServiceImpl implements QuotationService {
         log.debug("Request to delete Quotation : {}", id);
         quotationRepository.delete(id);
     }
+
+	@Override
+	public Page<QuotationDTO> findByIssuedDate(LocalDate date, Pageable pageable) {
+		log.debug("Request to get Quotation by Date : {}", date);
+		return quotationRepository.findByIssuedDate(date,pageable).map(quotationMapper::toDto);
+	}
 }
