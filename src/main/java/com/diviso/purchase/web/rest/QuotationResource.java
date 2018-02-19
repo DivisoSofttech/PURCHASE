@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -123,4 +123,19 @@ public class QuotationResource {
         quotationService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+    
+    /* * * * * * * * * * * *
+     *    EXTRA METHODS
+     * * * * * * * * * * * */
+
+    @GetMapping("/quotations/findByIssuedDate/{date}")
+    @Timed
+    public ResponseEntity<List<QuotationDTO>> getQuotationsByIssuedDate(@PathVariable LocalDate date,Pageable pageable) {
+        log.debug("REST request to get a page of Quotations by Given date");
+        Page<QuotationDTO> page = quotationService.findByIssuedDate(date,pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/quotations");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    
 }
+

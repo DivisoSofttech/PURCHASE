@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2018-02-16T12:13:29+0530",
-    comments = "version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_161 (Oracle Corporation)"
+    date = "2018-02-17T13:52:43+0530",
+    comments = "version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_102 (Oracle Corporation)"
 )
 @Component
 public class DeliveriesLineMapperImpl implements DeliveriesLineMapper {

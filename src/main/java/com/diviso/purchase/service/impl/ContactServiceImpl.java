@@ -112,7 +112,7 @@ public class ContactServiceImpl implements ContactService {
 	public ContactDTO findByPhoneNumber(Long phoneNumber1) {
 		// TODO Auto-generated method stub
 		log.debug("Request to get suppliers : {}", phoneNumber1);
-		Contact contact=contactRepository.findByPhoneNumber(phoneNumber1);
+		Contact contact=contactRepository.findByPhoneNumber1(phoneNumber1);
 		return contactMapper.toDto(contact);
 	}
 }
