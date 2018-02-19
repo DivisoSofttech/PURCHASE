@@ -21,6 +21,10 @@ public interface PurchaseOrderRepository extends JpaRepository<PurchaseOrder, Lo
 	 */
 	Page<PurchaseOrder> findByPurchaseDate( LocalDate purchaseDate ,Pageable pageable);
 	Page<PurchaseOrder> findByReference( String reference ,Pageable pageable);
+	/**
+	 * Spring Data JPA repository for the PurchaseOrder entity.
+	 * Use has a relationship. 
+	 */
 	Page<PurchaseOrder> findBySupplier_Id(Long id,Pageable pageable);
 	Page<PurchaseOrder> findBySupplier_Reference(String reference,Pageable pageable );
 	Page<PurchaseOrder> findByPurchaseDateBetween(LocalDate startDate,LocalDate endDate,Pageable pageable);
