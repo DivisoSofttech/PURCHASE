@@ -147,7 +147,7 @@ public class QuotationResource {
     @GetMapping("/quotations/findByIssuedDateBetween")
     @Timed
     public ResponseEntity<List<QuotationDTO>> getQuotationsByIssuedDateBetween(String startDate,String endDate,Pageable pageable) throws ParseException {
-        log.debug("REST request to get a page of Quotations between start and end date");
+        log.debug("REST request to get a page of Quotations between start and end date " + startDate,endDate);
         LocalDate start =  new SimpleDateFormat("dd/MM/yyyy").parse(startDate).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         
         LocalDate end = new SimpleDateFormat("dd/MM/yyyy").parse(endDate).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -158,6 +158,28 @@ public class QuotationResource {
     }
     
     
+    @GetMapping("/quotations/findByIssuedDateAfter")
+    @Timed
+    public ResponseEntity<List<QuotationDTO>> getQuotationsByIssuedDateAfter(String date,Pageable pageable) throws ParseException {
+        log.info("REST request to get a page of Quotations After Given date : " + date);
+		
+        LocalDate localDate = new SimpleDateFormat("dd/MM/yyyy").parse(date).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        Page<QuotationDTO> page = quotationService.findByIssuedDateAfter(localDate,pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/quotations");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    
+    
+    @GetMapping("/quotations/findByIssuedDateBefore")
+    @Timed
+    public ResponseEntity<List<QuotationDTO>> getQuotationsByIssuedDateBefore(String date,Pageable pageable) throws ParseException {
+        log.info("REST request to get a page of Quotations Before Given date : " + date);
+		
+        LocalDate localDate = new SimpleDateFormat("dd/MM/yyyy").parse(date).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        Page<QuotationDTO> page = quotationService.findByIssuedDateBefore(localDate,pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/quotations");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
     
     
 }

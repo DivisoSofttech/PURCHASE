@@ -101,4 +101,17 @@ public class QuotationServiceImpl implements QuotationService {
 		return quotationRepository.findByIssuedDateBetween(startDate,endDate,pageable).map(quotationMapper::toDto);
 		
 	}
+
+	@Override
+	public Page<QuotationDTO> findByIssuedDateAfter(LocalDate date, Pageable pageable) {
+		
+		log.debug("Request to get Quotations between StartDate and endDate: {}", date);
+		return quotationRepository.findByIssuedDateAfter(date,pageable).map(quotationMapper::toDto);
+	}
+
+	@Override
+	public Page<QuotationDTO> findByIssuedDateBefore(LocalDate date, Pageable pageable) {
+		log.debug("Request to get Quotations between StartDate and endDate: {}", date);
+		return quotationRepository.findByIssuedDateBefore(date,pageable).map(quotationMapper::toDto);
+	}
 }

@@ -46,4 +46,8 @@ public interface QuotationService {
 	Page<QuotationDTO> findByIssuedDate(LocalDate date, Pageable pageable);
 
 	Page<QuotationDTO> findByIssuedDateBetween(LocalDate startDate, LocalDate endDate, Pageable pageable);
+
+	Page<QuotationDTO> findByIssuedDateAfter(LocalDate localDate, Pageable pageable);
+
+	Page<QuotationDTO> findByIssuedDateBefore(LocalDate localDate, Pageable pageable);
 }
