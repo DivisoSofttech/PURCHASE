@@ -44,4 +44,6 @@ public interface QuotationService {
     void delete(Long id);
 
 	Page<QuotationDTO> findByIssuedDate(LocalDate date, Pageable pageable);
+
+	Page<QuotationDTO> findByIssuedDateBetween(LocalDate startDate, LocalDate endDate, Pageable pageable);
 }

@@ -21,4 +21,6 @@ public interface QuotationRepository extends JpaRepository<Quotation, Long> {
 
 	Page<Quotation> findByIssuedDate(LocalDate date, Pageable pageable);
 
+	Page<Quotation> findByIssuedDateBetween(LocalDate startDate, LocalDate endDate, Pageable pageable);
+
 }
