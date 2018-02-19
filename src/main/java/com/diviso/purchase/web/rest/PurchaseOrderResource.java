@@ -136,7 +136,7 @@ public class PurchaseOrderResource {
      * @param pageable
      * @return
      */
-    @GetMapping("/purchase-orders/findByDate/{purchaseDate}")
+    @GetMapping("/purchase-orders/findByPurchaseDate/{purchaseDate}")
     @Timed
     public ResponseEntity<List<PurchaseOrderDTO>> getPurchaseOrder(@PathVariable LocalDate purchaseDate ,Pageable pageable) {
     	log.debug("REST request to get a page of PurchaseOrder :{}", purchaseDate);
@@ -157,5 +157,107 @@ public class PurchaseOrderResource {
        Page<PurchaseOrderDTO> page = purchaseOrderService.findByPurchaseOrder(reference , pageable);
        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/purchase-orders");
        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+   }
+   
+   //find by
+   /**
+    * GET  /purchase-orders/:supplier id : get the "supplier id" purchase order.
+    * @param id
+    * @param pageable
+    * @return
+    */
+   @GetMapping("/purchase-orders/findBySupplierId/{supplierId}")
+   @Timed
+   public ResponseEntity<List<PurchaseOrderDTO>> getPurchaseOrder(@PathVariable  Long id ,Pageable pageable) {
+	   log.debug("REST request to get a page of PurchaseOrder :{}", id);
+	   Page<PurchaseOrderDTO> page = purchaseOrderService.findByPurchaseOrderSupplier(id , pageable);
+	   HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/purchase-orders");
+	   return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+   }
+   /**
+    * GET  /purchase-orders/:supplier reference : get the "supplier reference" purchase order.
+    * @param reference
+    * @param pageable
+    * @return
+    */
+   @GetMapping("/purchase-orders/findBySupplierReference/{supplierReference}")
+   @Timed
+   public ResponseEntity<List<PurchaseOrderDTO>> getPurchaseOrderSupplier(@PathVariable  String reference ,Pageable pageable) {
+	   log.debug("REST request to get a page of PurchaseOrder :{}", reference);
+	   Page<PurchaseOrderDTO> page = purchaseOrderService.findByPurchaseOrder(reference , pageable);
+	   HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/purchase-orders");
+	   return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+	   
+   }
+   /**
+    * GET  /purchase-orders/:supplier date : get the "betweenDate" purchase order.
+    * @param date
+    * @param pageable
+    * @return
+    */
+   @GetMapping("/purchase-orders/findByDateBetWeen/{betWeenDate}")
+   @Timed
+   public ResponseEntity<List<PurchaseOrderDTO>> getPurchaseOrderSupplier(@PathVariable LocalDate startDate,@PathVariable LocalDate endDate ,Pageable pageable) {
+	   log.debug("REST request to get a page of PurchaseOrder :{}", startDate,endDate);
+	   Page<PurchaseOrderDTO> page = purchaseOrderService.findByPurchaseDateBetween(startDate,endDate , pageable);
+	   HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/purchase-orders");
+	   return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+}
+   /**
+    * GET  /purchase-orders/:status id : get the "status id" purchase order.
+    * @param status id
+    * @param pageable
+    * @return
+    */
+   @GetMapping("/purchase-orders/findByStatusId/{statusId}")
+   @Timed
+   public ResponseEntity<List<PurchaseOrderDTO>> getPurchaseOrderStatuss(@PathVariable  Long id ,Pageable pageable) {
+	   log.debug("REST request to get a page of PurchaseOrder :{}", id);
+	   Page<PurchaseOrderDTO> page = purchaseOrderService.findByPurchaseOrderStatuss(id , pageable);
+	   HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/purchase-orders");
+	   return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+   }
+   /**
+    * GET  /purchase-orders/:supplier name: get the "supplier name" purchase order.
+    * @param name
+    * @param pageable
+    * @return
+    */
+   @GetMapping("/purchase-orders/findByStatussName/{statussName}")
+   @Timed
+   public ResponseEntity<List<PurchaseOrderDTO>> getPurchaseOrderStatuss(@PathVariable  String name ,Pageable pageable) {
+	   log.debug("REST request to get a page of PurchaseOrder :{}", name);
+	   Page<PurchaseOrderDTO> page = purchaseOrderService.findByPurchaseOrder(name , pageable);
+	   HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/purchase-orders");
+	   return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+	   
+   }
+   /**
+    * GET  /purchase-orders/:purchaseLine id : get the "purchaseLine id" purchase order.
+    * @param purchaseLine id
+    * @param pageable
+    * @return
+    */
+   @GetMapping("/purchase-orders/findByPurchaseLineId/{purchaseLineId}")
+   @Timed
+   public ResponseEntity<List<PurchaseOrderDTO>> getPurchaseOrderPurchaseLine(@PathVariable  Long id ,Pageable pageable) {
+	   log.debug("REST request to get a page of PurchaseOrder :{}", id);
+	   Page<PurchaseOrderDTO> page = purchaseOrderService.findByPurchaseOrderStatuss(id , pageable);
+	   HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/purchase-orders");
+	   return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+   }
+   /**
+    * GET  /purchase-orders/:purchaseLine productReference : get the "purchaseLine productReference" purchase order.
+    * @param purchaseLine productReference
+    * @param pageable
+    * @return
+    */
+   @GetMapping("/purchase-orders/findByPurchaseLineProductReference/{purchaseLineProductreference}")
+   @Timed
+   public ResponseEntity<List<PurchaseOrderDTO>> getPurchaseOrderPurchaseLine(@PathVariable  String productReference ,Pageable pageable) {
+	   log.debug("REST request to get a page of PurchaseOrder :{}", productReference);
+	   Page<PurchaseOrderDTO> page = purchaseOrderService.findByPurchaseOrderStatuss(productReference , pageable);
+	   HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/purchase-orders");
+	   return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
    }
 }

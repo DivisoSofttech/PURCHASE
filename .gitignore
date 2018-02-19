@@ -4,6 +4,7 @@
 /target/www/**
 /src/test/javascript/coverage/
 /src/test/javascript/PhantomJS*/
+/src/main/resources/config/liquibase
 
 ######################
 # Node
@@ -141,5 +142,3 @@ Desktop.ini
 # ESLint
 ######################
 .eslintcache
-.gitignore
-Displaying .gitignore.
