@@ -16,7 +16,9 @@ import org.springframework.data.jpa.repository.*;
 @SuppressWarnings("unused")
 @Repository
 public interface PurchaseOrderRepository extends JpaRepository<PurchaseOrder, Long> {
-	
+	/**
+	 * Spring Data JPA repository for the PurchaseOrder entity.
+	 */
 	Page<PurchaseOrder> findByPurchaseDate( LocalDate purchaseDate ,Pageable pageable);
 	Page<PurchaseOrder> findByReference( String reference ,Pageable pageable);
 	Page<PurchaseOrder> findBySupplier_Id(Long id,Pageable pageable);
