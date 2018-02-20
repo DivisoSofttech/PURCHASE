@@ -7,27 +7,21 @@ import com.diviso.purchase.domain.PurchaseLine;
 import com.diviso.purchase.domain.PurchaseOrder;
 import com.diviso.purchase.domain.Quotation;
 import com.diviso.purchase.domain.QuotationLine;
-import com.diviso.purchase.domain.Supplier;
+
 import com.diviso.purchase.repository.PurchaseOrderRepository;
 import com.diviso.purchase.service.dto.PurchaseOrderDTO;
 import com.diviso.purchase.service.mapper.PurchaseOrderMapper;
+import com.diviso.purchase.service.model.AddressModel;
+import com.diviso.purchase.service.model.ContactModel;
+import com.diviso.purchase.service.model.PurchaseLineModel;
+import com.diviso.purchase.service.model.PurchaseOrderModel;
+import com.diviso.purchase.service.model.StatussModel;
+import com.diviso.purchase.service.model.SupplierModel;
 
-import io.swagger.annotations.ApiParam;
-import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 import java.io.File;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -218,4 +212,171 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 
 		return "Mail Successfully sent..";
 	}
+	
+	 /**
+     * Get one purchaseOrderModel by id.
+     *
+     * @param id the id of the entity
+     * @return the entity
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public PurchaseOrderModel marshelledFindOne(Long id) {
+        log.debug("Request to get PurchaseOrder : {}", id);
+        
+        PurchaseOrder purchaseOrder = purchaseOrderRepository.findOne(id);
+        
+        PurchaseOrderModel purchaseOrderModel = new PurchaseOrderModel();
+        purchaseOrderModel.setId(purchaseOrder.getId());
+        purchaseOrderModel.setReference(purchaseOrder.getReference());
+        purchaseOrderModel.setPurchaseDate(purchaseOrder.getPurchaseDate());
+        
+        SupplierModel supplierModel = new SupplierModel();
+        supplierModel.setId(purchaseOrder.getSupplier().getId());
+        supplierModel.setReference(purchaseOrder.getSupplier().getReference());
+        supplierModel.setFirstName(purchaseOrder.getSupplier().getFirstName());
+        supplierModel.setLastName(purchaseOrder.getSupplier().getLastName());
+        
+        AddressModel permanentAddressModel = new AddressModel();
+        permanentAddressModel.setId(purchaseOrder.getSupplier().getPermanentAddress().getId());
+        permanentAddressModel.setPlace(purchaseOrder.getSupplier().getPermanentAddress().getPlace());
+        permanentAddressModel.setDistrict(purchaseOrder.getSupplier().getPermanentAddress().getDistrict());
+        permanentAddressModel.setState(purchaseOrder.getSupplier().getPermanentAddress().getState());
+        permanentAddressModel.setPinCode(purchaseOrder.getSupplier().getPermanentAddress().getPinCode());
+        
+        //Set AddressModel to SupplierModel
+        supplierModel.setPermanentAddressModel(permanentAddressModel);
+        
+        ContactModel contactModel = new ContactModel();
+        contactModel.setId(purchaseOrder.getSupplier().getContact().getId());
+        contactModel.setMailId(purchaseOrder.getSupplier().getContact().getMailId());
+        contactModel.setPhoneNumber1(purchaseOrder.getSupplier().getContact().getPhoneNumber1());
+        contactModel.setPhoneNumber2(purchaseOrder.getSupplier().getContact().getPhoneNumber2());
+        contactModel.setCompanyName(purchaseOrder.getSupplier().getContact().getCompanyName());
+        
+        //Set ContactModel to  SupplierModel
+        supplierModel.setContactModel(contactModel);
+        
+        //Set SupplierModel to PurchaseOrderModel
+        purchaseOrderModel.setSupplierModel(supplierModel);
+        
+        StatussModel statussModel = new StatussModel();
+        statussModel.setId(purchaseOrder.getStatuss().getId());
+        statussModel.setName(purchaseOrder.getStatuss().getName());
+        statussModel.setStatusLevel(purchaseOrder.getStatuss().getStatusLevel());
+        
+        //Set StatussModel to  PurchaseOrderModel
+        purchaseOrderModel.setStatussModel(statussModel);
+        
+        //Set PurchaseLinesModel to PurchaseOrderModel
+        for(PurchaseLine pl: purchaseOrder.getPurchaseLines()) {
+        	
+        	PurchaseLineModel purchaseLineModel = new PurchaseLineModel();
+        	purchaseLineModel.setId(pl.getId());
+        	purchaseLineModel.setProductReference(pl.getProductReference());
+        	purchaseLineModel.setProductPrice(pl.getProductPrice());
+        	purchaseLineModel.setProductTax(pl.getProductTax());
+        	purchaseLineModel.setQuantity(pl.getQuantity());
+        	
+        	purchaseOrderModel.getPurchaseLinesModel().add(purchaseLineModel);
+        }
+        
+        return purchaseOrderModel;
+    }
+    //find by
+    
+    /**
+     * Get purchase order by supplier id.
+     * @param supplier the id of the entity
+     */
+
+	@Override
+	@Transactional(readOnly = true)
+	public Page<PurchaseOrderDTO> findByPurchaseOrderSupplier(Long id, Pageable pageable) {
+		
+		log.debug("Request to delete PurchaseOrder : {}", id);
+		return purchaseOrderRepository.findBySupplier_Id(id,pageable)
+	            .map(purchaseOrderMapper::toDto);
+	}
+	/**
+     * Get purchase order by supplier reference.
+     * @param supplier the id of the entity
+     */
+
+	@Override
+	@Transactional(readOnly = true)
+	public Page<PurchaseOrderDTO> findByPurchaseOrderSupplier(String reference, Pageable pageable) {
+		
+		log.debug("Request to delete PurchaseOrder : {}", reference);
+		return purchaseOrderRepository.findBySupplier_Reference(reference,pageable)
+	            .map(purchaseOrderMapper::toDto);
+	}
+	/**
+     * Get purchase order by betweenDate.
+     * @param purchaseDate the id of the entity
+     */
+
+	@Override
+	@Transactional(readOnly = true)
+	public Page<PurchaseOrderDTO> findByPurchaseDateBetween(LocalDate startDate,LocalDate endDate , Pageable pageable) {
+		
+		log.debug("Request to delete PurchaseOrder : {}", startDate,endDate);
+		return purchaseOrderRepository.findByPurchaseDateBetween(startDate,endDate,pageable)
+	            .map(purchaseOrderMapper::toDto);
+	}
+	/**
+     * Get purchase order by statuss id.
+     * @param supplier the id of the entity
+     */
+
+	@Override
+	@Transactional(readOnly = true)
+	public Page<PurchaseOrderDTO> findByPurchaseOrderStatuss(Long id, Pageable pageable) {
+		
+		log.debug("Request to delete PurchaseOrder : {}", id);
+		return purchaseOrderRepository.findByStatuss_Id(id,pageable)
+	            .map(purchaseOrderMapper::toDto);
+	}
+	/**
+     * Get purchase order by statuss name.
+     * @param supplier the id of the entity
+     */
+
+	@Override
+	@Transactional(readOnly = true)
+	public Page<PurchaseOrderDTO> findByPurchaseOrderStatuss(String name, Pageable pageable) {
+		
+		log.debug("Request to delete PurchaseOrder : {}", name);
+		return purchaseOrderRepository.findByStatuss_Name(name,pageable)
+	            .map(purchaseOrderMapper::toDto);
+	}
+	/**
+     * Get purchase order by purchaseLine id.
+     * @param purchaseLine the id of the entity
+     */
+
+	@Override
+	@Transactional(readOnly = true)
+	public Page<PurchaseOrderDTO> findByPurchaseOrderPurchaseLine(Long id, Pageable pageable) {
+		
+		log.debug("Request to delete PurchaseOrder : {}", id);
+		return purchaseOrderRepository.findByPurchaseLines_Id(id,pageable)
+	            .map(purchaseOrderMapper::toDto);
+	}
+	/**
+     * Get purchase order by purchaseLine productReference.
+     * @param purchaseLine the productReference of the entity
+     */
+
+	@Override
+	@Transactional(readOnly = true)
+	public Page<PurchaseOrderDTO> findByPurchaseOrderPurchaseLine(String productReference, Pageable pageable) {
+		
+		log.debug("Request to delete PurchaseOrder : {}", productReference);
+		return purchaseOrderRepository.findByPurchaseLines_ProductReference(productReference,pageable)
+	            .map(purchaseOrderMapper::toDto);
+	}
+	
+    
+    
 }

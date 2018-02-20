@@ -15,6 +15,6 @@ public interface ContactRepository extends JpaRepository<Contact, Long> {
 
 	Contact findByMailId(String mailId);
 	
-	Contact findByPhoneNumber(Long phoneNumber1);
+	Contact findByPhoneNumber1(Long phoneNumber1);
 
 }

@@ -5,6 +5,9 @@ import com.diviso.purchase.domain.Quotation;
 import com.diviso.purchase.repository.QuotationRepository;
 import com.diviso.purchase.service.dto.QuotationDTO;
 import com.diviso.purchase.service.mapper.QuotationMapper;
+
+import java.time.LocalDate;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -83,4 +86,32 @@ public class QuotationServiceImpl implements QuotationService {
         log.debug("Request to delete Quotation : {}", id);
         quotationRepository.delete(id);
     }
+
+	@Override
+	public Page<QuotationDTO> findByIssuedDate(LocalDate date, Pageable pageable) {
+		log.debug("Request to get Quotation by Date : {}", date);
+		return quotationRepository.findByIssuedDate(date,pageable).map(quotationMapper::toDto);
+	}
+
+	@Override
+	public Page<QuotationDTO> findByIssuedDateBetween(LocalDate startDate, LocalDate endDate, Pageable pageable) {
+		log.debug("Request to get Quotations between StartDate and endDate: {}", startDate, endDate);
+		
+		
+		return quotationRepository.findByIssuedDateBetween(startDate,endDate,pageable).map(quotationMapper::toDto);
+		
+	}
+
+	@Override
+	public Page<QuotationDTO> findByIssuedDateAfter(LocalDate date, Pageable pageable) {
+		
+		log.debug("Request to get Quotations between StartDate and endDate: {}", date);
+		return quotationRepository.findByIssuedDateAfter(date,pageable).map(quotationMapper::toDto);
+	}
+
+	@Override
+	public Page<QuotationDTO> findByIssuedDateBefore(LocalDate date, Pageable pageable) {
+		log.debug("Request to get Quotations between StartDate and endDate: {}", date);
+		return quotationRepository.findByIssuedDateBefore(date,pageable).map(quotationMapper::toDto);
+	}
 }
