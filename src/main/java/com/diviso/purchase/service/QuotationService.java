@@ -43,6 +43,7 @@ public interface QuotationService {
      */
     void delete(Long id);
 
+
 	Page<QuotationDTO> findByReference(String reference, Pageable pageable);
 
 	Page<QuotationDTO> findBySupplierId(Long id, Pageable pageable);
@@ -54,8 +55,12 @@ public interface QuotationService {
 	Page<QuotationDTO> findByStatussName(String name, Pageable pageable);
 
 	
-	
-	//Page<QuotationDTO> findBySupplierId(Long id, Pageable pageable);
+	Page<QuotationDTO> findByIssuedDate(LocalDate date, Pageable pageable);
 
-	
+	Page<QuotationDTO> findByIssuedDateBetween(LocalDate startDate, LocalDate endDate, Pageable pageable);
+
+	Page<QuotationDTO> findByIssuedDateAfter(LocalDate localDate, Pageable pageable);
+
+	Page<QuotationDTO> findByIssuedDateBefore(LocalDate localDate, Pageable pageable);
+
 }

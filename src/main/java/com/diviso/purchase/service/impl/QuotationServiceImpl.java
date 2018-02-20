@@ -89,6 +89,7 @@ public class QuotationServiceImpl implements QuotationService {
 		quotationRepository.delete(id);
 	}
 
+
 	/*
 	 * * * * * * * * * * * * EXTRA METHODS * * * * * * * * * *
 	 */
@@ -126,6 +127,35 @@ public class QuotationServiceImpl implements QuotationService {
 	public Page<QuotationDTO> findByStatussName(String name, Pageable pageable) {
 		log.debug("Request to delete PurchaseOrder : {}", name);
 		return quotationRepository.findByStatuss_Name(name, pageable).map(quotationMapper::toDto);
+	}
+
+
+	@Override
+	public Page<QuotationDTO> findByIssuedDateBetween(LocalDate startDate, LocalDate endDate, Pageable pageable) {
+		log.debug("Request to get Quotations between StartDate and endDate: {}", startDate, endDate);
+		
+		
+		return quotationRepository.findByIssuedDateBetween(startDate,endDate,pageable).map(quotationMapper::toDto);
+		
+	}
+
+	@Override
+	public Page<QuotationDTO> findByIssuedDateAfter(LocalDate date, Pageable pageable) {
+		
+		log.debug("Request to get Quotations between StartDate and endDate: {}", date);
+		return quotationRepository.findByIssuedDateAfter(date,pageable).map(quotationMapper::toDto);
+	}
+
+	@Override
+	public Page<QuotationDTO> findByIssuedDateBefore(LocalDate date, Pageable pageable) {
+		log.debug("Request to get Quotations between StartDate and endDate: {}", date);
+		return quotationRepository.findByIssuedDateBefore(date,pageable).map(quotationMapper::toDto);
+	}
+
+	@Override
+	public Page<QuotationDTO> findByIssuedDate(LocalDate date, Pageable pageable) {
+		log.debug("Request to get Quotations by Date: {}", date);
+		return quotationRepository.findByIssuedDate(date, pageable).map(quotationMapper::toDto);
 	}
 
 }
