@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2018-02-17T13:52:42+0530",
-    comments = "version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_102 (Oracle Corporation)"
+    date = "2018-02-20T11:19:01+0530",
+    comments = "version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_144 (Oracle Corporation)"
 )
 @Component
 public class BudgetMapperImpl implements BudgetMapper {

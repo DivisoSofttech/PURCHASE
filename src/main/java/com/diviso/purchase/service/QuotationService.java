@@ -43,5 +43,19 @@ public interface QuotationService {
      */
     void delete(Long id);
 
-	Page<QuotationDTO> findByIssuedDate(LocalDate date, Pageable pageable);
+	Page<QuotationDTO> findByReference(String reference, Pageable pageable);
+
+	Page<QuotationDTO> findBySupplierId(Long id, Pageable pageable);
+
+	Page<QuotationDTO> findBySupplierReference(String reference, Pageable pageable);
+
+	Page<QuotationDTO> findByStatussId(Long id, Pageable pageable);
+
+	Page<QuotationDTO> findByStatussName(String name, Pageable pageable);
+
+	
+	
+	//Page<QuotationDTO> findBySupplierId(Long id, Pageable pageable);
+
+	
 }

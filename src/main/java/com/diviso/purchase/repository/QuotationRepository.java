@@ -19,6 +19,16 @@ import org.springframework.data.jpa.repository.*;
 @Repository
 public interface QuotationRepository extends JpaRepository<Quotation, Long> {
 
-	Page<Quotation> findByIssuedDate(LocalDate date, Pageable pageable);
+	Page<Quotation> findByReference(String reference, Pageable pageable);
+
+	Page<Quotation> findBySupplier_Id(Long id, Pageable pageable);
+
+	Page<Quotation> findBySupplier_Reference(String reference, Pageable pageable);
+
+	Page<Quotation> findByStatuss_Id(Long id, Pageable pageable);
+
+	Page<Quotation> findByStatuss_Name(String name, Pageable pageable);
+
+	
 
 }
