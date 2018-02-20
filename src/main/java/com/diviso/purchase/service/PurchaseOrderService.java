@@ -156,5 +156,10 @@ public interface PurchaseOrderService {
      */
 	Page<PurchaseOrderDTO> findByPurchaseOrderPurchaseLine(String productReference, Pageable pageable);
 	
+	 /**
+     * Send message through SMS
+     *
+     */
+	String sendMessageAsSms();
 	
 }
