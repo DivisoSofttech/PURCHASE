@@ -111,30 +111,55 @@ public class DeliveryNoteServiceImpl implements DeliveryNoteService {
      */
 
 	@Override
+	@Transactional(readOnly = true)
 	public Page<DeliveryNoteDTO> findAllByReference(String reference, Pageable pageable) {
 		// TODO Auto-generated method stub
 		 log.debug("Request to get all DeliveryNotes");
 	        return deliveryNoteRepository.findAllByReference(reference,pageable)
 	            .map(deliveryNoteMapper::toDto);
 	}
+	
+	 /**
+     * Get all the deliveryNotes by delivered date.
+     *
+     * @param pageable the pagination information
+     * @return the list of entities
+     */
 
 	@Override
+	@Transactional(readOnly = true)
 	public Page<DeliveryNoteDTO> findAllByDeliveredDate(LocalDate deliveredDate, Pageable pageable) {
 		// TODO Auto-generated method stub
 		log.debug("Request to get all DeliveryNotes");
         return deliveryNoteRepository.findAllByDeliveredDate(deliveredDate,pageable)
             .map(deliveryNoteMapper::toDto);
 	}
+	
+	 /**
+     * Get all the deliveryNotes by delivered date between.
+     *
+     * @param pageable the pagination information
+     * @return the list of entities
+     */
 
 	@Override
+	@Transactional(readOnly = true)
 	public Page<DeliveryNoteDTO> findAllByDeliveredDateBetween(LocalDate startDate, LocalDate endDate, Pageable pageable) {
 		// TODO Auto-generated method stub
 		log.debug("Request to get all DeliveryNotes");
         return deliveryNoteRepository.findAllByDeliveredDateBetween(startDate,endDate,pageable)
             .map(deliveryNoteMapper::toDto);
 	}
+	
+	 /**
+     * Get all the deliveryNotes by supplier id.
+     *
+     * @param pageable the pagination information
+     * @return the list of entities
+     */
 
 	@Override
+	@Transactional(readOnly = true)
 	public Page<DeliveryNoteDTO> findAllBySupplier_Id(Long supplierId, Pageable pageable) {
 		// TODO Auto-generated method stub
 		log.debug("Request to get all DeliveryNotes");
@@ -142,7 +167,14 @@ public class DeliveryNoteServiceImpl implements DeliveryNoteService {
             .map(deliveryNoteMapper::toDto);
 	}
 
+	 /**
+     * Get all the deliveryNotes by order reference.
+     *
+     * @param pageable the pagination information
+     * @return the list of entities
+     */
 	@Override
+	@Transactional(readOnly = true)
 	public Page<DeliveryNoteDTO> findAllByOrderReference(String orderReference, Pageable pageable) {
 		// TODO Auto-generated method stub
 		log.debug("Request to get all DeliveryNotes");
@@ -154,7 +186,7 @@ public class DeliveryNoteServiceImpl implements DeliveryNoteService {
 
 	// -------------------------------------------------------------------------------------
 	/**
-	 * This is a method which is used to send individual mail to the customer
+	 * This is a method which is used to send individual mail to the supplier
 	 * @param to,subject,text
 	 * 
 	 */
@@ -174,7 +206,7 @@ public class DeliveryNoteServiceImpl implements DeliveryNoteService {
 	
 	
 	/**
-	 * This is a method which is used to send individual mail to the customer with attachment
+	 * This is a method which is used to send individual mail to the supplier with attachment
 	 * @param to,subject,text
 	 * 
 	 */
@@ -198,6 +230,12 @@ public class DeliveryNoteServiceImpl implements DeliveryNoteService {
 
 		return "Mail Successfully sent..";
 	}
+	
+	/**
+	 * This is a method which is used update the inventory after the delivery
+	 * 
+	 * 
+	 */
 
 	@Override
 	public String updateInventory() {

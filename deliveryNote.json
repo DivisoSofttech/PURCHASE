@@ -1,0 +1,37 @@
+
+[{
+  "id": 1,
+  "reference": "dDxL",
+  "order_reference": "fLt8",
+  "delivered_date": "2018/01/05",
+  "supplier_id": 1
+}]
+
+[{
+  "id": 1,
+  "reference": "lTiB",
+  "price": 81,
+  "tax": 89,
+  "quantity": 88,
+  "delivery_note_id": 1
+}]
+
+[{
+  "id": 1,
+  "reference": "nFeJ",
+  "ratings": 3
+}]
+
+[{
+  "id": 1,
+  "reference": "s3cM",
+  "jhi_type": "dui",
+  "rating_id": 1
+}]
+
+[{
+  "id": 1,
+  "reference": "qOs3",
+  "comments": "Mauris sit amet eros. Suspendisse accumsan tortor quis turpis. Sed ante.",
+  "delivery_note_id": 1
+}]
