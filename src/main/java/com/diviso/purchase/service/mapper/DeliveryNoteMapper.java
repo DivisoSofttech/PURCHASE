@@ -8,7 +8,7 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity DeliveryNote and its DTO DeliveryNoteDTO.
  */
-@Mapper(componentModel = "spring", uses = {SupplierMapper.class, RatingMapper.class})
+@Mapper(componentModel = "spring", uses = {SupplierMapper.class, RatingMapper.class, RatingTypeMapper.class})
 public interface DeliveryNoteMapper extends EntityMapper<DeliveryNoteDTO, DeliveryNote> {
 
     @Mapping(source = "supplier.id", target = "supplierId")

@@ -25,6 +25,9 @@ public class RatingType implements Serializable {
     @Column(name = "jhi_type")
     private String type;
 
+    @ManyToOne
+    private Rating rating;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -58,6 +61,19 @@ public class RatingType implements Serializable {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public Rating getRating() {
+        return rating;
+    }
+
+    public RatingType rating(Rating rating) {
+        this.rating = rating;
+        return this;
+    }
+
+    public void setRating(Rating rating) {
+        this.rating = rating;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

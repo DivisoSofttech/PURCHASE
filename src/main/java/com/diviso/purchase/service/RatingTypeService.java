@@ -39,4 +39,22 @@ public interface RatingTypeService {
      * @param id the id of the entity
      */
     void delete(Long id);
+
+    /**
+     * Get all the ratingTypes by reference.
+     *
+     * @param pageable the pagination information
+     * @param string reference
+     * @return the list of entities
+     */
+	Page<RatingTypeDTO> findAllByReference(String reference, Pageable pageable);
+
+	/**
+     * Get all the ratingTypes by rating type.
+     *
+     * @param pageable the pagination information
+     * @param string type
+     * @return the list of entities
+     */
+	Page<RatingTypeDTO> findAllByRating(String type, Pageable pageable);
 }

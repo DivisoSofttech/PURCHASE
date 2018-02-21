@@ -83,4 +83,167 @@ public class DeliveriesLineServiceImpl implements DeliveriesLineService {
         log.debug("Request to delete DeliveriesLine : {}", id);
         deliveriesLineRepository.delete(id);
     }
+
+    /**
+     * Get all the deliveriesLines by reference.
+     *
+     * @param pageable the pagination information
+     * @param string reference
+     * @return the list of entities
+     */
+	@Override
+	@Transactional(readOnly = true)
+	public Page<DeliveriesLineDTO> findAllByReference(String reference, Pageable pageable) {
+		// TODO Auto-generated method stub
+		log.debug("Request to get all DeliveriesLines by reference");
+        return deliveriesLineRepository.findAllByReference(reference,pageable)
+            .map(deliveriesLineMapper::toDto);
+	}
+
+	/**
+     * Get all the deliveriesLines by price greater than equal.
+     *
+     * @param pageable the pagination information
+     * @param string reference
+     * @return the list of entities
+     */
+	@Override
+	@Transactional(readOnly = true)
+	public Page<DeliveriesLineDTO> findAllByPriceGreaterThanEqual(Double price, Pageable pageable) {
+		// TODO Auto-generated method stub
+		log.debug("Request to get all DeliveriesLines by price greater than or equal");
+        return deliveriesLineRepository.findAllByPriceGreaterThanEqual(price,pageable)
+            .map(deliveriesLineMapper::toDto);
+	}
+	/**
+     * Get all the deliveriesLines by price less than equal.
+     *
+     * @param pageable the pagination information
+     * @param string reference
+     * @return the list of entities
+     */
+
+	@Override
+	@Transactional(readOnly = true)
+	public Page<DeliveriesLineDTO> findAllByPriceLessThanEqual(Double price, Pageable pageable) {
+		// TODO Auto-generated method stub
+		log.debug("Request to get all DeliveriesLines by price less than or equal");
+        return deliveriesLineRepository.findAllByPriceLessThanEqual(price,pageable)
+            .map(deliveriesLineMapper::toDto);
+	}
+
+	/**
+     * Get all the deliveriesLines by price.
+     *
+     * @param pageable the pagination information
+     * @param string reference
+     * @return the list of entities
+     */
+	@Override
+	@Transactional(readOnly = true)
+	public Page<DeliveriesLineDTO> findAllByPrice(Double price, Pageable pageable) {
+		// TODO Auto-generated method stub
+		log.debug("Request to get all DeliveriesLines by price");
+        return deliveriesLineRepository.findAllByPrice(price,pageable)
+            .map(deliveriesLineMapper::toDto);
+	}
+
+	/**
+     * Get all the deliveriesLines by tax greater than equal.
+     *
+     * @param pageable the pagination information
+     * @param string reference
+     * @return the list of entities
+     */
+	@Override
+	@Transactional(readOnly = true)
+	public Page<DeliveriesLineDTO> findAllByTaxGreaterThanEqual(Double tax, Pageable pageable) {
+		// TODO Auto-generated method stub
+		log.debug("Request to get all DeliveriesLines by tax greater than equal");
+        return deliveriesLineRepository.findAllByTaxGreaterThanEqual(tax,pageable)
+            .map(deliveriesLineMapper::toDto);
+	}
+	/**
+     * Get all the deliveriesLines by tax less than equal.
+     *
+     * @param pageable the pagination information
+     * @param string reference
+     * @return the list of entities
+     */
+
+	@Override
+	@Transactional(readOnly = true)
+	public Page<DeliveriesLineDTO> findAllByTaxLessThanEqual(Double tax, Pageable pageable) {
+		// TODO Auto-generated method stub
+		log.debug("Request to get all DeliveriesLines by tax less than equal");
+        return deliveriesLineRepository.findAllByTaxLessThanEqual(tax,pageable)
+            .map(deliveriesLineMapper::toDto);
+	}
+	/**
+     * Get all the deliveriesLines by tax.
+     *
+     * @param pageable the pagination information
+     * @param string reference
+     * @return the list of entities
+     */
+
+	@Override
+	@Transactional(readOnly = true)
+	public Page<DeliveriesLineDTO> findAllByTax(Double tax, Pageable pageable) {
+		// TODO Auto-generated method stub
+		log.debug("Request to get all DeliveriesLines by tax greater than equal");
+        return deliveriesLineRepository.findAllByTax(tax,pageable)
+            .map(deliveriesLineMapper::toDto);
+	}
+	
+	/**
+     * Get all the deliveriesLines by quantity.
+     *
+     * @param pageable the pagination information
+     * @param string reference
+     * @return the list of entities
+     */
+
+	@Override
+	@Transactional(readOnly = true)
+	public Page<DeliveriesLineDTO> findAllByQuantity(Double quantity, Pageable pageable) {
+		// TODO Auto-generated method stub
+		log.debug("Request to get all DeliveriesLines by quantity");
+        return deliveriesLineRepository.findAllByQuantity(quantity,pageable)
+            .map(deliveriesLineMapper::toDto);
+	}
+	
+	/**
+     * Get all the deliveriesLines by quantity greater than equal.
+     *
+     * @param pageable the pagination information
+     * @param string reference
+     * @return the list of entities
+     */
+
+	@Override
+	@Transactional(readOnly = true)
+	public Page<DeliveriesLineDTO> findAllByQuantityGreaterThanEqual(Double quantity, Pageable pageable) {
+		// TODO Auto-generated method stub
+		log.debug("Request to get all DeliveriesLines by quantity greater than equal");
+        return deliveriesLineRepository.findAllByQuantityGreaterThanEqual(quantity,pageable)
+            .map(deliveriesLineMapper::toDto);
+	}
+
+	/**
+     * Get all the deliveriesLines by quantity less than equal.
+     *
+     * @param pageable the pagination information
+     * @param string reference
+     * @return the list of entities
+     */
+	@Override
+	@Transactional(readOnly = true)
+	public Page<DeliveriesLineDTO> findAllByQuantityLessThanEqual(Double quantity, Pageable pageable) {
+		// TODO Auto-generated method stub
+		log.debug("Request to get all DeliveriesLines by quantity less than equal");
+        return deliveriesLineRepository.findAllByQuantityLessThanEqual(quantity,pageable)
+            .map(deliveriesLineMapper::toDto);
+	}
+	
 }

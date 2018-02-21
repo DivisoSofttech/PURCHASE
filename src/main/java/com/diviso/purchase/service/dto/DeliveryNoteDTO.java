@@ -18,11 +18,13 @@ public class DeliveryNoteDTO implements Serializable {
 
     private String orderReference;
 
-    private LocalDate purchaseDate;
+    private LocalDate deliveredDate;
 
     private Long supplierId;
 
     private Set<RatingDTO> ratings = new HashSet<>();
+
+    private Set<RatingTypeDTO> ratingTypes = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -48,12 +50,12 @@ public class DeliveryNoteDTO implements Serializable {
         this.orderReference = orderReference;
     }
 
-    public LocalDate getPurchaseDate() {
-        return purchaseDate;
+    public LocalDate getDeliveredDate() {
+        return deliveredDate;
     }
 
-    public void setPurchaseDate(LocalDate purchaseDate) {
-        this.purchaseDate = purchaseDate;
+    public void setDeliveredDate(LocalDate deliveredDate) {
+        this.deliveredDate = deliveredDate;
     }
 
     public Long getSupplierId() {
@@ -70,6 +72,14 @@ public class DeliveryNoteDTO implements Serializable {
 
     public void setRatings(Set<RatingDTO> ratings) {
         this.ratings = ratings;
+    }
+
+    public Set<RatingTypeDTO> getRatingTypes() {
+        return ratingTypes;
+    }
+
+    public void setRatingTypes(Set<RatingTypeDTO> ratingTypes) {
+        this.ratingTypes = ratingTypes;
     }
 
     @Override
@@ -99,7 +109,7 @@ public class DeliveryNoteDTO implements Serializable {
             "id=" + getId() +
             ", reference='" + getReference() + "'" +
             ", orderReference='" + getOrderReference() + "'" +
-            ", purchaseDate='" + getPurchaseDate() + "'" +
+            ", deliveredDate='" + getDeliveredDate() + "'" +
             "}";
     }
 }

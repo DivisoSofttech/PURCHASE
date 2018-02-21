@@ -123,4 +123,49 @@ public class RatingResource {
         ratingService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+    
+    /**
+     * GET  /ratings : get all the ratings by rating.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of ratings in body
+     */
+    @GetMapping("/ratings/findByRating/{rating}")
+    @Timed
+    public ResponseEntity<List<RatingDTO>> getAllRatingsByRating(@PathVariable Integer rating,Pageable pageable) {
+        log.debug("REST request to get a page of Ratings by rating");
+        Page<RatingDTO> page = ratingService.findAllByRating(rating,pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/ratings");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    /**
+     * GET  /ratings : get all the ratings by rating greater than .
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of ratings in body
+     */
+    @GetMapping("/ratings/findByRatingGreaterThan/{rating}")
+    @Timed
+    public ResponseEntity<List<RatingDTO>> getAllRatingsByRatingGreaterThan(@PathVariable Integer rating,Pageable pageable) {
+        log.debug("REST request to get a page of Ratings by rating greater than");
+        Page<RatingDTO> page = ratingService.findAllByRatingGreaterThan(rating,pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/ratings");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    
+    /**
+     * GET  /ratings : get all the ratings by rating less than .
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of ratings in body
+     */
+    @GetMapping("/ratings/findByRatingLessThan/{rating}")
+    @Timed
+    public ResponseEntity<List<RatingDTO>> getAllRatingsByRatingLessThan(@PathVariable Integer rating,Pageable pageable) {
+        log.debug("REST request to get a page of Ratings by rating less than");
+        Page<RatingDTO> page = ratingService.findAllByRatingLessThan(rating,pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/ratings");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    
 }

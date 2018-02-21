@@ -39,4 +39,28 @@ public interface RatingService {
      * @param id the id of the entity
      */
     void delete(Long id);
+
+    /**
+     * Get all the ratings by rating.
+     *
+     * @param pageable the pagination information
+     * @return the list of entities
+     */
+	Page<RatingDTO> findAllByRating(Integer rating, Pageable pageable);
+
+	/**
+     * Get all the ratings by rating greater than.
+     *
+     * @param pageable the pagination information
+     * @return the list of entities
+     */
+	Page<RatingDTO> findAllByRatingGreaterThan(Integer rating, Pageable pageable);
+
+	/**
+     * Get all the ratings by rating less than.
+     *
+     * @param pageable the pagination information
+     * @return the list of entities
+     */
+	Page<RatingDTO> findAllByRatingLessThan(Integer rating, Pageable pageable);
 }

@@ -79,10 +79,14 @@ entity DeliveriesLine {
 }
 relationship OneToOne {
    Supplier{permanentAddress} to Address,
+<<<<<<< HEAD
+   Supplier{contact} to Contact
+=======
    Supplier{contact} to Contact,
    DeliveryNote{supplier} to Supplier
    Supplier{rating} to Rating
    Supplier{budget} to Budget
+>>>>>>> ccc990b37e86ab7eca1e0986432ea2a89ac1e008
    
 }
 relationship OneToMany {
@@ -95,10 +99,16 @@ relationship OneToMany {
   Statuss{quotations} to Quotation,
   Statuss{purchaseOrders} to PurchaseOrder,
   DeliveryNote{comments} to Comment
+<<<<<<< HEAD
+  Supplier{deliveryNote} to DeliveryNote
+  Rating{ratingType} to RatingType
+=======
   Budget{alert} to Alert
+>>>>>>> ccc990b37e86ab7eca1e0986432ea2a89ac1e008
 }
 relationship ManyToMany {
   DeliveryNote{ratings} to Rating
+  DeliveryNote{ratingType} to RatingType
 }
 paginate * with pagination
 dto * with mapstruct

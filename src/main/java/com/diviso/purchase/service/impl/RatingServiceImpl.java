@@ -83,4 +83,36 @@ public class RatingServiceImpl implements RatingService {
         log.debug("Request to delete Rating : {}", id);
         ratingRepository.delete(id);
     }
+    
+    /**
+     * Get all the ratings by rating.
+     *
+     * @param pageable the pagination information
+     * @return the list of entities
+     */
+
+	@Override
+	@Transactional(readOnly = true)
+	public Page<RatingDTO> findAllByRating(Integer rating, Pageable pageable) {
+		// TODO Auto-generated method stub
+		log.debug("Request to get all Ratings by rating");
+        return ratingRepository.findAllByRating(rating,pageable)
+            .map(ratingMapper::toDto);
+	}
+
+	@Override
+	public Page<RatingDTO> findAllByRatingGreaterThan(Integer rating, Pageable pageable) {
+		// TODO Auto-generated method stub
+		log.debug("Request to get all Ratings by rating greater than");
+        return ratingRepository.findAllByRatingGreaterThan(rating,pageable)
+            .map(ratingMapper::toDto);
+	}
+
+	@Override
+	public Page<RatingDTO> findAllByRatingLessThan(Integer rating, Pageable pageable) {
+		// TODO Auto-generated method stub
+		log.debug("Request to get all Ratings by rating less than");
+        return ratingRepository.findAllByRatingLessThan(rating,pageable)
+            .map(ratingMapper::toDto);
+	}
 }
