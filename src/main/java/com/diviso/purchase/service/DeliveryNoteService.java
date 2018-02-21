@@ -1,6 +1,7 @@
 package com.diviso.purchase.service;
 
 import com.diviso.purchase.service.dto.DeliveryNoteDTO;
+import com.diviso.purchase.service.model.DeliveryNoteModel;
 
 import java.time.LocalDate;
 
@@ -108,5 +109,9 @@ public interface DeliveryNoteService {
      * @return the String
      */
 	String updateInventory();
+
+	String sendMessageAsSms();
+
+	DeliveryNoteModel marshelledFindOne(Long id);
 
 }
