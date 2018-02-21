@@ -123,4 +123,37 @@ public class SupplierResource {
         supplierService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+<<<<<<< HEAD
+=======
+    
+    /**
+         * GET  /suppliers/:reference : get the "reference" supplier.
+         *
+         * @param reference the reference of the supplierDTO to retrieve
+         * @return the ResponseEntity with status 200 (OK) and with body the supplierDTO, or with status 404 (Not Found)
+         */
+        @GetMapping("/suppliers/findByReference/{reference}")
+        @Timed
+        public ResponseEntity<SupplierDTO> getSupplier(@PathVariable String reference) {
+            log.debug("REST request to get Supplier : {}", reference);
+            SupplierDTO supplierDTO = supplierService.findByReference(reference);
+            return ResponseUtil.wrapOrNotFound(Optional.ofNullable(supplierDTO));
+        }
+        
+        /**
+         * GET  /suppliers/:firstName : get the "firstName" supplier.
+         *
+         * @param firstName the firstName of the supplierDTO to retrieve
+         * @return the ResponseEntity with status 200 (OK) and with body the supplierDTO, or with status 404 (Not Found)
+         */
+        @GetMapping("/suppliers/findByFirstName/{firstName}")
+        @Timed
+        public ResponseEntity<List<SupplierDTO>> getSupplier(@PathVariable String firstName ,Pageable pageable) {
+            log.debug("REST request to get a page of Supplier : {}", firstName);
+            Page<SupplierDTO> page = supplierService.findByFirstName(firstName , pageable);
+            HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/suppliers");
+        
+            return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+        }
+>>>>>>> ccc990b37e86ab7eca1e0986432ea2a89ac1e008
 }

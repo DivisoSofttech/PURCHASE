@@ -1,3 +1,5 @@
+
+
 entity Supplier {
   reference String,
   firstName String,
@@ -15,6 +17,21 @@ entity Contact {
   phoneNumber2 Long,
   companyName String
 }
+
+entity Budget
+ {
+ reference String
+ name String
+ price Double
+
+ }
+ 
+ entity Alert
+ {
+ percentage String
+ price Double
+ }
+
 entity Quotation {
   reference String,
   issuedDate LocalDate
@@ -34,15 +51,11 @@ entity Statuss {
 entity DeliveryNote {
   reference String,
   orderReference String,
-  deliveredDate LocalDate
+  purchaseDate LocalDate
 }
 entity Rating {
   reference String,
   ratings Integer
-}
-entity RatingType{
-reference String,
-type String
 }
 entity Comment {
   reference String,
@@ -66,7 +79,14 @@ entity DeliveriesLine {
 }
 relationship OneToOne {
    Supplier{permanentAddress} to Address,
+<<<<<<< HEAD
    Supplier{contact} to Contact
+=======
+   Supplier{contact} to Contact,
+   DeliveryNote{supplier} to Supplier
+   Supplier{rating} to Rating
+   Supplier{budget} to Budget
+>>>>>>> ccc990b37e86ab7eca1e0986432ea2a89ac1e008
    
 }
 relationship OneToMany {
@@ -79,8 +99,12 @@ relationship OneToMany {
   Statuss{quotations} to Quotation,
   Statuss{purchaseOrders} to PurchaseOrder,
   DeliveryNote{comments} to Comment
+<<<<<<< HEAD
   Supplier{deliveryNote} to DeliveryNote
   Rating{ratingType} to RatingType
+=======
+  Budget{alert} to Alert
+>>>>>>> ccc990b37e86ab7eca1e0986432ea2a89ac1e008
 }
 relationship ManyToMany {
   DeliveryNote{ratings} to Rating

@@ -83,4 +83,36 @@ public class ContactServiceImpl implements ContactService {
         log.debug("Request to delete Contact : {}", id);
         contactRepository.delete(id);
     }
+    
+    /**
+     * Get one contact by mailId.
+     *
+     * @param mailId the mailId of the entity
+     * @return the entity
+     */
+    
+	@Override
+	@Transactional(readOnly = true)
+	public ContactDTO findByMailId(String mailId) {
+		// TODO Auto-generated method stub
+		log.debug("Request to get suppliers : {}", mailId);
+		Contact contact=contactRepository.findByMailId(mailId);
+		return contactMapper.toDto(contact);
+	}
+
+	/**
+     * Get one contact by phoneNumber.
+     *
+     * @param phoneNumber1 the phoneNumber of the entity
+     * @return the entity
+     */
+	
+	@Override
+	@Transactional(readOnly = true)
+	public ContactDTO findByPhoneNumber(Long phoneNumber1) {
+		// TODO Auto-generated method stub
+		log.debug("Request to get suppliers : {}", phoneNumber1);
+		Contact contact=contactRepository.findByPhoneNumber1(phoneNumber1);
+		return contactMapper.toDto(contact);
+	}
 }

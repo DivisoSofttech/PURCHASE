@@ -6,6 +6,7 @@ import com.diviso.purchase.domain.DeliveryNote;
 import com.diviso.purchase.repository.DeliveryNoteRepository;
 import com.diviso.purchase.service.dto.DeliveryNoteDTO;
 import com.diviso.purchase.service.mapper.DeliveryNoteMapper;
+<<<<<<< HEAD
 
 import java.io.File;
 import java.time.LocalDate;
@@ -13,6 +14,8 @@ import java.time.LocalDate;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
+=======
+>>>>>>> ccc990b37e86ab7eca1e0986432ea2a89ac1e008
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -102,6 +105,7 @@ public class DeliveryNoteServiceImpl implements DeliveryNoteService {
         log.debug("Request to delete DeliveryNote : {}", id);
         deliveryNoteRepository.delete(id);
     }
+<<<<<<< HEAD
     
     /**
      * Get all the deliveryNotes by reference.
@@ -243,4 +247,6 @@ public class DeliveryNoteServiceImpl implements DeliveryNoteService {
 		return null;
 	}
   
+=======
+>>>>>>> ccc990b37e86ab7eca1e0986432ea2a89ac1e008
 }

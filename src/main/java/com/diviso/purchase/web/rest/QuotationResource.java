@@ -18,8 +18,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
+import java.util.Date;
 import java.util.Optional;
 
 /**
@@ -123,4 +127,111 @@ public class QuotationResource {
         quotationService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+    
+    
+    
+    /* * * * * * * * * * * *
+     *    EXTRA METHODS
+     * * * * * * * * * * * */
+
+
+    @GetMapping("/quotations/findByReference/{reference}")
+	@Timed
+	public ResponseEntity<List<QuotationDTO>> getQuotationsByReference(@PathVariable String reference, Pageable pageable) {
+		log.debug("REST request to get a page of Quotation by reference:{}", reference);
+		Page<QuotationDTO> page = quotationService.findByReference(reference, pageable);
+		HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/quotations");
+		return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+	}
+    
+    
+    @GetMapping("/quotations/findBySupplierId/{id}")
+    @Timed
+    public ResponseEntity<List<QuotationDTO>> getQuotationBySupplierId(@PathVariable  Long id ,Pageable pageable) {
+ 	   log.debug("REST request to get a page of Quotation :{}", id);
+ 	   Page<QuotationDTO> page = quotationService.findBySupplierId(id , pageable);
+ 	   HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/quotations");
+ 	   return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    
+    @GetMapping("/quotations/findBySupplierReference/{reference}")
+    @Timed
+    public ResponseEntity<List<QuotationDTO>> getSupplierReference(@PathVariable  String reference ,Pageable pageable) {
+ 	   log.debug("REST request to get a page of Quotation :{}", reference);
+ 	   Page<QuotationDTO> page = quotationService.findBySupplierReference(reference , pageable);
+ 	   HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/quotations");
+ 	   return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);  
+    }
+    
+    @GetMapping("/quotations/findByStatussId/{id}")
+    @Timed
+    public ResponseEntity<List<QuotationDTO>> getStatussId(@PathVariable  Long id ,Pageable pageable) {
+ 	   log.debug("REST request to get a page of Quotation :{}", id);
+ 	   Page<QuotationDTO> page = quotationService.findByStatussId(id , pageable);
+ 	   HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/quotations");
+ 	   return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    
+    
+    
+    @GetMapping("/quotations/findByStatussName/{name}")
+    @Timed
+    public ResponseEntity<List<QuotationDTO>> getStatussName(@PathVariable  String name ,Pageable pageable) {
+ 	   log.debug("REST request to get a page of Quotation :{}", name);
+ 	   Page<QuotationDTO> page = quotationService.findByStatussName(name , pageable);
+ 	   HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/quotations");
+ 	   return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    
+    @GetMapping("/quotations/findByIssuedDate")
+    @Timed
+    public ResponseEntity<List<QuotationDTO>> getQuotationsByIssuedDate(String date,Pageable pageable) throws ParseException {
+        log.info("REST request to get a page of Quotations by Given date : " + date);
+		
+        LocalDate localDate = new SimpleDateFormat("dd/MM/yyyy").parse(date).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        Page<QuotationDTO> page = quotationService.findByIssuedDate(localDate,pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/quotations");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    
+
+    @GetMapping("/quotations/findByIssuedDateBetween")
+    @Timed
+    public ResponseEntity<List<QuotationDTO>> getQuotationsByIssuedDateBetween(String startDate,String endDate,Pageable pageable) throws ParseException {
+        log.debug("REST request to get a page of Quotations between start and end date " + startDate,endDate);
+        LocalDate start =  new SimpleDateFormat("dd/MM/yyyy").parse(startDate).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        
+        LocalDate end = new SimpleDateFormat("dd/MM/yyyy").parse(endDate).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        
+        Page<QuotationDTO> page = quotationService.findByIssuedDateBetween(start,end,pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/quotations");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    
+    
+    @GetMapping("/quotations/findByIssuedDateAfter")
+    @Timed
+    public ResponseEntity<List<QuotationDTO>> getQuotationsByIssuedDateAfter(String date,Pageable pageable) throws ParseException {
+        log.info("REST request to get a page of Quotations After Given date : " + date);
+		
+        LocalDate localDate = new SimpleDateFormat("dd/MM/yyyy").parse(date).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        Page<QuotationDTO> page = quotationService.findByIssuedDateAfter(localDate,pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/quotations");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    
+    
+    @GetMapping("/quotations/findByIssuedDateBefore")
+    @Timed
+    public ResponseEntity<List<QuotationDTO>> getQuotationsByIssuedDateBefore(String date,Pageable pageable) throws ParseException {
+        log.info("REST request to get a page of Quotations Before Given date : " + date);
+		
+        LocalDate localDate = new SimpleDateFormat("dd/MM/yyyy").parse(date).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        Page<QuotationDTO> page = quotationService.findByIssuedDateBefore(localDate,pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/quotations");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    
+    
 }
+

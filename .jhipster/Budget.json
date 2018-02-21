@@ -10,6 +10,13 @@
     ],
     "fields": [
         {
+<<<<<<< HEAD
+=======
+            "fieldName": "reference",
+            "fieldType": "String"
+        },
+        {
+>>>>>>> ccc990b37e86ab7eca1e0986432ea2a89ac1e008
             "fieldName": "name",
             "fieldType": "String"
         },

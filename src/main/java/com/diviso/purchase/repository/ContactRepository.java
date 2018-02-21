@@ -13,4 +13,8 @@ import org.springframework.data.jpa.repository.*;
 @Repository
 public interface ContactRepository extends JpaRepository<Contact, Long> {
 
+	Contact findByMailId(String mailId);
+	
+	Contact findByPhoneNumber1(Long phoneNumber1);
+
 }

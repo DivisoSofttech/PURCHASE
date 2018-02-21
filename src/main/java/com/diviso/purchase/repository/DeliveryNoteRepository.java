@@ -1,13 +1,13 @@
 package com.diviso.purchase.repository;
 
 import com.diviso.purchase.domain.DeliveryNote;
-import com.diviso.purchase.service.dto.DeliveryNoteDTO;
-
 import org.springframework.stereotype.Repository;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import com.diviso.purchase.service.dto.DeliveryNoteDTO;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 
 import java.time.LocalDate;
 import java.util.List;

@@ -39,4 +39,26 @@ public interface SupplierService {
      * @param id the id of the entity
      */
     void delete(Long id);
+<<<<<<< HEAD
+=======
+    
+    /**
+     * Get the "reference" supplier.
+     *
+     * @param reference of the entity
+     * @param pageable
+     * @return the entity
+     */
+    
+    SupplierDTO findByReference(String reference);
+    	/**
+         * Get the "firstName" supplier.
+         *
+         * @param firstName of the entity
+         * @param pageable
+         * @return the entity
+         */
+    
+    	Page<SupplierDTO> findByFirstName(String firstName, Pageable pageable);
+>>>>>>> ccc990b37e86ab7eca1e0986432ea2a89ac1e008
 }

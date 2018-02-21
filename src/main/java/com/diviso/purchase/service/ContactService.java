@@ -39,4 +39,22 @@ public interface ContactService {
      * @param id the id of the entity
      */
     void delete(Long id);
+    
+    /**
+     * Get the "mailId" contact.
+     *
+     * @param mailId the mailId of the entity
+     * @return the entity
+     */
+
+	ContactDTO findByMailId(String mailId);
+	
+	/**
+     * Get the "phoneNumber" contact.
+     *
+     * @param phoneNumber1 the phoneNumber of the entity
+     * @return the entity
+     */
+
+	ContactDTO findByPhoneNumber(Long phoneNumber1);
 }
