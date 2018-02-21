@@ -417,6 +417,31 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 		}
 		
 	}
+	//after and before date purchaseOrder
+		/**
+	     * Get purchase order by purchaseOrder purchaseDateAfter.
+	     * @param purchaseOrder the purchaseAfterDate of the entity
+	     */
+		@Override
+		@Transactional(readOnly = true)
+		public Page<PurchaseOrderDTO> findByPurchaseDateAfterPurchaseOrder(LocalDate dateAfter, Pageable pageable) {
+			
+			log.debug("Request to delete PurchaseOrder : {}", dateAfter);
+			return purchaseOrderRepository.findByPurchaseDateAfter(dateAfter,pageable)
+		            .map(purchaseOrderMapper::toDto);
+	}
+		/**
+	     * Get purchase order by purchaseOrder purchaseBeforeDate.
+	     * @param purchaseOrder the purchaseBeforeDate of the entity
+	     */
+		@Override
+		@Transactional(readOnly = true)
+		public Page<PurchaseOrderDTO> findByPurchaseDateBeforePurchaseOrder(LocalDate dateBefore, Pageable pageable) {
+			
+			log.debug("Request to delete PurchaseOrder : {}", dateBefore);
+			return purchaseOrderRepository.findByPurchaseDateBefore(dateBefore,pageable)
+		            .map(purchaseOrderMapper::toDto);
+	}
 	
     
     

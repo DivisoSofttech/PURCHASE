@@ -161,5 +161,21 @@ public interface PurchaseOrderService {
      *
      */
 	String sendMessageAsSms();
+	//after and before purchaseOrder
+		/**
+	     * Get the "purchase order" purchaseOrder purchaseDateAfter.
+	     * @param purchaseOrder purchaseDateAfter
+	     * @param pageable
+	     * @return the entity
+	     */
+		Page<PurchaseOrderDTO> findByPurchaseDateAfterPurchaseOrder(LocalDate dateAfter, Pageable pageable);
+		/**
+	     * Get the "purchase order" purchaseOrder purchaseDateBefore.
+	     * @param purchaseOrder purchaseDateBefore
+	     * @param pageable
+	     * @return the entity
+	     */
+		Page<PurchaseOrderDTO> findByPurchaseDateBeforePurchaseOrder(LocalDate dateBefore, Pageable pageable);
+	}
 	
-}
+

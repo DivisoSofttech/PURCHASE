@@ -32,5 +32,8 @@ public interface PurchaseOrderRepository extends JpaRepository<PurchaseOrder, Lo
 	Page<PurchaseOrder> findByStatuss_Name(String name,Pageable pageable);
 	Page<PurchaseOrder> findByPurchaseLines_Id(Long id,Pageable pageable);
 	Page<PurchaseOrder> findByPurchaseLines_ProductReference(String productReference,Pageable pageable);
+	//After and before purchaseOrder
+		Page<PurchaseOrder> findByPurchaseDateAfter(LocalDate dateAfter ,Pageable pageable);
+		Page<PurchaseOrder> findByPurchaseDateBefore(LocalDate dateBefore ,Pageable pageable);
 	
 }
