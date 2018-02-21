@@ -260,4 +260,44 @@ public class PurchaseOrderResource {
 	   HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/purchase-orders");
 	   return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
    }
+// after and before purchaseDate
+	/**
+	 * GET /purchase-orders/:purchaseOrder puchaseDateAfter : get the "purchaseOrder
+	 * purchaseDate" purchase order.
+	 * 
+	 * @param purchaseOrder
+	 *            purchaseDateAfter
+	 * @param pageable
+	 * @return
+	 */
+	@GetMapping("/purchase-orders/findByDateAfterPurchaseOrder/{purchaseOrderPurchaseDate}")
+	@Timed
+	public ResponseEntity<List<PurchaseOrderDTO>> getPurchaseOrderPurchaseDateAfter(@PathVariable LocalDate dateAfter,
+			Pageable pageable) {
+		log.debug("REST request to get a page of PurchaseOrder :{}", dateAfter);
+		Page<PurchaseOrderDTO> page = purchaseOrderService.findByPurchaseDateAfterPurchaseOrder(dateAfter, pageable);
+		HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/purchase-orders");
+		return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+
+	}
+	
+	/**
+	 * GET /purchase-orders/:purchaseOrder puchaseDateBefore : get the "purchaseOrder
+	 * purchaseDate" purchase order.
+	 * 
+	 * @param purchaseOrder
+	 *            purchaseDateBefore
+	 * @param pageable
+	 * @return
+	 */
+	@GetMapping("/purchase-orders/findByDateBeforePurchaseOrder/{purchaseOrderPurchaseDate}")
+	@Timed
+	public ResponseEntity<List<PurchaseOrderDTO>> getPurchaseOrderPurchaseDateBefore(@PathVariable LocalDate dateBefore,
+			Pageable pageable) {
+		log.debug("REST request to get a page of PurchaseOrder :{}", dateBefore);
+		Page<PurchaseOrderDTO> page = purchaseOrderService.findByPurchaseDateAfterPurchaseOrder(dateBefore, pageable);
+		HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/purchase-orders");
+		return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+	
+}
 }
