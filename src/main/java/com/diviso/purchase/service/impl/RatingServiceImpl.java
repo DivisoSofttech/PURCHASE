@@ -96,7 +96,7 @@ public class RatingServiceImpl implements RatingService {
 	public Page<RatingDTO> findAllByRating(Integer rating, Pageable pageable) {
 		// TODO Auto-generated method stub
 		log.debug("Request to get all Ratings by rating");
-        return ratingRepository.findAllByRating(rating,pageable)
+        return ratingRepository.findAllByRatings(rating,pageable)
             .map(ratingMapper::toDto);
 	}
 

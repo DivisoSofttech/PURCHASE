@@ -13,11 +13,10 @@ public class BudgetDTO implements Serializable {
 
     private Long id;
 
-<<<<<<< HEAD
-=======
+
     private String reference;
 
->>>>>>> ccc990b37e86ab7eca1e0986432ea2a89ac1e008
+
     private String name;
 
     private Double price;
@@ -30,8 +29,7 @@ public class BudgetDTO implements Serializable {
         this.id = id;
     }
 
-<<<<<<< HEAD
-=======
+
     public String getReference() {
         return reference;
     }
@@ -40,7 +38,7 @@ public class BudgetDTO implements Serializable {
         this.reference = reference;
     }
 
->>>>>>> ccc990b37e86ab7eca1e0986432ea2a89ac1e008
+
     public String getName() {
         return name;
     }
@@ -82,10 +80,9 @@ public class BudgetDTO implements Serializable {
     public String toString() {
         return "BudgetDTO{" +
             "id=" + getId() +
-<<<<<<< HEAD
-=======
+
             ", reference='" + getReference() + "'" +
->>>>>>> ccc990b37e86ab7eca1e0986432ea2a89ac1e008
+
             ", name='" + getName() + "'" +
             ", price=" + getPrice() +
             "}";
