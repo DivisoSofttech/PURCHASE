@@ -63,4 +63,6 @@ public interface QuotationService {
 
 	Page<QuotationDTO> findByIssuedDateBefore(LocalDate localDate, Pageable pageable);
 
+	Page<QuotationDTO> findByQuotationLineCount(int count, Pageable pageable);
+
 }
