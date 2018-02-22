@@ -82,11 +82,8 @@ public class SupplierServiceImpl implements SupplierService {
     public void delete(Long id) {
         log.debug("Request to delete Supplier : {}", id);
         supplierRepository.delete(id);
-    }
 
-
-
-    
+    }    
         /*--------------------------------------------------------------
          * EXTRA METHOD
          * -------------------------------------------------------------*/
@@ -110,8 +107,7 @@ public class SupplierServiceImpl implements SupplierService {
     	public Page<SupplierDTO> findByFirstName(String firstName, Pageable pageable) {
     		// TODO Auto-generated method stub
     		log.debug("Request to get suppliers : {}", firstName);
-    		return supplierRepository.findByFirstName(firstName,pageable)
-    	            .map(supplierMapper::toDto);
+    		return supplierRepository.findByFirstName(firstName,pageable).map(supplierMapper::toDto);
     	}
      }
 

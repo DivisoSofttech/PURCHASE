@@ -14,6 +14,7 @@ public class BudgetDTO implements Serializable {
     private Long id;
 
 
+
     private String reference;
 
 
@@ -29,7 +30,6 @@ public class BudgetDTO implements Serializable {
         this.id = id;
     }
 
-
     public String getReference() {
         return reference;
     }
@@ -37,7 +37,6 @@ public class BudgetDTO implements Serializable {
     public void setReference(String reference) {
         this.reference = reference;
     }
-
 
     public String getName() {
         return name;
