@@ -54,7 +54,7 @@ feign:
             execution:
                 isolation:
                     thread:
-                        timeoutInMilliseconds: 1000000
+                        timeoutInMilliseconds: 10000000
 
 hystrix:
     share-security-context: true
