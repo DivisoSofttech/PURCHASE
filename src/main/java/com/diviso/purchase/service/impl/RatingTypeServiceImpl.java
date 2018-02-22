@@ -83,4 +83,20 @@ public class RatingTypeServiceImpl implements RatingTypeService {
         log.debug("Request to delete RatingType : {}", id);
         ratingTypeRepository.delete(id);
     }
+
+	@Override
+	public Page<RatingTypeDTO> findAllByReference(String reference, Pageable pageable) {
+		// TODO Auto-generated method stub
+		 log.debug("Request to get all RatingTypes by reference");
+	        return ratingTypeRepository.findAllByReference(reference,pageable)
+	            .map(ratingTypeMapper::toDto);
+	}
+
+	@Override
+	public Page<RatingTypeDTO> findAllByRating(String type, Pageable pageable) {
+		// TODO Auto-generated method stub
+		 log.debug("Request to get all RatingTypes by type");
+	        return ratingTypeRepository.findAllByType(type,pageable)
+	            .map(ratingTypeMapper::toDto);
+	}
 }

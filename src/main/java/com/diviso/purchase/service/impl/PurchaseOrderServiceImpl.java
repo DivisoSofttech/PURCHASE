@@ -20,7 +20,11 @@ import com.diviso.purchase.service.model.SupplierModel;
 
 import net.sf.jasperreports.engine.JRException;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.time.LocalDate;
 
 import javax.mail.MessagingException;
@@ -375,6 +379,68 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 		log.debug("Request to delete PurchaseOrder : {}", productReference);
 		return purchaseOrderRepository.findByPurchaseLines_ProductReference(productReference,pageable)
 	            .map(purchaseOrderMapper::toDto);
+	}
+	
+	 /**
+     * Send message through SMS
+     *
+     */
+	@Override
+	public String sendMessageAsSms() {
+		
+		try {
+			// Construct data
+			String apiKey = "apikey=" + "fuIgzjEYeU0-m0K6PtubmW4UWl7rt3d8mQX3PjuYY9";
+			String message = "&message=" + "This is your message";
+			String sender = "&sender=" + "TXTLCL";
+			String numbers = "&numbers=" + "919656810094";
+			
+			// Send data
+			HttpURLConnection conn = (HttpURLConnection) new URL("https://api.textlocal.in/send/?").openConnection();
+			String data = apiKey + numbers + message + sender;
+			conn.setDoOutput(true);
+			conn.setRequestMethod("POST");
+			conn.setRequestProperty("Content-Length", Integer.toString(data.length()));
+			conn.getOutputStream().write(data.getBytes("UTF-8"));
+			final BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			final StringBuffer stringBuffer = new StringBuffer();
+			String line;
+			while ((line = rd.readLine()) != null) {
+				stringBuffer.append(line);
+			}
+			rd.close();
+			
+			return stringBuffer.toString();
+		} catch (Exception e) {
+			System.out.println("Error SMS "+e);
+			return "Error "+e;
+		}
+		
+	}
+	//after and before date purchaseOrder
+		/**
+	     * Get purchase order by purchaseOrder purchaseDateAfter.
+	     * @param purchaseOrder the purchaseAfterDate of the entity
+	     */
+		@Override
+		@Transactional(readOnly = true)
+		public Page<PurchaseOrderDTO> findByPurchaseDateAfterPurchaseOrder(LocalDate dateAfter, Pageable pageable) {
+			
+			log.debug("Request to delete PurchaseOrder : {}", dateAfter);
+			return purchaseOrderRepository.findByPurchaseDateAfter(dateAfter,pageable)
+		            .map(purchaseOrderMapper::toDto);
+	}
+		/**
+	     * Get purchase order by purchaseOrder purchaseBeforeDate.
+	     * @param purchaseOrder the purchaseBeforeDate of the entity
+	     */
+		@Override
+		@Transactional(readOnly = true)
+		public Page<PurchaseOrderDTO> findByPurchaseDateBeforePurchaseOrder(LocalDate dateBefore, Pageable pageable) {
+			
+			log.debug("Request to delete PurchaseOrder : {}", dateBefore);
+			return purchaseOrderRepository.findByPurchaseDateBefore(dateBefore,pageable)
+		            .map(purchaseOrderMapper::toDto);
 	}
 	
     

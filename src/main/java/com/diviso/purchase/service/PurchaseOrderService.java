@@ -156,5 +156,26 @@ public interface PurchaseOrderService {
      */
 	Page<PurchaseOrderDTO> findByPurchaseOrderPurchaseLine(String productReference, Pageable pageable);
 	
+	 /**
+     * Send message through SMS
+     *
+     */
+	String sendMessageAsSms();
+	//after and before purchaseOrder
+		/**
+	     * Get the "purchase order" purchaseOrder purchaseDateAfter.
+	     * @param purchaseOrder purchaseDateAfter
+	     * @param pageable
+	     * @return the entity
+	     */
+		Page<PurchaseOrderDTO> findByPurchaseDateAfterPurchaseOrder(LocalDate dateAfter, Pageable pageable);
+		/**
+	     * Get the "purchase order" purchaseOrder purchaseDateBefore.
+	     * @param purchaseOrder purchaseDateBefore
+	     * @param pageable
+	     * @return the entity
+	     */
+		Page<PurchaseOrderDTO> findByPurchaseDateBeforePurchaseOrder(LocalDate dateBefore, Pageable pageable);
+	}
 	
-}
+

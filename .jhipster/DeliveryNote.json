@@ -28,6 +28,14 @@
             "otherEntityName": "rating",
             "otherEntityField": "id",
             "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "",
+            "relationshipName": "ratingType",
+            "otherEntityName": "ratingType",
+            "otherEntityField": "id",
+            "ownerSide": true
         }
     ],
     "fields": [

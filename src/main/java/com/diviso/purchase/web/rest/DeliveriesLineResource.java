@@ -123,4 +123,163 @@ public class DeliveriesLineResource {
         deliveriesLineService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+    
+    /**
+     * GET  /deliveries-lines : get all the deliveriesLines by reference.
+     *
+     * @param pageable the pagination information
+     * @param string reference
+     * @return the ResponseEntity with status 200 (OK) and the list of deliveriesLines in body
+     */
+    @GetMapping("/deliveries-lines/findByReference/{reference}")
+    @Timed
+    public ResponseEntity<List<DeliveriesLineDTO>> getAllDeliveriesLinesByReference(@PathVariable String reference,Pageable pageable) {
+        log.debug("REST request to get a page of DeliveriesLines");
+        Page<DeliveriesLineDTO> page = deliveriesLineService.findAllByReference(reference,pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/deliveries-lines");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    
+    /**
+     * GET  /deliveries-lines : get all the deliveriesLines by price greater than or equal to.
+     *
+     * @param pageable the pagination information
+     * @param double price
+     * @return the ResponseEntity with status 200 (OK) and the list of deliveriesLines in body
+     */
+    @GetMapping("/deliveries-lines/findByPriceGreaterThanEqual/{price}")
+    @Timed
+    public ResponseEntity<List<DeliveriesLineDTO>> getAllDeliveriesLinesByPriceGreaterThanEqual(@PathVariable Double price,Pageable pageable) {
+        log.debug("REST request to get a page of DeliveriesLines");
+        Page<DeliveriesLineDTO> page = deliveriesLineService.findAllByPriceGreaterThanEqual(price,pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/deliveries-lines");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    
+    /**
+     * GET  /deliveries-lines : get all the deliveriesLines by price less than or equal to.
+     *
+     * @param pageable the pagination information
+     * @param double price
+     * @return the ResponseEntity with status 200 (OK) and the list of deliveriesLines in body
+     */
+    @GetMapping("/deliveries-lines/findByPriceLessThanEqual/{price}")
+    @Timed
+    public ResponseEntity<List<DeliveriesLineDTO>> getAllDeliveriesLinesByPriceLessThanEqual(@PathVariable Double price,Pageable pageable) {
+        log.debug("REST request to get a page of DeliveriesLines");
+        Page<DeliveriesLineDTO> page = deliveriesLineService.findAllByPriceLessThanEqual(price,pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/deliveries-lines");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    /**
+     * GET  /deliveries-lines : get all the deliveriesLines by price less than or equal to.
+     *
+     * @param pageable the pagination information
+     * @param double price
+     * @return the ResponseEntity with status 200 (OK) and the list of deliveriesLines in body
+     */
+    @GetMapping("/deliveries-lines/findByPrice/{price}")
+    @Timed
+    public ResponseEntity<List<DeliveriesLineDTO>> getAllDeliveriesLinesByPrice(@PathVariable Double price,Pageable pageable) {
+        log.debug("REST request to get a page of DeliveriesLines");
+        Page<DeliveriesLineDTO> page = deliveriesLineService.findAllByPrice(price,pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/deliveries-lines");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    
+    /**
+     * GET  /deliveries-lines : get all the deliveriesLines by tax greater than or equal to.
+     *
+     * @param pageable the pagination information
+     * @param double tax
+     * @return the ResponseEntity with status 200 (OK) and the list of deliveriesLines in body
+     */
+    @GetMapping("/deliveries-lines/findByTaxGreaterThanEqual/{tax}")
+    @Timed
+    public ResponseEntity<List<DeliveriesLineDTO>> getAllDeliveriesLinesByTaxGreaterThanEqual(@PathVariable Double tax,Pageable pageable) {
+        log.debug("REST request to get a page of DeliveriesLines");
+        Page<DeliveriesLineDTO> page = deliveriesLineService.findAllByTaxGreaterThanEqual(tax,pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/deliveries-lines");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    
+    /**
+     * GET  /deliveries-lines : get all the deliveriesLines by tax less than or equal to.
+     *
+     * @param pageable the pagination information
+     * @param double tax
+     * @return the ResponseEntity with status 200 (OK) and the list of deliveriesLines in body
+     */
+    @GetMapping("/deliveries-lines/findByTaxLessThanEqual/{tax}")
+    @Timed
+    public ResponseEntity<List<DeliveriesLineDTO>> getAllDeliveriesLinesByTaxLessThanEqual(@PathVariable Double tax,Pageable pageable) {
+        log.debug("REST request to get a page of DeliveriesLines");
+        Page<DeliveriesLineDTO> page = deliveriesLineService.findAllByTaxLessThanEqual(tax,pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/deliveries-lines");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    /**
+     * GET  /deliveries-lines : get all the deliveriesLines by tax less than or equal to.
+     *
+     * @param pageable the pagination information
+     * @param double tax
+     * @return the ResponseEntity with status 200 (OK) and the list of deliveriesLines in body
+     */
+    @GetMapping("/deliveries-lines/findByTax/{tax}")
+    @Timed
+    public ResponseEntity<List<DeliveriesLineDTO>> getAllDeliveriesLinesByTax(@PathVariable Double tax,Pageable pageable) {
+        log.debug("REST request to get a page of DeliveriesLines");
+        Page<DeliveriesLineDTO> page = deliveriesLineService.findAllByTax(tax,pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/deliveries-lines");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    
+    /**
+     * GET  /deliveries-lines : get all the deliveriesLines by quantity.
+     *
+     * @param pageable the pagination information
+     * @param double quantity
+     * @return the ResponseEntity with status 200 (OK) and the list of deliveriesLines in body
+     */
+    @GetMapping("/deliveries-lines/findByQuantity/{quantity}")
+    @Timed
+    public ResponseEntity<List<DeliveriesLineDTO>> getAllDeliveriesLinesByQuantity(@PathVariable Double quantity,Pageable pageable) {
+        log.debug("REST request to get a page of DeliveriesLines");
+        Page<DeliveriesLineDTO> page = deliveriesLineService.findAllByQuantity(quantity,pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/deliveries-lines");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    
+    /**
+     * GET  /deliveries-lines : get all the deliveriesLines by quantity greater than equal.
+     *
+     * @param pageable the pagination information
+     * @param double quantity
+     * @return the ResponseEntity with status 200 (OK) and the list of deliveriesLines in body
+     */
+    @GetMapping("/deliveries-lines/findByQuantity/{quantity}")
+    @Timed
+    public ResponseEntity<List<DeliveriesLineDTO>> getAllDeliveriesLinesByQuantityGreaterThanEqual(@PathVariable Double quantity,Pageable pageable) {
+        log.debug("REST request to get a page of DeliveriesLines");
+        Page<DeliveriesLineDTO> page = deliveriesLineService.findAllByQuantityGreaterThanEqual(quantity,pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/deliveries-lines");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    
+    /**
+     * GET  /deliveries-lines : get all the deliveriesLines by quantity less than equal.
+     *
+     * @param pageable the pagination information
+     * @param double quantity
+     * @return the ResponseEntity with status 200 (OK) and the list of deliveriesLines in body
+     */
+    @GetMapping("/deliveries-lines/findByQuantity/{quantity}")
+    @Timed
+    public ResponseEntity<List<DeliveriesLineDTO>> getAllDeliveriesLinesByQuantityLessThanEqual(@PathVariable Double quantity,Pageable pageable) {
+        log.debug("REST request to get a page of DeliveriesLines");
+        Page<DeliveriesLineDTO> page = deliveriesLineService.findAllByQuantityLessThanEqual(quantity,pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/deliveries-lines");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
 }

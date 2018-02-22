@@ -1,9 +1,12 @@
 package com.diviso.purchase.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -24,6 +27,10 @@ public class Rating implements Serializable {
 
     @Column(name = "ratings")
     private Integer ratings;
+
+    @OneToMany(mappedBy = "rating")
+    @JsonIgnore
+    private Set<RatingType> ratingTypes = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -58,6 +65,31 @@ public class Rating implements Serializable {
 
     public void setRatings(Integer ratings) {
         this.ratings = ratings;
+    }
+
+    public Set<RatingType> getRatingTypes() {
+        return ratingTypes;
+    }
+
+    public Rating ratingTypes(Set<RatingType> ratingTypes) {
+        this.ratingTypes = ratingTypes;
+        return this;
+    }
+
+    public Rating addRatingType(RatingType ratingType) {
+        this.ratingTypes.add(ratingType);
+        ratingType.setRating(this);
+        return this;
+    }
+
+    public Rating removeRatingType(RatingType ratingType) {
+        this.ratingTypes.remove(ratingType);
+        ratingType.setRating(null);
+        return this;
+    }
+
+    public void setRatingTypes(Set<RatingType> ratingTypes) {
+        this.ratingTypes = ratingTypes;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

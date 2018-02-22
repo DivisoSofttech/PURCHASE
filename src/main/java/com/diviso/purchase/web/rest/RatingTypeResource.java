@@ -123,4 +123,34 @@ public class RatingTypeResource {
         ratingTypeService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+    
+    /**
+     * GET  /rating-types : get all the ratingTypes by reference.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of ratingTypes in body
+     */
+    @GetMapping("/rating-types/findByReference/{reference}")
+    @Timed
+    public ResponseEntity<List<RatingTypeDTO>> getAllRatingTypesByReference(@PathVariable String reference,Pageable pageable) {
+        log.debug("REST request to get a page of RatingTypes");
+        Page<RatingTypeDTO> page = ratingTypeService.findAllByReference(reference,pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/rating-types");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    
+    /**
+     * GET  /rating-types : get all the ratingTypes by reference.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of ratingTypes in body
+     */
+    @GetMapping("/rating-types/findByRatingType/{type}")
+    @Timed
+    public ResponseEntity<List<RatingTypeDTO>> getAllRatingTypesByType(@PathVariable String type,Pageable pageable) {
+        log.debug("REST request to get a page of RatingTypes");
+        Page<RatingTypeDTO> page = ratingTypeService.findAllByRating(type,pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/rating-types");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
 }

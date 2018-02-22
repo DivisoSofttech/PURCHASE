@@ -83,6 +83,9 @@ public class SupplierServiceImpl implements SupplierService {
         log.debug("Request to delete Supplier : {}", id);
         supplierRepository.delete(id);
     }
+<<<<<<< HEAD
+}
+=======
     
         /*--------------------------------------------------------------
          * EXTRA METHOD
@@ -112,3 +115,4 @@ public class SupplierServiceImpl implements SupplierService {
     	}
      }
 
+>>>>>>> ccc990b37e86ab7eca1e0986432ea2a89ac1e008
