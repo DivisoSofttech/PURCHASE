@@ -2,13 +2,22 @@ package com.diviso.purchase.service.impl;
 
 import com.diviso.purchase.service.DeliveryNoteService;
 import com.codahale.metrics.annotation.Timed;
+import com.diviso.purchase.domain.DeliveriesLine;
 import com.diviso.purchase.domain.DeliveryNote;
 import com.diviso.purchase.repository.DeliveryNoteRepository;
 import com.diviso.purchase.service.dto.DeliveryNoteDTO;
 import com.diviso.purchase.service.mapper.DeliveryNoteMapper;
+import com.diviso.purchase.service.model.AddressModel;
+import com.diviso.purchase.service.model.ContactModel;
+import com.diviso.purchase.service.model.DeliveriesLineModel;
+import com.diviso.purchase.service.model.DeliveryNoteModel;
+import com.diviso.purchase.service.model.SupplierModel;
 
-
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.time.LocalDate;
 
 import javax.mail.MessagingException;
@@ -104,7 +113,6 @@ public class DeliveryNoteServiceImpl implements DeliveryNoteService {
         log.debug("Request to delete DeliveryNote : {}", id);
         deliveryNoteRepository.delete(id);
     }
-
     
     /**
      * Get all the deliveryNotes by reference.
@@ -245,6 +253,90 @@ public class DeliveryNoteServiceImpl implements DeliveryNoteService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	 /**
+     * Send message through SMS
+     *
+     */
+	@Override
+	public String sendMessageAsSms() {
+		
+		try {
+			// Construct data
+			String apiKey = "apikey=" + "fuIgzjEYeU0-m0K6PtubmW4UWl7rt3d8mQX3PjuYY9";
+			String message = "&message=" + "This is your message";
+			String sender = "&sender=" + "TXTLCL";
+			String numbers = "&numbers=" + "919656810094";
+			
+			// Send data
+			HttpURLConnection conn = (HttpURLConnection) new URL("https://api.textlocal.in/send/?").openConnection();
+			String data = apiKey + numbers + message + sender;
+			conn.setDoOutput(true);
+			conn.setRequestMethod("POST");
+			conn.setRequestProperty("Content-Length", Integer.toString(data.length()));
+			conn.getOutputStream().write(data.getBytes("UTF-8"));
+			final BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			final StringBuffer stringBuffer = new StringBuffer();
+			String line;
+			while ((line = rd.readLine()) != null) {
+				stringBuffer.append(line);
+			}
+			rd.close();
+			
+			return stringBuffer.toString();
+		} catch (Exception e) {
+			System.out.println("Error SMS "+e);
+			return "Error "+e;
+		}
+		
+	}
+	
+	 /**
+     * Get one deliveryNoteModel by id.
+     *
+     * @param id the id of the entity
+     * @return the entity
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public DeliveryNoteModel marshelledFindOne(Long id) {
+        log.debug("Request to get deliveryNote : {}", id);
+        
+        DeliveryNote deliveryNote = deliveryNoteRepository.findOne(id);
+        
+        DeliveryNoteModel deliveryNoteModel = new DeliveryNoteModel();
+        deliveryNoteModel.setId(deliveryNote.getId());
+        deliveryNoteModel.setReference(deliveryNote.getReference());
+        deliveryNoteModel.setDeliveredDate(deliveryNote.getDeliveredDate());
+        
+        SupplierModel supplierModel = new SupplierModel();
+        supplierModel.setId(deliveryNote.getSupplier().getId());
+        supplierModel.setReference(deliveryNote.getSupplier().getReference());
+        supplierModel.setFirstName(deliveryNote.getSupplier().getFirstName());
+        supplierModel.setLastName(deliveryNote.getSupplier().getLastName());
+        
+       
+        //Set SupplierModel to deliveryLineModel
+        deliveryNoteModel.setSupplierModel(supplierModel);
+        
+        
+        
+        
+        
+        //Set deliveryLineModel to deliveryNoteModel
+        for(DeliveriesLine dl: deliveryNote.getDeliveryLines()) {
+        	
+        	DeliveriesLineModel deliveriesLineModel = new DeliveriesLineModel();
+        	deliveriesLineModel.setId(dl.getId());
+        	deliveriesLineModel.setReference(dl.getReference());
+        	deliveriesLineModel.setPrice(dl.getPrice());
+        	deliveriesLineModel.setTax(dl.getTax());
+        	deliveriesLineModel.setQuantity(dl.getQuantity());
+        	
+        	deliveryNoteModel.getDeliveryLinesModel().add(deliveriesLineModel);
+        }
+        
+        return deliveryNoteModel;
+    }
   
 
 }

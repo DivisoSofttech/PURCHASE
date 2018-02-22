@@ -34,6 +34,13 @@ import com.diviso.purchase.web.rest.util.HeaderUtil;
 import com.diviso.purchase.web.rest.util.PaginationUtil;
 
 import io.github.jhipster.web.util.ResponseUtil;
+import org.springframework.web.bind.annotation.*;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
+import javax.mail.MessagingException;
 
 /**
  * REST controller for managing DeliveryNote.
@@ -41,7 +48,6 @@ import io.github.jhipster.web.util.ResponseUtil;
 @RestController
 @RequestMapping("/api")
 public class DeliveryNoteResource {
-
 
 	private final Logger log = LoggerFactory.getLogger(DeliveryNoteResource.class);
 
@@ -305,5 +311,3 @@ public class DeliveryNoteResource {
 	}
 }
 
-
-   
