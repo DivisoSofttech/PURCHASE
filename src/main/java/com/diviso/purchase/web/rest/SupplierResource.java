@@ -123,8 +123,6 @@ public class SupplierResource {
         supplierService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
-<<<<<<< HEAD
-=======
     
     /**
          * GET  /suppliers/:reference : get the "reference" supplier.
@@ -155,5 +153,5 @@ public class SupplierResource {
         
             return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
         }
->>>>>>> ccc990b37e86ab7eca1e0986432ea2a89ac1e008
+
 }
