@@ -122,6 +122,10 @@ public class BudgetResourceIntTest {
         List<Budget> budgetList = budgetRepository.findAll();
         assertThat(budgetList).hasSize(databaseSizeBeforeCreate + 1);
         Budget testBudget = budgetList.get(budgetList.size() - 1);
+
+
+        assertThat(testBudget.getReference()).isEqualTo(DEFAULT_REFERENCE);
+
         assertThat(testBudget.getReference()).isEqualTo(DEFAULT_REFERENCE);
         assertThat(testBudget.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testBudget.getPrice()).isEqualTo(DEFAULT_PRICE);
@@ -158,6 +162,9 @@ public class BudgetResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(budget.getId().intValue())))
+
+            .andExpect(jsonPath("$.[*].reference").value(hasItem(DEFAULT_REFERENCE.toString())))
+
             .andExpect(jsonPath("$.[*].reference").value(hasItem(DEFAULT_REFERENCE.toString())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].price").value(hasItem(DEFAULT_PRICE.doubleValue())));
@@ -174,6 +181,9 @@ public class BudgetResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(budget.getId().intValue()))
+
+            .andExpect(jsonPath("$.reference").value(DEFAULT_REFERENCE.toString()))
+
             .andExpect(jsonPath("$.reference").value(DEFAULT_REFERENCE.toString()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
             .andExpect(jsonPath("$.price").value(DEFAULT_PRICE.doubleValue()));
@@ -199,6 +209,9 @@ public class BudgetResourceIntTest {
         // Disconnect from session so that the updates on updatedBudget are not directly saved in db
         em.detach(updatedBudget);
         updatedBudget
+
+            .reference(UPDATED_REFERENCE)
+
             .reference(UPDATED_REFERENCE)
             .name(UPDATED_NAME)
             .price(UPDATED_PRICE);
@@ -213,6 +226,9 @@ public class BudgetResourceIntTest {
         List<Budget> budgetList = budgetRepository.findAll();
         assertThat(budgetList).hasSize(databaseSizeBeforeUpdate);
         Budget testBudget = budgetList.get(budgetList.size() - 1);
+
+        assertThat(testBudget.getReference()).isEqualTo(UPDATED_REFERENCE);
+
         assertThat(testBudget.getReference()).isEqualTo(UPDATED_REFERENCE);
         assertThat(testBudget.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testBudget.getPrice()).isEqualTo(UPDATED_PRICE);

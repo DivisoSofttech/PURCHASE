@@ -13,7 +13,10 @@ public class BudgetDTO implements Serializable {
 
     private Long id;
 
+
+
     private String reference;
+
 
     private String name;
 
@@ -76,7 +79,9 @@ public class BudgetDTO implements Serializable {
     public String toString() {
         return "BudgetDTO{" +
             "id=" + getId() +
+
             ", reference='" + getReference() + "'" +
+
             ", name='" + getName() + "'" +
             ", price=" + getPrice() +
             "}";

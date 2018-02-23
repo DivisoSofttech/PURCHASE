@@ -82,6 +82,7 @@ public class SupplierServiceImpl implements SupplierService {
     public void delete(Long id) {
         log.debug("Request to delete Supplier : {}", id);
         supplierRepository.delete(id);
+
     }    
         /*--------------------------------------------------------------
          * EXTRA METHOD
