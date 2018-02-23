@@ -201,8 +201,8 @@ public class DeliveryNoteServiceImpl implements DeliveryNoteService {
 	 * @param to,subject,text
 	 * 
 	 */
-	@PostMapping("/customers/sendmail/{to}/{subject}/{text}")
-	@Timed
+	@Override
+	@Transactional(readOnly = true)
 	public String sendMail(@PathVariable String to,@PathVariable String subject,@PathVariable String text) {
 
 		SimpleMailMessage message = new SimpleMailMessage();
@@ -221,8 +221,8 @@ public class DeliveryNoteServiceImpl implements DeliveryNoteService {
 	 * @param to,subject,text
 	 * 
 	 */
-	@PostMapping("/customers/sendmailwithattachments")
-	@Timed
+	@Override
+	@Transactional(readOnly = true)
 	public String sendMailWithAttachments(@PathVariable String to,@PathVariable String subject,@PathVariable String text
 											 ) throws MessagingException {
 
@@ -258,6 +258,7 @@ public class DeliveryNoteServiceImpl implements DeliveryNoteService {
      *
      */
 	@Override
+	@Transactional(readOnly = true)
 	public String sendMessageAsSms() {
 		
 		try {

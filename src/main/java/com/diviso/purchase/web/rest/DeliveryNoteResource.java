@@ -168,7 +168,7 @@ public class DeliveryNoteResource {
 	 * @return the ResponseEntity with status 200 (OK) and the list of
 	 *         deliveryNotes in body
 	 */
-	@GetMapping("/delivery-notes/findByOrderReference/{orderreference}")
+	@GetMapping("/delivery-notes/findByOrderReference/{orderReference}")
 	@Timed
 	public ResponseEntity<List<DeliveryNoteDTO>> getAllDeliveryNotesByOrderReference(
 			@PathVariable String orderReference, Pageable pageable) {

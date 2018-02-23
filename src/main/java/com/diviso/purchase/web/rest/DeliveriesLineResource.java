@@ -257,7 +257,7 @@ public class DeliveriesLineResource {
      * @param double quantity
      * @return the ResponseEntity with status 200 (OK) and the list of deliveriesLines in body
      */
-    @GetMapping("/deliveries-lines/findByQuantity/{quantity}")
+    @GetMapping("/deliveries-lines/findByQuantityGreaterThanEqual/{quantity}")
     @Timed
     public ResponseEntity<List<DeliveriesLineDTO>> getAllDeliveriesLinesByQuantityGreaterThanEqual(@PathVariable Double quantity,Pageable pageable) {
         log.debug("REST request to get a page of DeliveriesLines");
@@ -273,7 +273,7 @@ public class DeliveriesLineResource {
      * @param double quantity
      * @return the ResponseEntity with status 200 (OK) and the list of deliveriesLines in body
      */
-    @GetMapping("/deliveries-lines/findByQuantity/{quantity}")
+    @GetMapping("/deliveries-lines/findByQuantityLessThanEqual/{quantity}")
     @Timed
     public ResponseEntity<List<DeliveriesLineDTO>> getAllDeliveriesLinesByQuantityLessThanEqual(@PathVariable Double quantity,Pageable pageable) {
         log.debug("REST request to get a page of DeliveriesLines");
