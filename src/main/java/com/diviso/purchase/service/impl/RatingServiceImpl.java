@@ -104,7 +104,7 @@ public class RatingServiceImpl implements RatingService {
 	public Page<RatingDTO> findAllByRatingGreaterThan(Integer rating, Pageable pageable) {
 		// TODO Auto-generated method stub
 		log.debug("Request to get all Ratings by rating greater than");
-        return ratingRepository.findAllByRatingGreaterThan(rating,pageable)
+        return ratingRepository.findAllByRatingsGreaterThan(rating,pageable)
             .map(ratingMapper::toDto);
 	}
 
@@ -112,7 +112,7 @@ public class RatingServiceImpl implements RatingService {
 	public Page<RatingDTO> findAllByRatingLessThan(Integer rating, Pageable pageable) {
 		// TODO Auto-generated method stub
 		log.debug("Request to get all Ratings by rating less than");
-        return ratingRepository.findAllByRatingLessThan(rating,pageable)
+        return ratingRepository.findAllByRatingsLessThan(rating,pageable)
             .map(ratingMapper::toDto);
 	}
 }

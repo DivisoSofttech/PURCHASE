@@ -18,8 +18,8 @@ public interface RatingRepository extends JpaRepository<Rating, Long> {
 
 	Page<Rating> findAllByRatings(Integer rating, Pageable pageable);
 
-	Page<Rating> findAllByRatingGreaterThan(Integer rating, Pageable pageable);
+	Page<Rating> findAllByRatingsGreaterThan(Integer rating, Pageable pageable);
 
-	Page<Rating> findAllByRatingLessThan(Integer rating, Pageable pageable);
+	Page<Rating> findAllByRatingsLessThan(Integer rating, Pageable pageable);
 
 }
